@@ -1,0 +1,39 @@
+::: {.header}
+![](images/image.png) 
+:::
+
+---
+title: "International K-matrix Day"
+format: html
+css: styles.css  
+---
+
+## Introduction
+The K-Matrix formalism is a powerful tool for modeling scattering amplitudes in high energy particle physics, and thus can provide information about resonance properties and the subatomic processes in which they participate.
+The International K-Matrix Day can be seen as a conversation starter for everything related to the K-Matrix. The lectures and practical examples are designed to provide theoretical instruction for those who are new to the concept of amplitude analysis. It will also cover some advanced topics related to theoretical behaviour and applications to experimental data, as well as consistency in the implementation of the formalism. We also encourage the participants to start a discussion about their favorite topic related to the K-matrix, so that one can possibly work on a problem together. 
+The goal of the K-Matrix Day is to share information about this powerful tool and make it available to anyone who wants to learn more.<br>
+
+💬 For further discussions, we therefore refer to our **Slack channel**: [Join here](https://slack.com/international-kmatrix-day)
+
+## 🕒 Timetable
+The annual International K-Matrix Day will take on the **14.04.2025**.<br> All all events will take place remote (Zoom link: TBA)
+
+| Time            | Event                                | Speaker               | 
+|-----------------|--------------------------------------|-----------------------|
+| 09:00 - 09:30   |                                      | Dr. A. Example        |
+| 09:30 - 10:15   | topic 1    | Prof. B. Researcher   | 
+| 10:15 - 10:30   | **☕ Coffee Break**                 | -                     |
+| 10:30 - 12:00   | Workshop: Symbolic Amplitudes       | Dr. C. Mathematician  |
+| 12:00 - 13:30   | **🍽️ Lunch Break**                 | -                     |
+| 13:30 - 15:00   | Panel Discussion: Future Research   | Various Experts       |
+| 15:00 - 15:15   | **☕ Coffee Break**                 | -                     |   
+
+### Responsible for the Content:
+This website is maintained for informational purposes. All content is provided as-is without any warranties.  
+We would love to hear your thoughts! For feedback, suggestions, or questions, please reach out to us:  
+
+**International K-matrix Day Team** <br>
+Prof. Dr. Mikhail Mikhasenko (mikhail.mikhasenko@cern.ch)  
+Remco de Boer (remco.deboer@rub.de)  
+Ilya Segal (ilya.segal@rub.de)  
+Lena Pöpping (lena.poepping@rub.de)

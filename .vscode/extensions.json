@@ -1,0 +1,19 @@
+{
+	"recommendations": [		
+	  "eamodio.gitlens",
+	  "editorconfig.editorconfig",
+	  "esbenp.prettier-vscode",
+	  "foxundermoon.shell-format",
+	  "github.vscode-github-actions",
+	  "github.vscode-pull-request-github",
+	  "mhutchie.git-graph",
+	  "ms-vscode.live-server",
+	  "pascalreitermann93.vscode-yaml-sort",
+	  "quarto.quarto",
+	  "redhat.vscode-yaml",
+	  "soulcode.vscode-unwanted-extensions",
+	  "stkb.rewrap",
+	  "streetsidesoftware.code-spell-checker",
+	  "tamasfe.even-better-toml",
+	  "yzhang.markdown-all-in-one"
+	],

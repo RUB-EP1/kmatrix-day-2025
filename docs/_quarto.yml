@@ -1,0 +1,45 @@
+
+format:
+  html:
+    anchor-sections: false
+    theme:
+      dark: darkly
+      light: flatly
+    css: styles.css
+number-depth: 3
+project:
+  output-dir: _build/html
+  type: website
+website:
+  description: Website for the international K-matrix day
+  favicon: favicon.ico
+  navbar:
+    background: "#17365c"
+    foreground: "#e7e7e7"
+    logo: _images/rub-white.svg
+    logo-href: https://rub.de
+    pinned: true
+    title: false
+    website:
+  sidebar:
+    style: docked  # Sidebar is always visible
+    search: true   # Enable search in sidebar
+    contents:
+      - href: 
+        text: "Home"
+      - href: 
+        text: "Notebooks"
+        children: 
+          - href: 
+            text: "Material A"
+          - href: 
+            text: "Material B"
+      - href: 
+        text: "Section 2"
+      - href: 
+        text: "Useful links"
+    tools:
+      - href: https://github.com/RUB-EP1/international-k-matrix-day
+        icon: github
+      - href: https://your-slack-workspace-link.com
+        icon: slack
