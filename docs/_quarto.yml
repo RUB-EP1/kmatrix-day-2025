@@ -22,8 +22,8 @@ website:
     title: false
     website:
   sidebar:
-    style: docked  # Sidebar is always visible
-    search: true   # Enable search in sidebar
+    search: true
+    style: docked
     contents:
       - href: 
         text: "Home"

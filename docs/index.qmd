@@ -1,12 +1,10 @@
+---
+title: International K-matrix Day
+---
+
 ::: {.header}
 ![](images/image.png) 
 :::
-
----
-title: "International K-matrix Day"
-format: html
-css: styles.css  
----
 
 ## Introduction
 The K-Matrix formalism is a powerful tool for modeling scattering amplitudes in high energy particle physics, and thus can provide information about resonance properties and the subatomic processes in which they participate.
