@@ -2,9 +2,10 @@
 title: International K-matrix Day
 ---
 
-::: {.header}
-![](images/image.png)
-:::
+<img src="images/image.png" class="KCreatures">
+
+
+
 
 ## Introduction
 The K-Matrix formalism is a powerful tool for modeling scattering amplitudes in high energy particle physics, and thus can provide information about resonance properties and the subatomic processes in which they participate.
@@ -19,7 +20,7 @@ The annual International K-Matrix Day will take on the **14.04.2025**.<br> All a
 | Time            | Event                                | Speaker               |
 |-----------------|--------------------------------------|-----------------------|
 | 09:00 - 09:30   |                                      | Dr. A. Example        |
-| 09:30 - 10:15   | topic 1    | Prof. B. Researcher   |
+| 09:30 - 10:15   | topic 1                              | Prof. B. Researcher   |
 | 10:15 - 10:30   | **☕ Coffee Break**                 | -                     |
 | 10:30 - 12:00   | Workshop: Symbolic Amplitudes       | Dr. C. Mathematician  |
 | 12:00 - 13:30   | **🍽️ Lunch Break**                 | -                     |
