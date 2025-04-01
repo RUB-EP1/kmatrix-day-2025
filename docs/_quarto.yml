@@ -1,4 +1,3 @@
-
 format:
   html:
     anchor-sections: false
@@ -25,18 +24,18 @@ website:
     search: true
     style: docked
     contents:
-      - href: 
+      - href:
         text: "Home"
-      - href: 
+      - href:
         text: "Notebooks"
-        children: 
-          - href: 
+        children:
+          - href:
             text: "Material A"
-          - href: 
+          - href:
             text: "Material B"
-      - href: 
+      - href:
         text: "Section 2"
-      - href: 
+      - href:
         text: "Useful links"
     tools:
       - href: https://github.com/RUB-EP1/international-k-matrix-day

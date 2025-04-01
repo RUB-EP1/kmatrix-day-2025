@@ -19,7 +19,7 @@ window.document.addEventListener("DOMContentLoaded", function (_event) {
   let quartoSearchOptions = {};
   let language = {};
   const searchOptionEl = window.document.getElementById(
-    "quarto-search-options"
+    "quarto-search-options",
   );
   if (searchOptionEl) {
     const jsonStr = searchOptionEl.textContent;
@@ -189,8 +189,8 @@ window.document.addEventListener("DOMContentLoaded", function (_event) {
                     title: isExpanded
                       ? language["search-hide-matches-text"]
                       : remainingCount === 1
-                      ? `${remainingCount} ${language["search-more-match-text"]}`
-                      : `${remainingCount} ${language["search-more-matches-text"]}`,
+                        ? `${remainingCount} ${language["search-more-match-text"]}`
+                        : `${remainingCount} ${language["search-more-matches-text"]}`,
                     type: kItemTypeMore,
                     href: kItemTypeMoreHref,
                   });
@@ -312,7 +312,7 @@ window.document.addEventListener("DOMContentLoaded", function (_event) {
                     hasQuery ? "" : " no-query"
                   }`,
                 },
-                language["search-no-results-text"]
+                language["search-no-results-text"],
               );
             },
             header({ items, createElement }) {
@@ -325,13 +325,13 @@ window.document.addEventListener("DOMContentLoaded", function (_event) {
                 return createElement(
                   "div",
                   { class: "search-result-header" },
-                  `${count} ${language["search-matching-documents-text"]}`
+                  `${count} ${language["search-matching-documents-text"]}`,
                 );
               } else {
                 return createElement(
                   "div",
                   { class: "search-result-header-no-results" },
-                  ``
+                  ``,
                 );
               }
             },
@@ -343,14 +343,14 @@ window.document.addEventListener("DOMContentLoaded", function (_event) {
                 const libDir = quartoSearchOptions.algolia["libDir"];
                 const logo = createElement("img", {
                   src: offsetURL(
-                    `${libDir}/quarto-search/search-by-algolia.svg`
+                    `${libDir}/quarto-search/search-by-algolia.svg`,
                   ),
                   class: "algolia-search-logo",
                 });
                 return createElement(
                   "a",
                   { href: "http://www.algolia.com/" },
-                  logo
+                  logo,
                 );
               }
             },
@@ -363,7 +363,7 @@ window.document.addEventListener("DOMContentLoaded", function (_event) {
                 setActiveItemId,
                 setContext,
                 refresh,
-                quartoSearchOptions
+                quartoSearchOptions,
               );
             },
           },
@@ -408,7 +408,7 @@ window.document.addEventListener("DOMContentLoaded", function (_event) {
   // to a non-existent label
   if (quartoSearchOptions.type === "overlay") {
     const inputEl = window.document.querySelector(
-      "#quarto-search .aa-Autocomplete"
+      "#quarto-search .aa-Autocomplete",
     );
     if (inputEl) {
       inputEl.removeAttribute("aria-labelledby");
@@ -609,12 +609,12 @@ function showCopyLink(query, options) {
   lastQuery = query;
   // Insert share icon
   const inputSuffixEl = window.document.body.querySelector(
-    ".aa-Form .aa-InputWrapperSuffix"
+    ".aa-Form .aa-InputWrapperSuffix",
   );
 
   if (inputSuffixEl) {
     let copyButtonEl = window.document.body.querySelector(
-      ".aa-Form .aa-InputWrapperSuffix .aa-CopyButton"
+      ".aa-Form .aa-InputWrapperSuffix .aa-CopyButton",
     );
 
     if (copyButtonEl === null) {
@@ -692,7 +692,7 @@ async function readSearchData() {
   if (fuseIndex === undefined) {
     if (window.location.protocol === "file:" && !shownWarning) {
       window.alert(
-        "Search requires JavaScript features disabled when running in file://... URLs. In order to use search, please run this document in a web server."
+        "Search requires JavaScript features disabled when running in file://... URLs. In order to use search, please run this document in a web server.",
       );
       shownWarning = true;
       return;
@@ -712,8 +712,8 @@ async function readSearchData() {
     } else {
       return Promise.reject(
         new Error(
-          "Unexpected status from search index request: " + response.status
-        )
+          "Unexpected status from search index request: " + response.status,
+        ),
       );
     }
   }
@@ -747,7 +747,7 @@ function renderItem(
   setActiveItemId,
   setContext,
   refresh,
-  quartoSearchOptions
+  quartoSearchOptions,
 ) {
   switch (item.type) {
     case kItemTypeDoc:
@@ -759,7 +759,7 @@ function renderItem(
         item.text,
         item.href,
         item.crumbs,
-        quartoSearchOptions
+        quartoSearchOptions,
       );
     case kItemTypeMore:
       return createMoreCard(
@@ -768,14 +768,14 @@ function renderItem(
         state,
         setActiveItemId,
         setContext,
-        refresh
+        refresh,
       );
     case kItemTypeItem:
       return createSectionCard(
         createElement,
         item.section,
         item.text,
-        item.href
+        item.href,
       );
     case kItemTypeError:
       return createErrorCard(createElement, item.title, item.text);
@@ -792,7 +792,7 @@ function createDocumentCard(
   text,
   href,
   crumbs,
-  quartoSearchOptions
+  quartoSearchOptions,
 ) {
   const iconEl = createElement("i", {
     class: `bi bi-${icon} search-result-icon`,
@@ -815,7 +815,7 @@ function createDocumentCard(
     const crumbEl = createElement(
       "p",
       { class: crumbClz.join(" ") },
-      crumbsOut
+      crumbsOut,
     );
     titleContents.push(crumbEl);
   }
@@ -823,7 +823,7 @@ function createDocumentCard(
   const titleContainerEl = createElement(
     "div",
     { class: "search-result-title-container" },
-    titleContents
+    titleContents,
   );
 
   const textEls = [];
@@ -831,7 +831,7 @@ function createDocumentCard(
     const sectionEl = createElement(
       "p",
       { class: "search-result-section" },
-      section
+      section,
     );
     textEls.push(sectionEl);
   }
@@ -846,7 +846,7 @@ function createDocumentCard(
   const textContainerEl = createElement(
     "div",
     { class: "search-result-text-container" },
-    textEls
+    textEls,
   );
 
   const containerEl = createElement(
@@ -854,7 +854,7 @@ function createDocumentCard(
     {
       class: "search-result-container",
     },
-    [titleContainerEl, textContainerEl]
+    [titleContainerEl, textContainerEl],
   );
 
   const linkEl = createElement(
@@ -863,7 +863,7 @@ function createDocumentCard(
       href: offsetURL(href),
       class: "search-result-link",
     },
-    containerEl
+    containerEl,
   );
 
   const classes = ["search-result-doc", "search-item"];
@@ -876,7 +876,7 @@ function createDocumentCard(
     {
       class: classes.join(" "),
     },
-    linkEl
+    linkEl,
   );
 }
 
@@ -886,7 +886,7 @@ function createMoreCard(
   state,
   setActiveItemId,
   setContext,
-  refresh
+  refresh,
 ) {
   const moreCardEl = createElement(
     "div",
@@ -899,7 +899,7 @@ function createMoreCard(
         e.stopPropagation();
       },
     },
-    item.title
+    item.title,
   );
 
   return moreCardEl;
@@ -926,7 +926,7 @@ function createSectionCard(createElement, section, text, href) {
     {
       class: "search-result-doc-section search-item",
     },
-    sectionEl
+    sectionEl,
   );
 }
 
@@ -945,7 +945,7 @@ function createSection(createElement, title, text, href) {
       href: offsetURL(href),
       class: "search-result-link",
     },
-    [titleEl, descEl]
+    [titleEl, descEl],
   );
   return linkEl;
 }
@@ -973,10 +973,10 @@ function createErrorCard(createElement, title, text) {
 
 function positionPanel(pos) {
   const panelEl = window.document.querySelector(
-    "#quarto-search-results .aa-Panel"
+    "#quarto-search-results .aa-Panel",
   );
   const inputEl = window.document.querySelector(
-    "#quarto-search .aa-Autocomplete"
+    "#quarto-search .aa-Autocomplete",
   );
 
   if (panelEl && inputEl) {
@@ -1008,7 +1008,7 @@ function highlightMatch(query, text) {
       const startInfo = clipStart(text, start);
       const endInfo = clipEnd(
         text,
-        startInfo.position + startMark.length + endMark.length
+        startInfo.position + startMark.length + endMark.length,
       );
       text =
         startInfo.prefix +
@@ -1123,8 +1123,8 @@ function highlight(term, el) {
           const mark = document.createElement("mark");
           mark.appendChild(
             document.createTextNode(
-              text.slice(matchIndex, matchIndex + term.length)
-            )
+              text.slice(matchIndex, matchIndex + term.length),
+            ),
           );
           markFragment.appendChild(mark);
 
@@ -1136,7 +1136,7 @@ function highlight(term, el) {
         }
         if (startIndex < text.length) {
           markFragment.appendChild(
-            document.createTextNode(text.slice(startIndex, text.length))
+            document.createTextNode(text.slice(startIndex, text.length)),
           );
         }
 
@@ -1216,7 +1216,7 @@ function algoliaSearch(query, limit, algoliaOptions) {
                   newItem[keyName] = item[mappedName];
                   delete newItem[mappedName];
                 }
-              }
+              },
             );
             newItem.text = highlightMatch(query, newItem.text);
             return newItem;
