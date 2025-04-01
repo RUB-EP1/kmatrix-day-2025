@@ -1,4 +1,11 @@
 {
   "quarto.path": ".pixi/envs/default/bin/quarto",
-  "cSpell.words": ["autoupdate", "jsonschema", "MAINT", "schemafile", "taplo"]
+  "cSpell.words": [
+    "autoupdate",
+    "doclive",
+    "jsonschema",
+    "MAINT",
+    "schemafile",
+    "taplo"
+  ]
 }
