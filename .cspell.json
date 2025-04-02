@@ -26,6 +26,7 @@
     ".editorconfig",
     ".envrc",
     ".gitattributes",
+    ".github/",
     ".gitignore",
     ".pre-commit-config.yaml",
     ".prettierignore",
