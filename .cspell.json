@@ -1,6 +1,13 @@
 {
   "allowCompoundWords": true,
-  "enableFiletypes": ["git-commit", "github-actions-workflow", "quarto"],
+  "enableFiletypes": [
+    "git-commit",
+    "github-actions-workflow",
+    "julia",
+    "jupyter",
+    "python",
+    "quarto"
+  ],
   "flagWords": [
     "analyse",
     "colour",
@@ -25,11 +32,13 @@
     ".vscode/",
     "*.css",
     "*.ico",
-    "*.svg"
+    "*.svg",
+    "LICENSE",
+    "pyproject.toml"
   ],
   "ignoreWords": [],
   "language": "en-US",
   "useGitignore": true,
   "version": "0.2",
-  "words": ["Pöpping", "Segal", "Ilya", "Remco", "Mikhasenko"]
+  "words": ["Hüsken", "Ilya", "Mikhasenko", "Pixi", "Pöpping", "Remco", "Segal"]
 }

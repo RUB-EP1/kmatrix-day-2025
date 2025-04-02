@@ -1,0 +1,23 @@
+[project]
+authors = [
+    {name = "Ilya Segal"},
+    {name = "Lena Pöpping"},
+    {name = "Mikhail Mikhasenko"},
+    {name = "Nils Hüsken"},
+    {name = "Remco de Boer"},
+]
+dependencies = ["quarto-cli"]
+name = "k-matrix-day-2025"
+requires-python = ">=3.12"
+version = "0.0.0"
+
+[tool.tomlsort]
+all = false
+ignore_case = true
+in_place = true
+sort_first = [
+    "project",
+    "tool.tox.env_run_base",
+]
+spaces_indent_inline_array = 4
+trailing_comma_inline_array = true
