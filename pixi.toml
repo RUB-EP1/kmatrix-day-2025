@@ -10,7 +10,7 @@ cmd = "quarto render docs"
 cmd = "quarto preview docs --port 7000"
 
 [workspace]
-authors = ["Lena Poepping <80910285+Zeyna777@users.noreply.github.com>"]
+authors = ["Lena Pöpping <80910285+Zeyna777@users.noreply.github.com>"]
 channels = ["conda-forge"]
 name = "k-matrix-day"
 platforms = ["linux-64", "osx-64", "osx-arm64", "win-64"]
