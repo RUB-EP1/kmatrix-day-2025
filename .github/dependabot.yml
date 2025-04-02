@@ -4,6 +4,7 @@ updates:
     directory: "/"
     assignees:
       - redeboer
+      - Zeyna777
     commit-message:
       prefix: MAINT
     labels:
