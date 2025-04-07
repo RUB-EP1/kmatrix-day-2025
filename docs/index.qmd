@@ -2,7 +2,7 @@
 title: International K-matrix Day
 ---
 
-<img src="images/image.png" class="KCreatures">
+<img src="images/banner.png" class="KCreatures">
 
 ## Introduction
 
