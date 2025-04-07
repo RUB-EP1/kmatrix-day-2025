@@ -20,7 +20,7 @@ The annual International K-Matrix Day will take on the **14.04.2025**.<br> All a
 | ------------- | -------------------------------------------------------------------- | ------------------ |
 | 14:30 - 15:15 | Talk: **General construction of the K-matrix**                       | Nils Hüsken        |
 | 15:15 - 16:00 | Demo Exercise: **Construction of K-matrices for different examples** | Ilya Segal         |
-| 16:00 - 16:15 | **☕ Coffee Break**                                                   |                    |
+| 16:00 - 16:15 | **☕ Coffee Break**                                                  |                    |
 | 16:15 - 17:00 | Talk: **Complex analysis for extraction of resonance properties**    | Mikhail Mikhasenko |
 | 17:00 - 17:45 | Demo Exercise: **Finding pole positions**                            | Lena Pöpping       |
 
