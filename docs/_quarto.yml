@@ -10,7 +10,7 @@ project:
   output-dir: _build/html
   type: website
 website:
-  description: Website for the international K-matrix day
+  description: Website for the International K-Matrix Day 2025
   favicon: favicon.ico
   navbar:
     background: "#17365c"
