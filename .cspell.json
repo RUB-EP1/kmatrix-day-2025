@@ -37,7 +37,7 @@
     "LICENSE",
     "pyproject.toml"
   ],
-  "ignoreWords": [],
+  "ignoreWords": ["nbsp"],
   "language": "en-US",
   "useGitignore": true,
   "version": "0.2",
