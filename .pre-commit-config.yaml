@@ -1,0 +1,49 @@
+ci:
+  autoupdate_commit_msg: "MAINT: update lock files"
+  autoupdate_schedule: quarterly
+
+repos:
+  - repo: meta
+    hooks:
+      - id: check-hooks-apply
+      - id: check-useless-excludes
+
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v5.0.0
+    hooks:
+      - id: check-case-conflict
+      - id: check-json
+      - id: check-merge-conflict
+      - id: end-of-file-fixer
+        exclude: (?x)^(.*\.svg)$
+      - id: mixed-line-ending
+      - id: trailing-whitespace
+        exclude: (?x)^(.*\.svg)$
+
+  - repo: https://github.com/streetsidesoftware/cspell-cli
+    rev: v8.17.3
+    hooks:
+      - id: cspell
+
+  - repo: https://github.com/editorconfig-checker/editorconfig-checker.python
+    rev: 3.2.1
+    hooks:
+      - id: editorconfig-checker
+        name: editorconfig
+        alias: ec
+
+  - repo: https://github.com/ComPWA/prettier-pre-commit
+    rev: v3.4.2
+    hooks:
+      - id: prettier
+
+  - repo: https://github.com/ComPWA/taplo-pre-commit
+    rev: v0.9.3
+    hooks:
+      - id: taplo-format
+
+  - repo: https://github.com/pappasam/toml-sort
+    rev: v0.24.2
+    hooks:
+      - id: toml-sort
+        args: [--in-place]

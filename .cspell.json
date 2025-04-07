@@ -1,0 +1,54 @@
+{
+  "allowCompoundWords": true,
+  "enableFiletypes": [
+    "git-commit",
+    "github-actions-workflow",
+    "julia",
+    "jupyter",
+    "python",
+    "quarto"
+  ],
+  "flagWords": [
+    "analyse",
+    "colour",
+    "comparision",
+    "favour",
+    "flavour",
+    "hte",
+    "optimise",
+    "paramater",
+    "parmater",
+    "transision",
+    "transisions"
+  ],
+  "ignorePaths": [
+    ".cspell.json",
+    ".editorconfig",
+    ".envrc",
+    ".gitattributes",
+    ".github/",
+    ".gitignore",
+    ".pre-commit-config.yaml",
+    ".prettierignore",
+    ".vscode/",
+    "*.css",
+    "*.ico",
+    "*.svg",
+    "LICENSE",
+    "pyproject.toml"
+  ],
+  "ignoreWords": ["nbsp"],
+  "language": "en-US",
+  "useGitignore": true,
+  "version": "0.2",
+  "words": [
+    "Hüsken",
+    "Ilya",
+    "Indico",
+    "Mikhasenko",
+    "Pixi",
+    "Pöpping",
+    "Remco",
+    "Segal"
+  ]
+}
