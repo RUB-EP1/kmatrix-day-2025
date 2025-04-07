@@ -34,7 +34,7 @@ This website is maintained for informational purposes. For feedback, suggestions
 **International K-matrix Day Team** <br>
 Mikhail Mikhasenko \
 Nils Hüsken \
-Remco de Boer \
 Ilya Segal \
-Lena Pöpping
+Lena Pöpping \
+Remco de Boer
 </div>
