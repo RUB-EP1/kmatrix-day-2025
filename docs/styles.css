@@ -32,14 +32,14 @@ a:hover {
   text-align: center;
   color: #06418a;
 }
-.KCreatures {
+.k-creatures {
   width: 700px;
   height: 500px;
   overflow: hidden;
   margin-left: 2.8cm;
   margin-top: -2.5cm;
 }
-.Khumans {
+.k-humans {
   width: 300px;
   height: 300px;
 }
