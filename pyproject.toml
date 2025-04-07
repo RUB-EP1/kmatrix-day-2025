@@ -6,7 +6,11 @@ authors = [
     {name = "Nils Hüsken"},
     {name = "Remco de Boer"},
 ]
-dependencies = ["quarto-cli"]
+dependencies = [
+    "iminuit>=2.31.1",
+    "matplotlib>=3.10.1",
+    "quarto-cli",
+]
 name = "k-matrix-day-2025"
 requires-python = ">=3.12"
 version = "0.0.0"
