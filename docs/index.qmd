@@ -16,14 +16,13 @@ The goal of the K-Matrix Day is to share information about this powerful tool an
 
 The annual International K-Matrix Day will take on the **14.04.2025**.<br> All all events will take place remote (Zoom link: https://cern.zoom.us/j/64114654083?pwd=eZRHAaZJfDBlQEfmzBVvbqvwQh9ghV.1)
 
-| Time          | Event                             | Speaker              |
-| ------------- | --------------------------------- | -------------------- |
-| 14:30 - 15:15 |                                   | Nils Hüsken      |
-| 15:15 - 16:00 | topic 1                           | Ilya Segal  |
-| 16:00 - 16:15 | topic 1                           | Mikhail Mikhasenko |
-| 16:15 - 17:00 | **☕ Coffee Break**                | -                    |
-| 17:00 - 17:45 | Workshop: Symbolic Amplitudes     | Lena Pöpping |
-
+| Time          | Event                         | Speaker            |
+| ------------- | ----------------------------- | ------------------ |
+| 14:30 - 15:15 |                               | Nils Hüsken        |
+| 15:15 - 16:00 | topic 1                       | Ilya Segal         |
+| 16:00 - 16:15 | topic 1                       | Mikhail Mikhasenko |
+| 16:15 - 17:00 | **☕ Coffee Break**           | -                  |
+| 17:00 - 17:45 | Workshop: Symbolic Amplitudes | Lena Pöpping       |
 
 ### Responsible for the Content:
 
