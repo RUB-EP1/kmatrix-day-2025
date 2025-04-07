@@ -1,10 +1,10 @@
 ---
-title: International K-matrix Day
+title: International K-Matrix Day 2025
 ---
 
 <img src="images/banner.png" width="100%">
 
-The international K-matrix day is an annual educational event dedicated to a powerful tool in amplitude analysis, the K-Matrix. Important basics will be taught on black board, practical examples will be showcased with live coding sessions. Everyone is welcome, no matter how much you already know about the topic.
+The International K-Matrix Day is an annual educational event dedicated to a powerful tool in amplitude analysis, the K-Matrix. Important basics will be taught on black board, practical examples will be showcased with live coding sessions. Everyone is welcome, no matter how much you already know about the topic.
 The goal of the K-Matrix Day is to share information about this powerful tool and make it available to anyone who wants to learn more.<br>
 
 ✏️ Application via **Indico**: [https://indico.global/event/14144](https://indico.global/event/14144)
@@ -31,10 +31,10 @@ This website is maintained for informational purposes. For feedback, suggestions
 <img src="images/k-humans.svg" width="300px" style="margin-bottom:20px; margin-bottom:10px; margin-top:10px;">
 
 <div style="display:block; margin-left:1em">
-**International K-matrix Day Team** <br>
+**International K-Matrix Day Team** <br>
 Mikhail Mikhasenko \
 Nils Hüsken \
-Remco de Boer \
 Ilya Segal \
-Lena Pöpping
+Lena Pöpping \
+Remco de Boer
 </div>

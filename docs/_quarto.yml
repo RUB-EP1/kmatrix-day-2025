@@ -10,7 +10,7 @@ project:
   output-dir: _build/html
   type: website
 website:
-  description: Website for the international K-matrix day
+  description: Website for the International K-Matrix Day 2025
   favicon: favicon.ico
   navbar:
     background: "#17365c"
@@ -32,6 +32,10 @@ website:
           - text: Material B
       - text: Useful links
         icon: book
+      - text: ---
+      - text: K-Matrix Day 2024
+        href: https://rub-ep1.github.io/kmatrix-day-2024
+        icon: box-arrow-up-right
     search: true
     style: docked
     tools:
