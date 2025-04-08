@@ -25,10 +25,3 @@ a:hover {
 .sidebar-link:hover {
   color: #ffcc00 !important;
 }
-
-.title {
-  font-size: 3rem;
-  font-weight: bold;
-  text-align: center;
-  color: #06418a;
-}

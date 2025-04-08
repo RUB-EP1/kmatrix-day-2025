@@ -1,4 +1,7 @@
 ---
+css:
+  - styles.css
+  - styles-landing-page.css
 title: International K-Matrix Day 2025
 ---
 
