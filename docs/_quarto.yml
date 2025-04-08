@@ -12,6 +12,7 @@ project:
   output-dir: _build/html
   type: website
 website:
+  cookie-consent: true
   description: Website for the International K-Matrix Day 2025
   favicon: favicon.ico
   navbar:
