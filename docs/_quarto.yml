@@ -10,7 +10,7 @@ project:
   output-dir: _build/html
   type: website
 website:
-  description: Website for the international K-matrix day
+  description: Website for the International K-Matrix Day 2025
   favicon: favicon.ico
   navbar:
     background: "#17365c"
@@ -21,24 +21,25 @@ website:
     title: false
     website:
   sidebar:
+    contents:
+      - file: index.qmd
+        icon: house
+        text: Home
+      - text: Notebooks
+        icon: journal-code
+        contents:
+          - text: Material A
+          - text: Material B
+      - text: Useful links
+        icon: book
+      - text: ---
+      - text: K-Matrix Day 2024
+        href: https://rub-ep1.github.io/kmatrix-day-2024
+        icon: box-arrow-up-right
     search: true
     style: docked
-    contents:
-      - href:
-        text: "Home"
-      - href:
-        text: "Notebooks"
-        children:
-          - href:
-            text: "Material A"
-          - href:
-            text: "Material B"
-      - href:
-        text: "Section 2"
-      - href:
-        text: "Useful links"
     tools:
-      - href: https://github.com/RUB-EP1/international-k-matrix-day
+      - href: https://github.com/RUB-EP1/kmatrix-day-2025
         icon: github
-      - href: https://your-slack-workspace-link.com
+      - href: https://amplitude-analysis.slack.com/archives/C08KUF36Y6S
         icon: slack

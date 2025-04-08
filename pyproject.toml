@@ -7,8 +7,8 @@ authors = [
     {name = "Remco de Boer"},
 ]
 dependencies = [
-    "iminuit>=2.31.1",
-    "matplotlib>=3.10.1",
+    "iminuit",
+    "matplotlib",
     "quarto-cli",
 ]
 name = "k-matrix-day-2025"

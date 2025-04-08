@@ -1,38 +1,40 @@
 ---
-title: International K-matrix Day
+title: International K-Matrix Day 2025
 ---
 
-<img src="images/image.png" class="KCreatures">
+<img src="images/banner.png" width="100%">
 
-## Introduction
-
-The international K-matrix day is an annual educational event dedicated to a powerful tool in amplitude analysis, the K-Matrix. Important basics will be taught on black board, practical examples will be showcased with live coding sessions. Everyone is welcome, no matter how much you already know about the topic.
+The International K-Matrix Day is an annual educational event dedicated to a powerful tool in amplitude analysis, the K-Matrix. Important basics will be taught on black board, practical examples will be showcased with live coding sessions. Everyone is welcome, no matter how much you already know about the topic.
 The goal of the K-Matrix Day is to share information about this powerful tool and make it available to anyone who wants to learn more.<br>
 
-💬 For further discussions, we refer to our **Slack channel**: [Join here](https://slack.com/international-kmatrix-day)
-:pencil2: Application via **Indico**: https://indico.global/event/14144/
+✏️ Application via **Indico**: [https://indico.global/event/14144](https://indico.global/event/14144)
 
-## 🕒 Timetable
+💬 For further discussions, join the [Amplitude analysis Slack workspace](https://join.slack.com/t/amplitude-analysis/shared_invite/zt-20eqvwbg6-~KbrYI_F6FAiFmVaUpQoPA), then look for the [#international-k-matrix-day](https://amplitude-analysis.slack.com/archives/C08KUF36Y6S) channel
 
-The annual International K-Matrix Day will take on the **14.04.2025**.<br> All all events will take place remote (Zoom link: https://cern.zoom.us/j/64114654083?pwd=eZRHAaZJfDBlQEfmzBVvbqvwQh9ghV.1)
+### 🕒 Timetable
 
-| Time          | Event                                                                | Speaker            |
-| ------------- | -------------------------------------------------------------------- | ------------------ |
-| 14:30 - 15:15 | Talk: **General construction of the K-matrix**                       | Nils Hüsken        |
-| 15:15 - 16:00 | Demo Exercise: **Construction of K-matrices for different examples** | Ilya Segal         |
-| 16:00 - 16:15 | **☕ Coffee Break**                                                  |                    |
-| 16:15 - 17:00 | Talk: **Complex analysis for extraction of resonance properties**    | Mikhail Mikhasenko |
-| 17:00 - 17:45 | Demo Exercise: **Finding pole positions**                            | Lena Pöpping       |
+The annual International K-Matrix Day will take on Monday **April 14<sup>th</sup>, 2025**.<br>
+All events will take place on Zoom: [https://cern.zoom.us/j/64114654083?pwd=eZRHAaZJfDBlQEfmzBVvbqvwQh9ghV.1](https://cern.zoom.us/j/64114654083?pwd=eZRHAaZJfDBlQEfmzBVvbqvwQh9ghV.1).
 
-### Responsible for the Content:
+| Time                          | Event                                                             | Speaker                 |
+| ----------------------------- | ----------------------------------------------------------------- | ----------------------- |
+| 14:30&nbsp;&#8209;&nbsp;15:15 | Talk: **General construction of the K-matrix**                    | Nils&nbsp;Hüsken        |
+| 15:15&nbsp;&#8209;&nbsp;16:00 | Exercise: **Construction of K-matrices for different examples**   | Ilya&nbsp;Segal         |
+| 16:00&nbsp;&#8209;&nbsp;16:15 | **☕ Coffee Break**                                               |                         |
+| 16:15&nbsp;&#8209;&nbsp;17:00 | Talk: **Complex analysis for extraction of resonance properties** | Mikhail&nbsp;Mikhasenko |
+| 17:00&nbsp;&#8209;&nbsp;17:45 | Exercise: **Finding pole positions**                              | Lena&nbsp;Pöpping       |
 
-<!-- cspell:ignore Khumans -->
+### About
 
-This website is maintained for informational purposes. All content is provided as-is without any warranties.
-We would love to hear your thoughts! For feedback, suggestions, or questions, please reach out to us:\
-<img src="images/Khumans.svg" class="Khumans">\
-**International K-matrix Day Team** <br>
-Prof. Dr. Mikhail Mikhasenko (mikhail.mikhasenko@cern.ch)\
-Remco de Boer (remco.deboer@rub.de)\
-Ilya Segal (ilya.segal@rub.de)\
-Lena Pöpping (lena.poepping@rub.de)\
+This website is maintained for informational purposes. For feedback, suggestions, or questions, please reach out to us [via GitHub](https://github.com/RUB-EP1/kmatrix-day-2025) or via the Slack channel!
+
+<img src="images/k-humans.svg" width="300px" style="margin-bottom:20px; margin-bottom:10px; margin-top:10px;">
+
+<div style="display:block; margin-left:1em">
+**International K-Matrix Day Team** <br>
+Mikhail Mikhasenko \
+Nils Hüsken \
+Ilya Segal \
+Lena Pöpping \
+Remco de Boer
+</div>

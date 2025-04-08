@@ -1,4 +1,5 @@
 version = 1
+revision = 1
 requires-python = ">=3.12"
 
 [[package]]
@@ -826,8 +827,8 @@ dependencies = [
 
 [package.metadata]
 requires-dist = [
-    { name = "iminuit", specifier = ">=2.31.1" },
-    { name = "matplotlib", specifier = ">=3.10.1" },
+    { name = "iminuit" },
+    { name = "matplotlib" },
     { name = "quarto-cli" },
 ]
 
