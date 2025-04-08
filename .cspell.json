@@ -38,12 +38,21 @@
     "LICENSE",
     "pyproject.toml"
   ],
-  "ignoreWords": ["iminuit", "ipynb", "mathbb", "mathrm", "nbsp"],
+  "ignoreWords": [
+    "aslatex",
+    "iminuit",
+    "ipynb",
+    "mathbb",
+    "mathrm",
+    "nbsp",
+    "pcolormesh",
+    "vmax",
+    "vmin"
+  ],
   "language": "en-US",
   "useGitignore": true,
   "version": "0.2",
   "words": [
-    "aslatex",
     "Hüsken",
     "Ilya",
     "Indico",
@@ -51,12 +60,9 @@
     "lambdify",
     "Mikhasenko",
     "NumPy",
-    "pcolormesh",
     "Pixi",
     "Pöpping",
     "Remco",
-    "Segal",
-    "vmax",
-    "vmin"
+    "Segal"
   ]
 }
