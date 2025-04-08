@@ -4,8 +4,8 @@ format:
   html:
     anchor-sections: false
     theme:
-      dark: darkly
       light: flatly
+      dark: darkly
     css: styles.css
 number-depth: 3
 project:
