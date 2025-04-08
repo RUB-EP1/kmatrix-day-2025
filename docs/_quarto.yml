@@ -6,6 +6,7 @@ format:
     theme:
       light: flatly
       dark: darkly
+    toc: true
 number-depth: 3
 project:
   output-dir: _build/html
@@ -22,6 +23,12 @@ website:
     pinned: true
     title: false
     website:
+  page-navigation: true
+  repo-actions:
+    - edit
+    - issue
+    - source
+  repo-url: https://github.com/RUB-EP1/kmatrix-day-2025
   sidebar:
     contents:
       - file: index.qmd
