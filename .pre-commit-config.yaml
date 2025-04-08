@@ -27,18 +27,6 @@ repos:
       - id: trailing-whitespace
         exclude: (?x)^(.*\.svg)$
 
-  - repo: https://github.com/streetsidesoftware/cspell-cli
-    rev: v8.17.3
-    hooks:
-      - id: cspell
-
-  - repo: https://github.com/editorconfig-checker/editorconfig-checker.python
-    rev: 3.2.1
-    hooks:
-      - id: editorconfig-checker
-        name: editorconfig
-        alias: ec
-
   - repo: https://github.com/kynan/nbstripout
     rev: 0.8.1
     hooks:
@@ -66,6 +54,18 @@ repos:
             metadata.toc-showtags
             metadata.varInspector
             metadata.vscode
+
+  - repo: https://github.com/streetsidesoftware/cspell-cli
+    rev: v8.17.3
+    hooks:
+      - id: cspell
+
+  - repo: https://github.com/editorconfig-checker/editorconfig-checker.python
+    rev: 3.2.1
+    hooks:
+      - id: editorconfig-checker
+        name: editorconfig
+        alias: ec
 
   - repo: https://github.com/ComPWA/prettier-pre-commit
     rev: v3.4.2
