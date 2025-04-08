@@ -43,14 +43,19 @@
   "useGitignore": true,
   "version": "0.2",
   "words": [
+    "aslatex",
     "Hüsken",
     "Ilya",
     "Indico",
+    "lambdify",
     "Mikhasenko",
     "NumPy",
+    "pcolormesh",
     "Pixi",
     "Pöpping",
     "Remco",
-    "Segal"
+    "Segal",
+    "vmax",
+    "vmin"
   ]
 }

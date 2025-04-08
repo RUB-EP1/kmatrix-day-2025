@@ -3,6 +3,21 @@ revision = 1
 requires-python = ">=3.12"
 
 [[package]]
+name = "ampform"
+version = "0.15.8"
+source = { registry = "https://pypi.org/simple" }
+dependencies = [
+    { name = "attrs" },
+    { name = "frozendict" },
+    { name = "qrules" },
+    { name = "sympy" },
+]
+sdist = { url = "https://files.pythonhosted.org/packages/d4/7a/936b6111fd2855cf99c2f56c0e0d7098ea550a2f90de6b658c41f7b140ac/ampform-0.15.8.tar.gz", hash = "sha256:cf3afa23dad9249147456d2067da39bb33b8e7f5081f310e53166df6760f0410", size = 371646 }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/48/2a/91f45b108c77830aacc4bae109f57a69d1c894fae08e95aee3959b98b272/ampform-0.15.8-py3-none-any.whl", hash = "sha256:e9faf059217bbe15e765c13560480f7630897dd25deaa04e542c4aac67011dd6", size = 88574 },
+]
+
+[[package]]
 name = "anyio"
 version = "4.9.0"
 source = { registry = "https://pypi.org/simple" }
@@ -410,6 +425,17 @@ wheels = [
 ]
 
 [[package]]
+name = "frozendict"
+version = "2.4.6"
+source = { registry = "https://pypi.org/simple" }
+sdist = { url = "https://files.pythonhosted.org/packages/bb/59/19eb300ba28e7547538bdf603f1c6c34793240a90e1a7b61b65d8517e35e/frozendict-2.4.6.tar.gz", hash = "sha256:df7cd16470fbd26fc4969a208efadc46319334eb97def1ddf48919b351192b8e", size = 316416 }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/04/13/d9839089b900fa7b479cce495d62110cddc4bd5630a04d8469916c0e79c5/frozendict-2.4.6-py311-none-any.whl", hash = "sha256:d065db6a44db2e2375c23eac816f1a022feb2fa98cbb50df44a9e83700accbea", size = 16148 },
+    { url = "https://files.pythonhosted.org/packages/ba/d0/d482c39cee2ab2978a892558cf130681d4574ea208e162da8958b31e9250/frozendict-2.4.6-py312-none-any.whl", hash = "sha256:49344abe90fb75f0f9fdefe6d4ef6d4894e640fadab71f11009d52ad97f370b9", size = 16146 },
+    { url = "https://files.pythonhosted.org/packages/a5/8e/b6bf6a0de482d7d7d7a2aaac8fdc4a4d0bb24a809f5ddd422aa7060eb3d2/frozendict-2.4.6-py313-none-any.whl", hash = "sha256:7134a2bb95d4a16556bb5f2b9736dceb6ea848fa5b6f3f6c2d6dba93b44b4757", size = 16146 },
+]
+
+[[package]]
 name = "gitdb"
 version = "4.0.12"
 source = { registry = "https://pypi.org/simple" }
@@ -473,6 +499,15 @@ source = { registry = "https://pypi.org/simple" }
 sdist = { url = "https://files.pythonhosted.org/packages/f5/38/3af3d3633a34a3316095b39c8e8fb4853a28a536e55d347bd8d8e9a14b03/h11-0.14.0.tar.gz", hash = "sha256:8f19fbbe99e72420ff35c00b27a34cb9937e902a8b810e2c88300c6f0a3b699d", size = 100418 }
 wheels = [
     { url = "https://files.pythonhosted.org/packages/95/04/ff642e65ad6b90db43e668d70ffb6736436c7ce41fcc549f4e9472234127/h11-0.14.0-py3-none-any.whl", hash = "sha256:e3fe4ac4b851c468cc8363d500db52c2ead036020723024a109d37346efaa761", size = 58259 },
+]
+
+[[package]]
+name = "hepunits"
+version = "2.3.5"
+source = { registry = "https://pypi.org/simple" }
+sdist = { url = "https://files.pythonhosted.org/packages/3a/d1/d6bae778eddaa133408c6d6cc85425ed2f3c4730809341b234f7d71cebb2/hepunits-2.3.5.tar.gz", hash = "sha256:9434cd2d6a722c949e9e9e22bd0b59587f69025bd37356e5c70635f1b37036d8", size = 13537 }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/aa/44/afb4051adec67d014ad8bfe45a068ec21f95b1dd357411772c9a5baa0b97/hepunits-2.3.5-py3-none-any.whl", hash = "sha256:7f4511be95a1f0b87f297e035c0d3515cacdfd92a43306d466cd46cf19ba1b8d", size = 14403 },
 ]
 
 [[package]]
@@ -1009,10 +1044,12 @@ name = "k-matrix-day-2025"
 version = "0.0.0"
 source = { virtual = "." }
 dependencies = [
+    { name = "ampform" },
     { name = "iminuit" },
     { name = "jupyter-cache" },
     { name = "matplotlib" },
     { name = "quarto-cli" },
+    { name = "sympy" },
 ]
 
 [package.dev-dependencies]
@@ -1038,10 +1075,12 @@ jupyter = [
 
 [package.metadata]
 requires-dist = [
+    { name = "ampform", specifier = ">=0.15.8" },
     { name = "iminuit" },
     { name = "jupyter-cache" },
     { name = "matplotlib" },
     { name = "quarto-cli" },
+    { name = "sympy", specifier = ">=1.13.3" },
 ]
 
 [package.metadata.requires-dev]
@@ -1223,6 +1262,15 @@ source = { registry = "https://pypi.org/simple" }
 sdist = { url = "https://files.pythonhosted.org/packages/c4/79/bda47f7dd7c3c55770478d6d02c9960c430b0cf1773b72366ff89126ea31/mistune-3.1.3.tar.gz", hash = "sha256:a7035c21782b2becb6be62f8f25d3df81ccb4d6fa477a6525b15af06539f02a0", size = 94347 }
 wheels = [
     { url = "https://files.pythonhosted.org/packages/01/4d/23c4e4f09da849e127e9f123241946c23c1e30f45a88366879e064211815/mistune-3.1.3-py3-none-any.whl", hash = "sha256:1a32314113cff28aa6432e99e522677c8587fd83e3d51c29b82a52409c842bd9", size = 53410 },
+]
+
+[[package]]
+name = "mpmath"
+version = "1.3.0"
+source = { registry = "https://pypi.org/simple" }
+sdist = { url = "https://files.pythonhosted.org/packages/e0/47/dd32fa426cc72114383ac549964eecb20ecfd886d1e5ccf5340b55b02f57/mpmath-1.3.0.tar.gz", hash = "sha256:7a28eb2a9774d00c7bc92411c19a89209d5da7c4c9a9e227be8330a23a25b91f", size = 508106 }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/43/e3/7d92a15f894aa0c9c4b49b8ee9ac9850d6e63b03c9c32c0367a13ae62209/mpmath-1.3.0-py3-none-any.whl", hash = "sha256:a0b2b9fe80bbcd81a6647ff13108738cfb482d481d826cc0e02f5b35e5c88d2c", size = 536198 },
 ]
 
 [[package]]
@@ -1412,6 +1460,20 @@ wheels = [
 ]
 
 [[package]]
+name = "particle"
+version = "0.25.3"
+source = { registry = "https://pypi.org/simple" }
+dependencies = [
+    { name = "attrs" },
+    { name = "hepunits" },
+    { name = "typing-extensions", marker = "python_full_version < '3.13'" },
+]
+sdist = { url = "https://files.pythonhosted.org/packages/d7/20/297376c3cb2855959572ece51ca1ea26b6f48dfe67d7523b22c7f8b0b9c8/particle-0.25.3.tar.gz", hash = "sha256:78cf7e56e9e2118385fbfb8908d8395e7a267ab5f0596aaafebadb08cb04452b", size = 316953 }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/60/11/3e7465a6acb22fc143dd00af6500da6fc950694e72407f2b328c5603e107/particle-0.25.3-py3-none-any.whl", hash = "sha256:4ba94538d431d145d610d3946ad8a2bcd0ba4e7c1ba35fdf6d5ec46ed604f23a", size = 290502 },
+]
+
+[[package]]
 name = "pexpect"
 version = "4.9.0"
 source = { registry = "https://pypi.org/simple" }
@@ -1559,6 +1621,12 @@ sdist = { url = "https://files.pythonhosted.org/packages/bb/22/f1129e69d94ffff62
 wheels = [
     { url = "https://files.pythonhosted.org/packages/05/e7/df2285f3d08fee213f2d041540fa4fc9ca6c2d44cf36d3a035bf2a8d2bcc/pyparsing-3.2.3-py3-none-any.whl", hash = "sha256:a749938e02d6fd0b59b356ca504a24982314bb090c383e3cf201c95ef7e2bfcf", size = 111120 },
 ]
+
+[[package]]
+name = "python-constraint"
+version = "1.4.0"
+source = { registry = "https://pypi.org/simple" }
+sdist = { url = "https://files.pythonhosted.org/packages/37/8b/5f1bc2734ca611943e1d6733ee244238679f6410a10cd45ede55a61a8402/python-constraint-1.4.0.tar.bz2", hash = "sha256:501d6f17afe0032dfc6ea6c0f8acc12e44f992733f00e8538961031ef27ccb8e", size = 18416 }
 
 [[package]]
 name = "python-dateutil"
@@ -1735,6 +1803,24 @@ wheels = [
     { url = "https://files.pythonhosted.org/packages/6e/bc/f88b0bad0f7a7f500547d71e99f10336f2314e525d4ebf576a1ea4a1d903/pyzmq-26.4.0-cp313-cp313t-musllinux_1_1_aarch64.whl", hash = "sha256:b30f862f6768b17040929a68432c8a8be77780317f45a353cb17e423127d250c", size = 1189183 },
     { url = "https://files.pythonhosted.org/packages/d9/8c/db446a3dd9cf894406dec2e61eeffaa3c07c3abb783deaebb9812c4af6a5/pyzmq-26.4.0-cp313-cp313t-musllinux_1_1_i686.whl", hash = "sha256:c80fcd3504232f13617c6ab501124d373e4895424e65de8b72042333316f64a8", size = 1495501 },
     { url = "https://files.pythonhosted.org/packages/05/4c/bf3cad0d64c3214ac881299c4562b815f05d503bccc513e3fd4fdc6f67e4/pyzmq-26.4.0-cp313-cp313t-musllinux_1_1_x86_64.whl", hash = "sha256:26a2a7451606b87f67cdeca2c2789d86f605da08b4bd616b1a9981605ca3a364", size = 1395540 },
+]
+
+[[package]]
+name = "qrules"
+version = "0.10.5"
+source = { registry = "https://pypi.org/simple" }
+dependencies = [
+    { name = "attrs" },
+    { name = "frozendict" },
+    { name = "jsonschema" },
+    { name = "particle" },
+    { name = "python-constraint" },
+    { name = "pyyaml" },
+    { name = "tqdm" },
+]
+sdist = { url = "https://files.pythonhosted.org/packages/cf/8e/101313599b3f7db1198491e56f5c746617a6d55c0ad722d06873a1124c75/qrules-0.10.5.tar.gz", hash = "sha256:63dd44cc64962779c0fa3c2506ad7679e450cef847a6db346f9648fa330b6fd7", size = 272633 }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/ff/99/a63e865c51106b9371c43b6250b359ceb2d4e5807106cddfac1a9e1c3b3a/qrules-0.10.5-py3-none-any.whl", hash = "sha256:7958a8343cb1e79ec931d416ee3b334a1f40f72109dbb763cf4c8c54892ced52", size = 80335 },
 ]
 
 [[package]]
@@ -1980,6 +2066,18 @@ wheels = [
 ]
 
 [[package]]
+name = "sympy"
+version = "1.13.3"
+source = { registry = "https://pypi.org/simple" }
+dependencies = [
+    { name = "mpmath" },
+]
+sdist = { url = "https://files.pythonhosted.org/packages/11/8a/5a7fd6284fa8caac23a26c9ddf9c30485a48169344b4bd3b0f02fef1890f/sympy-1.13.3.tar.gz", hash = "sha256:b27fd2c6530e0ab39e275fc9b683895367e51d5da91baa8d3d64db2565fec4d9", size = 7533196 }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/99/ff/c87e0622b1dadea79d2fb0b25ade9ed98954c9033722eb707053d310d4f3/sympy-1.13.3-py3-none-any.whl", hash = "sha256:54612cf55a62755ee71824ce692986f23c88ffa77207b30c1368eda4a7060f73", size = 6189483 },
+]
+
+[[package]]
 name = "tabulate"
 version = "0.9.0"
 source = { registry = "https://pypi.org/simple" }
@@ -2030,6 +2128,18 @@ wheels = [
     { url = "https://files.pythonhosted.org/packages/2b/ae/c1b22d4524b0e10da2f29a176fb2890386f7bd1f63aacf186444873a88a0/tornado-6.4.2-cp38-abi3-musllinux_1_2_x86_64.whl", hash = "sha256:932d195ca9015956fa502c6b56af9eb06106140d844a335590c1ec7f5277d10c", size = 437261 },
     { url = "https://files.pythonhosted.org/packages/b5/25/36dbd49ab6d179bcfc4c6c093a51795a4f3bed380543a8242ac3517a1751/tornado-6.4.2-cp38-abi3-win32.whl", hash = "sha256:2876cef82e6c5978fde1e0d5b1f919d756968d5b4282418f3146b79b58556482", size = 438463 },
     { url = "https://files.pythonhosted.org/packages/61/cc/58b1adeb1bb46228442081e746fcdbc4540905c87e8add7c277540934edb/tornado-6.4.2-cp38-abi3-win_amd64.whl", hash = "sha256:908b71bf3ff37d81073356a5fadcc660eb10c1476ee6e2725588626ce7e5ca38", size = 438907 },
+]
+
+[[package]]
+name = "tqdm"
+version = "4.67.1"
+source = { registry = "https://pypi.org/simple" }
+dependencies = [
+    { name = "colorama", marker = "sys_platform == 'win32'" },
+]
+sdist = { url = "https://files.pythonhosted.org/packages/a8/4b/29b4ef32e036bb34e4ab51796dd745cdba7ed47ad142a9f4a1eb8e0c744d/tqdm-4.67.1.tar.gz", hash = "sha256:f8aef9c52c08c13a65f30ea34f4e5aac3fd1a34959879d7e59e63027286627f2", size = 169737 }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/d0/30/dc54f88dd4a2b5dc8a0279bdd7270e735851848b762aeb1c1184ed1f6b14/tqdm-4.67.1-py3-none-any.whl", hash = "sha256:26445eca388f82e72884e0d580d5464cd801a3ea01e63e5601bdff9ba6a48de2", size = 78540 },
 ]
 
 [[package]]

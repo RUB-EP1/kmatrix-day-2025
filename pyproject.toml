@@ -7,10 +7,12 @@ authors = [
     {name = "Remco de Boer"},
 ]
 dependencies = [
+    "ampform>=0.15.8",
     "iminuit",
     "jupyter-cache",
     "matplotlib",
     "quarto-cli",
+    "sympy>=1.13.3",
 ]
 name = "k-matrix-day-2025"
 requires-python = ">=3.12"
@@ -45,6 +47,7 @@ ignore = [
     "ANN20",
     "CPY001",
     "D103",
+    "E741",
 ]
 select = ["ALL"]
 task-tags = ["cspell"]
