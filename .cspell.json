@@ -1,5 +1,6 @@
 {
   "allowCompoundWords": true,
+  "dictionaries": ["latex", "python"],
   "enableFiletypes": [
     "git-commit",
     "github-actions-workflow",
@@ -37,9 +38,19 @@
     "LICENSE",
     "pyproject.toml"
   ],
-  "ignoreWords": [],
+  "ignoreWords": ["iminuit", "mathbb", "mathrm", "nbsp"],
   "language": "en-US",
   "useGitignore": true,
   "version": "0.2",
-  "words": ["Hüsken", "Ilya", "Mikhasenko", "Pixi", "Pöpping", "Remco", "Segal"]
+  "words": [
+    "Hüsken",
+    "Ilya",
+    "Indico",
+    "Mikhasenko",
+    "NumPy",
+    "Pixi",
+    "Pöpping",
+    "Remco",
+    "Segal"
+  ]
 }
