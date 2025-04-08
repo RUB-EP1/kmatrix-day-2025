@@ -47,6 +47,7 @@
   "quarto.path": ".venv/bin/quarto",
   "redhat.telemetry.enabled": false,
   "ruff.enable": true,
+  "ruff.importStrategy": "fromEnvironment",
   "ruff.organizeImports": true,
   "telemetry.telemetryLevel": "off"
 }
