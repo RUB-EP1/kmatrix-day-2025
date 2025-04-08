@@ -1,3 +1,5 @@
+.ipynb_checkpoints/
 .pixi/
+.virtual_documents/
 *.egg-info
 node_modules/
