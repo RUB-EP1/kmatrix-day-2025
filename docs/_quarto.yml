@@ -13,6 +13,7 @@ project:
   type: website
 website:
   description: Website for the International K-Matrix Day 2025
+  draft-mode: visible
   favicon: favicon.ico
   navbar:
     background: "#17365c"
