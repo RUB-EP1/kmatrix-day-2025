@@ -16,7 +16,19 @@ requires-python = ">=3.12"
 version = "0.0.0"
 
 [dependency-groups]
-dev = ["ruff"]
+dev = [
+    "ruff",
+    {include-group = "jupyter"},
+]
+jupyter = [
+    "jupyterlab",
+    "jupyterlab-code-formatter",
+    "jupyterlab-git",
+    "jupyterlab-lsp",
+    "jupyterlab-myst",
+    "python-lsp-ruff",
+    "python-lsp-server[rope]",
+]
 
 [tool.ruff]
 preview = true
