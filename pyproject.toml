@@ -8,6 +8,7 @@ authors = [
 ]
 dependencies = [
     "iminuit",
+    "jupyter-cache",
     "matplotlib",
     "quarto-cli",
 ]
