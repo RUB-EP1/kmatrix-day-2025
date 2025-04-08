@@ -38,7 +38,7 @@
     "LICENSE",
     "pyproject.toml"
   ],
-  "ignoreWords": ["iminuit", "mathbb", "mathrm", "nbsp"],
+  "ignoreWords": ["iminuit", "ipynb", "mathbb", "mathrm", "nbsp"],
   "language": "en-US",
   "useGitignore": true,
   "version": "0.2",

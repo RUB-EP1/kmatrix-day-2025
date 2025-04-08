@@ -28,8 +28,7 @@ website:
       - text: Notebooks
         icon: journal-code
         contents:
-          - text: Material A
-          - text: Material B
+          - file: finding-poles.ipynb
       - text: Useful links
         icon: book
       - text: ---
