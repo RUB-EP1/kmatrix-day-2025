@@ -2,11 +2,10 @@ execute:
   cache: true
 format:
   html:
-    anchor-sections: false
+    css: styles.css
     theme:
       light: flatly
       dark: darkly
-    css: styles.css
 number-depth: 3
 project:
   output-dir: _build/html
