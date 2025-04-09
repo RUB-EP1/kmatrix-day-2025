@@ -38,6 +38,7 @@
   },
   "git.rebaseWhenSync": true,
   "gitlens.telemetry.enabled": false,
+  "julia.executablePath": ".pixi/envs/default/bin/julia",
   "julia.NumThreads": "auto",
   "livePreview.defaultPreviewPath": "docs/_build/html",
   "prettier.documentSelectors": ["**/*.qmd"],
