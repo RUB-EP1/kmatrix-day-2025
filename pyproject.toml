@@ -7,12 +7,12 @@ authors = [
     {name = "Remco de Boer"},
 ]
 dependencies = [
-    "ampform>=0.15.8",
+    "ampform",
     "iminuit",
     "jupyter-cache",
     "matplotlib",
     "quarto-cli",
-    "sympy>=1.13.3",
+    "sympy",
 ]
 name = "k-matrix-day-2025"
 requires-python = ">=3.12"

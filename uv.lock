@@ -1089,12 +1089,12 @@ jupyter = [
 
 [package.metadata]
 requires-dist = [
-    { name = "ampform", specifier = ">=0.15.8" },
+    { name = "ampform" },
     { name = "iminuit" },
     { name = "jupyter-cache" },
     { name = "matplotlib" },
     { name = "quarto-cli" },
-    { name = "sympy", specifier = ">=1.13.3" },
+    { name = "sympy" },
 ]
 
 [package.metadata.requires-dev]
