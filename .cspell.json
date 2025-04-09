@@ -1,5 +1,6 @@
 {
   "allowCompoundWords": true,
+  "dictionaries": ["latex", "python"],
   "enableFiletypes": [
     "git-commit",
     "github-actions-workflow",
@@ -37,7 +38,21 @@
     "LICENSE",
     "pyproject.toml"
   ],
-  "ignoreWords": ["nbsp"],
+  "ignoreWords": [
+    "aslatex",
+    "iminuit",
+    "ipynb",
+    "mathbb",
+    "mathrm",
+    "nbsp",
+    "pcolormesh",
+    "vmax",
+    "vmin",
+    "xlabel",
+    "ylabel",
+    "ylim",
+    "yticks"
+  ],
   "language": "en-US",
   "useGitignore": true,
   "version": "0.2",
@@ -45,10 +60,14 @@
     "Hüsken",
     "Ilya",
     "Indico",
+    "Kallen",
+    "lambdify",
     "Mikhasenko",
+    "NumPy",
     "Pixi",
     "Pöpping",
     "Remco",
-    "Segal"
+    "Segal",
+    "unphysical"
   ]
 }

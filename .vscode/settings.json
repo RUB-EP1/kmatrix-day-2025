@@ -38,8 +38,13 @@
   },
   "git.rebaseWhenSync": true,
   "gitlens.telemetry.enabled": false,
+  "julia.executablePath": ".pixi/envs/default/bin/julia",
   "julia.NumThreads": "auto",
   "livePreview.defaultPreviewPath": "docs/_build/html",
+  "notebook.codeActionsOnSave": {
+    "notebook.source.organizeImports": "explicit"
+  },
+  "notebook.formatOnSave.enabled": true,
   "prettier.documentSelectors": ["**/*.qmd"],
   "python.analysis.autoImportCompletions": false,
   "python.defaultInterpreterPath": ".venv/bin/python",
@@ -47,6 +52,7 @@
   "quarto.path": ".venv/bin/quarto",
   "redhat.telemetry.enabled": false,
   "ruff.enable": true,
+  "ruff.importStrategy": "fromEnvironment",
   "ruff.organizeImports": true,
   "telemetry.telemetryLevel": "off"
 }

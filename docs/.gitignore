@@ -1,3 +1,4 @@
-/.quarto/
 _build/
+.jupyter_cache/
+/.quarto/
 index_files/
