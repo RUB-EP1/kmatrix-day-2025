@@ -27,15 +27,15 @@ md"""
 """
 
 # ╔═╡ aee1d99e-4737-4356-a82f-3aa010c06d45
-theme(:boxed; 
-	  colorbar=false, 
-	  clim=(-1, 1), 
-	  lab="", 
+theme(:boxed;
+	  colorbar=false,
+	  clim=(-1, 1),
+	  lab="",
 	  xlab="Mass of system [GeV]",
 	  fontfamily="Computer Modern",
       xlim=(:auto, :auto),
 	  ylim=(:auto, :auto),
-	  grid=false, 
+	  grid=false,
 	  minorticks=true,
 	  guidefonthalign=:right,
       foreground_color_legend=nothing,
@@ -96,7 +96,7 @@ begin
 	#
 	amplitude(K::Kmatrix, m) =
 	    sum((gs * gs') ./ (M^2 - m^2) for (M, gs) in K.poles) + K.nonpoles
-	# 
+	#
 	npoles(X::Kmatrix{N,V}) where {N,V} = V
 	nchannels(X::Kmatrix{N,V}) where {N,V} = N
 	#
@@ -118,7 +118,7 @@ md"""
 
 ### Amplitudes and cross-section
 
-Cross section of a certain channel calculated as 
+Cross section of a certain channel calculated as
 
 $\frac{\mathrm{d}\sigma}{\mathrm{d}m} = \frac{1}{J} |T|^2 \frac{\mathrm{d}\Phi}{\mathrm{d}m}$
 
@@ -140,10 +140,10 @@ begin
 	nchannels(X::ProductionAmplitude{N,V}) where {N,V} = N
 	detD(X::ProductionAmplitude, m; ϕ=-π / 2) = detD(X.T, m; ϕ)
 	channels(X::ProductionAmplitude) = channels(X.T)
-	# 
+	#
 	ProductionAmplitude(T::Tmatrix{N,V}) where {N,V} =
 	    ProductionAmplitude(T, SVector{V}(ones(V)), SVector{N}(ones(N)))
-	# 
+	#
 	function amplitude(A::ProductionAmplitude, m; ϕ=-π / 2)
 	    @unpack T, αpoles, αnonpoles = A
 	    P = αnonpoles
@@ -170,7 +170,7 @@ begin
 	    sqrt((m^2 - (ch.m1 - ch.m2)^2)) /
 	    m^2
 	end
-	#	
+	#
 	function Dmatrix(T::Tmatrix{N,V}, m; ϕ=-π / 2) where {N,V}
 	    𝕀 = Matrix(I, (N, N))
 	    iρv = 1im .* ρ.(T.channels, m; ϕ) .* 𝕀
@@ -179,7 +179,7 @@ begin
 	end
 	detD(T::Tmatrix, m; ϕ=-π / 2) = det(Dmatrix(T, m; ϕ))
 	amplitude(T::Tmatrix, m; ϕ=-π / 2) = inv(Dmatrix(T, m; ϕ)) * amplitude(T.K, m)
-	# 
+	#
 	npoles(X::Tmatrix{N,V}) where {N,V} = V
 	nchannels(X::Tmatrix{N,V}) where {N,V} = N
 	channels(X::Tmatrix) = X.channels
@@ -228,7 +228,7 @@ $K = \frac{1}{m_0^2-s}
 g_1^2 & g_1 g_2 & g_1 g_3\\
 g_2 g_1 & g_2^2 & g_2 g_3\\
 g_3 g_1 & g_3 g_2 & g_3^2\\
-\end{pmatrix}$ 
+\end{pmatrix}$
 
 and $\rho=\text{Diag}(\rho_1,\rho_2,\rho_3)$
 
