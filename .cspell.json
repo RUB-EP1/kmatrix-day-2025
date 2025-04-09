@@ -47,7 +47,11 @@
     "nbsp",
     "pcolormesh",
     "vmax",
-    "vmin"
+    "vmin",
+    "xlabel",
+    "ylabel",
+    "ylim",
+    "yticks"
   ],
   "language": "en-US",
   "useGitignore": true,
@@ -63,9 +67,6 @@
     "Pixi",
     "Pöpping",
     "Remco",
-    "Segal",
-    "xlabel",
-    "ylabel",
-    "ylim"
+    "Segal"
   ]
 }
