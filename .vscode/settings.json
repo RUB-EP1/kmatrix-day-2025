@@ -41,6 +41,10 @@
   "julia.executablePath": ".pixi/envs/default/bin/julia",
   "julia.NumThreads": "auto",
   "livePreview.defaultPreviewPath": "docs/_build/html",
+  "notebook.codeActionsOnSave": {
+    "notebook.source.organizeImports": "explicit"
+  },
+  "notebook.formatOnSave.enabled": true,
   "prettier.documentSelectors": ["**/*.qmd"],
   "python.analysis.autoImportCompletions": false,
   "python.defaultInterpreterPath": ".venv/bin/python",
