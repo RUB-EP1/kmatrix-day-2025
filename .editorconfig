@@ -7,7 +7,7 @@ indent_style = space
 insert_final_newline = true
 trim_trailing_whitespace = true
 
-[*.{md,qmd}]
+[*.{ipynb,md,qmd}]
 indent_size = unset
 
 [*.toml]
@@ -15,3 +15,6 @@ indent_size = 4
 
 [LICENSE]
 indent_size = unset
+
+[uv.lock]
+indent_size = 4

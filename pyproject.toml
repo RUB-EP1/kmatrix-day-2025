@@ -6,10 +6,67 @@ authors = [
     {name = "Nils Hüsken"},
     {name = "Remco de Boer"},
 ]
-dependencies = ["quarto-cli"]
+dependencies = [
+    "ampform",
+    "iminuit",
+    "jupyter-cache",
+    "matplotlib",
+    "quarto-cli",
+    "sympy",
+]
 name = "k-matrix-day-2025"
 requires-python = ">=3.12"
 version = "0.0.0"
+
+[dependency-groups]
+dev = [
+    "ruff",
+    {include-group = "jupyter"},
+]
+jupyter = [
+    "jupyterlab",
+    "jupyterlab-code-formatter",
+    "jupyterlab-git",
+    "jupyterlab-lsp",
+    "jupyterlab-quarto",
+    "jupyterlab-quickopen",
+    "python-lsp-ruff",
+    "python-lsp-server[rope]",
+]
+
+[tool.ruff]
+preview = true
+show-fixes = true
+
+[tool.ruff.format]
+docstring-code-format = true
+line-ending = "lf"
+
+[tool.ruff.lint]
+ignore = [
+    "ANN001",
+    "ANN20",
+    "CPY001",
+    "D103",
+    "E741",
+]
+select = ["ALL"]
+task-tags = ["cspell"]
+
+[tool.ruff.lint.flake8-builtins]
+builtins-ignorelist = ["display"]
+
+[tool.ruff.lint.isort]
+known-third-party = ["sympy"]
+split-on-trailing-comma = false
+
+[tool.ruff.lint.per-file-ignores]
+"*.ipynb" = [
+    "B018",
+    "C408",
+    "D",
+    "E303",
+]
 
 [tool.tomlsort]
 all = false
