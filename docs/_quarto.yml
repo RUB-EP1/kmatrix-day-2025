@@ -1,3 +1,5 @@
+bibliography: references.bib
+csl: apa.csl
 execute:
   cache: true
 format:
@@ -10,6 +12,8 @@ format:
 number-depth: 3
 project:
   output-dir: _build/html
+  resources:
+    - references.bib
   type: website
 website:
   description: Website for the International K-Matrix Day 2025
@@ -40,6 +44,7 @@ website:
           - file: finding-poles.ipynb
       - text: Useful links
         icon: book
+        file: references.qmd
       - text: ---
       - text: K-Matrix Day 2024
         href: https://rub-ep1.github.io/kmatrix-day-2024
