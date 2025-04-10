@@ -10,7 +10,7 @@ title: International K-Matrix Day 2025
 The International K-Matrix Day is an annual educational event dedicated to a powerful tool in amplitude analysis, the K-Matrix. Important basics will be taught on black board, practical examples will be showcased with live coding sessions. Everyone is welcome, no matter how much you already know about the topic.
 The goal of the K-Matrix Day is to share information about this powerful tool and make it available to anyone who wants to learn more.<br>
 
-✏️ Application via **Indico**: [https://indico.global/event/14144](https://indico.global/event/14144)
+✏️ Application via **Indico**: [https://indico.global/e/kmatrix-day-2025](https://indico.global/event/14144) <!-- cspell:ignore kmatrix -->
 
 💬 For further discussions, join the [Amplitude analysis Slack workspace](https://join.slack.com/t/amplitude-analysis/shared_invite/zt-20eqvwbg6-~KbrYI_F6FAiFmVaUpQoPA), then look for the [#international-k-matrix-day](https://amplitude-analysis.slack.com/archives/C08MJ655W6R) channel
 
