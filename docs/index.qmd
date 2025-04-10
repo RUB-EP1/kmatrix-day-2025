@@ -12,7 +12,7 @@ The goal of the K-Matrix Day is to share information about this powerful tool an
 
 ✏️ Application via **Indico**: [https://indico.global/event/14144](https://indico.global/event/14144)
 
-💬 For further discussions, join the [Amplitude analysis Slack workspace](https://join.slack.com/t/amplitude-analysis/shared_invite/zt-20eqvwbg6-~KbrYI_F6FAiFmVaUpQoPA), then look for the [#international-k-matrix-day](https://amplitude-analysis.slack.com/archives/C08KUF36Y6S) channel
+💬 For further discussions, join the [Amplitude analysis Slack workspace](https://join.slack.com/t/amplitude-analysis/shared_invite/zt-20eqvwbg6-~KbrYI_F6FAiFmVaUpQoPA), then look for the [#international-k-matrix-day](https://amplitude-analysis.slack.com/archives/C08MJ655W6R) channel
 
 ### 🕒 Timetable
 
