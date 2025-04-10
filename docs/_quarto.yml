@@ -37,6 +37,7 @@ website:
     - edit
     - issue
     - source
+  repo-subdir: docs
   repo-url: https://github.com/RUB-EP1/kmatrix-day-2025
   sidebar:
     contents:
