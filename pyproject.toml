@@ -28,7 +28,6 @@ jupyter = [
     "jupyterlab-code-formatter",
     "jupyterlab-git",
     "jupyterlab-lsp",
-    "jupyterlab-quarto",
     "jupyterlab-quickopen",
     "python-lsp-ruff",
     "python-lsp-server[rope]",
@@ -48,6 +47,8 @@ ignore = [
     "ANN20",
     "CPY001",
     "D103",
+    "D203",
+    "D213",
     "E741",
 ]
 select = ["ALL"]
