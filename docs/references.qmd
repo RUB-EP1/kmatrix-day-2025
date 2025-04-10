@@ -16,3 +16,7 @@ The Chew–Mandelstam function for $S$&nbsp;waves is described in @Basdevant:197
 
 ::: {#refs}
 :::
+
+::: {.callout-tip}
+Download this bibliography as a BibTeX file: [`references.bib`](./references.bib)
+:::

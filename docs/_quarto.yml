@@ -12,6 +12,8 @@ format:
 number-depth: 3
 project:
   output-dir: _build/html
+  resources:
+    - references.bib
   type: website
 website:
   description: Website for the International K-Matrix Day 2025
