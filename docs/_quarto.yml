@@ -64,6 +64,9 @@ website:
       - href: https://amplitude-analysis.slack.com/archives/C08MJ655W6R
         icon: slack
         text: Slack Channel
+      - href: https://indico.global/event/14144
+        icon: calendar-event
+        text: Indico Event
       - href: lite/lab/index.html
         icon: code-square
         text: Live coding with Jupyter Lite
