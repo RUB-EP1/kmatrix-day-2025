@@ -47,9 +47,6 @@ website:
         icon: journal-code
         contents:
           - file: finding-poles.ipynb
-      - href: lite/lab/index.html
-        text: Jupyter Lite
-        icon: code-square
       - text: Resources
         icon: book
         file: resources.qmd
@@ -62,5 +59,10 @@ website:
     tools:
       - href: https://github.com/RUB-EP1/kmatrix-day-2025
         icon: github
-      - href: https://amplitude-analysis.slack.com/archives/C08KUF36Y6S
+        text: GitHub Repository
+      - href: https://amplitude-analysis.slack.com/archives/C08MJ655W6R
         icon: slack
+        text: Slack Channel
+      - href: lite/lab/index.html
+        icon: code-square
+        text: Live coding with Jupyter Lite
