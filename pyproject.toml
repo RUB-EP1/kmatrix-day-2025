@@ -28,7 +28,6 @@ jupyter = [
     "jupyterlab-code-formatter",
     "jupyterlab-git",
     "jupyterlab-lsp",
-    "jupyterlab-quarto",
     "jupyterlab-quickopen",
     "python-lsp-ruff",
     "python-lsp-server[rope]",
