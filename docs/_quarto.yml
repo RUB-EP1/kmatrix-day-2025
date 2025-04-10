@@ -15,7 +15,7 @@ project:
   render:
     - index.qmd
     - finding-poles.ipynb
-    - references.qmd
+    - resources.qmd
   resources:
     - lite/
     - references.bib
@@ -50,9 +50,9 @@ website:
       - href: lite/lab/index.html
         text: Jupyter Lite
         icon: code-square
-      - text: Useful links
+      - text: Resources
         icon: book
-        file: references.qmd
+        file: resources.qmd
       - text: ---
       - text: K-Matrix Day 2024
         href: https://rub-ep1.github.io/kmatrix-day-2024
