@@ -23,6 +23,8 @@
     "transisions"
   ],
   "ignorePaths": [
+    "*.bib",
+    "*.csl",
     ".cspell.json",
     ".editorconfig",
     ".envrc",
@@ -48,6 +50,7 @@
     "mathrm",
     "nbsp",
     "ncols",
+    "nocite",
     "pcolormesh",
     "sharey",
     "vmax",
@@ -61,18 +64,25 @@
   "useGitignore": true,
   "version": "0.2",
   "words": [
+    "analyticity",
+    "Anisovich",
+    "Bargiotti",
+    "Basdevant",
     "Breit",
     "Hüsken",
     "Ilya",
     "Indico",
     "Kallen",
+    "Kopf",
     "lambdify",
     "Mikhasenko",
     "NumPy",
+    "parametrizations",
     "Pixi",
     "Pöpping",
     "Remco",
     "Segal",
+    "unitarization",
     "unphysical"
   ]
 }
