@@ -36,7 +36,11 @@ jobs:
           path: docs/.jupyter_cache
           restore-keys: jupyter-cache-${{hashFiles('uv.lock')}}
       - name: Build documentation with Quarto
-        run: uv run quarto render docs --execute
+        run: |
+          uv run \
+            --group doc \
+            --no-dev \
+            quarto render docs --execute
       - uses: actions/upload-pages-artifact@v3
         with:
           path: docs/_build/html
