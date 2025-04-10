@@ -9,9 +9,7 @@ authors = [
 dependencies = [
     "ampform",
     "iminuit",
-    "jupyter-cache",
     "matplotlib",
-    "quarto-cli",
     "sympy",
 ]
 name = "k-matrix-day-2025"
@@ -21,7 +19,12 @@ version = "0.0.0"
 [dependency-groups]
 dev = [
     "ruff",
+    {include-group = "doc"},
     {include-group = "jupyter"},
+]
+doc = [
+    "jupyter-cache",
+    "quarto-cli",
 ]
 jupyter = [
     "jupyterlab",
