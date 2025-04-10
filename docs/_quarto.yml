@@ -12,7 +12,12 @@ format:
 number-depth: 3
 project:
   output-dir: _build/html
+  render:
+    - index.qmd
+    - finding-poles.ipynb
+    - references.qmd
   resources:
+    - lite/
     - references.bib
   type: website
 website:
@@ -42,6 +47,9 @@ website:
         icon: journal-code
         contents:
           - file: finding-poles.ipynb
+      - href: lite/lab/index.html
+        text: Jupyter Lite
+        icon: code-square
       - text: Useful links
         icon: book
         file: references.qmd

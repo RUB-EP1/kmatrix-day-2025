@@ -35,6 +35,13 @@ jobs:
           key: jupyter-cache-${{hashFiles('uv.lock')}}-${{hashFiles('docs/**/*.ipynb')}}
           path: docs/.jupyter_cache
           restore-keys: jupyter-cache-${{hashFiles('uv.lock')}}
+      - name: Build Jupyter Lite server
+        run: |
+          uv run \
+            --group lite \
+            --no-dev \
+            jupyter lite build --contents finding-poles.ipynb --output-dir lite
+        working-directory: docs
       - name: Build documentation with Quarto
         run: |
           uv run \

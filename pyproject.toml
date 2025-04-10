@@ -21,6 +21,7 @@ dev = [
     "ruff",
     {include-group = "doc"},
     {include-group = "jupyter"},
+    {include-group = "lite"},
 ]
 doc = [
     "jupyter-cache",
@@ -33,6 +34,14 @@ jupyter = [
     "jupyterlab-lsp",
     "jupyterlab-quickopen",
     "python-lsp-ruff",
+    "python-lsp-server[rope]",
+]
+lite = [
+    "jupyterlab",
+    "jupyterlab-lsp",
+    "jupyterlite-core",
+    "jupyterlite-pyodide-kernel",
+    "notebook",
     "python-lsp-server[rope]",
 ]
 

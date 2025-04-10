@@ -254,6 +254,15 @@ wheels = [
 ]
 
 [[package]]
+name = "cloudpickle"
+version = "3.1.1"
+source = { registry = "https://pypi.org/simple" }
+sdist = { url = "https://files.pythonhosted.org/packages/52/39/069100b84d7418bc358d81669d5748efb14b9cceacd2f9c75f550424132f/cloudpickle-3.1.1.tar.gz", hash = "sha256:b216fa8ae4019d5482a8ac3c95d8f6346115d8835911fd4aefd1a445e4242c64", size = 22113 }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/7e/e8/64c37fadfc2816a7701fa8a6ed8d87327c7d54eacfbfb6edab14a2f2be75/cloudpickle-3.1.1-py3-none-any.whl", hash = "sha256:c8c5a44295039331ee9dad40ba100a9c7297b6f988e50e87ccdf3765a668350e", size = 20992 },
+]
+
+[[package]]
 name = "colorama"
 version = "0.4.6"
 source = { registry = "https://pypi.org/simple" }
@@ -370,6 +379,19 @@ dependencies = [
 sdist = { url = "https://files.pythonhosted.org/packages/58/1f/16e6d4026e94224d662dcd344dcd3563bc8a74a272f2c27b325793cad5fc/docstring_to_markdown-0.16.tar.gz", hash = "sha256:097bf502fdf040b0d019688a7cc1abb89b98196801448721740e8aa3e5075627", size = 31157 }
 wheels = [
     { url = "https://files.pythonhosted.org/packages/47/a6/bf7cda3cc85ad1f8cfbf1ede45ade2c5c25f0a315f8a11e4a7943de66af7/docstring_to_markdown-0.16-py3-none-any.whl", hash = "sha256:f92cc42357b2c932f70ca2ebc79f7805039a34011ad381c1b6ac3481e81596ce", size = 23187 },
+]
+
+[[package]]
+name = "doit"
+version = "0.36.0"
+source = { registry = "https://pypi.org/simple" }
+dependencies = [
+    { name = "cloudpickle" },
+    { name = "importlib-metadata" },
+]
+sdist = { url = "https://files.pythonhosted.org/packages/5a/36/66b7dea1bb5688ba0d2d7bc113e9c0d57df697bd3f39ce2a139d9612aeee/doit-0.36.0.tar.gz", hash = "sha256:71d07ccc9514cb22fe59d98999577665eaab57e16f644d04336ae0b4bae234bc", size = 1448096 }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/44/83/a2960d2c975836daa629a73995134fd86520c101412578c57da3d2aa71ee/doit-0.36.0-py3-none-any.whl", hash = "sha256:ebc285f6666871b5300091c26eafdff3de968a6bd60ea35dd1e3fc6f2e32479a", size = 85937 },
 ]
 
 [[package]]
@@ -1043,6 +1065,32 @@ wheels = [
 ]
 
 [[package]]
+name = "jupyterlite-core"
+version = "0.5.1"
+source = { registry = "https://pypi.org/simple" }
+dependencies = [
+    { name = "doit" },
+    { name = "jupyter-core" },
+]
+sdist = { url = "https://files.pythonhosted.org/packages/3f/82/7c2e6e186f32dce940dc47ca4e0fffe5ec3af467f7244a1078fc0d755e24/jupyterlite_core-0.5.1.tar.gz", hash = "sha256:c6eebc93b914b33d57ce5838cc1db197500ab8d6360fce9b163920011936c8e1", size = 14787228 }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/46/15/1d9160819d1e6e018d15de0e98b9297d0a09cfcfdc73add6e24ee3b2b83c/jupyterlite_core-0.5.1-py3-none-any.whl", hash = "sha256:76381619a632f06bf67fb47e5464af762ad8836df5ffe3d7e7ee0e316c1407ee", size = 14799350 },
+]
+
+[[package]]
+name = "jupyterlite-pyodide-kernel"
+version = "0.5.2"
+source = { registry = "https://pypi.org/simple" }
+dependencies = [
+    { name = "jupyterlite-core" },
+    { name = "pkginfo" },
+]
+sdist = { url = "https://files.pythonhosted.org/packages/35/62/86ff7bf536e034686bfe90e7c0d05087b6989c3821f97ed45d04947ba4c2/jupyterlite_pyodide_kernel-0.5.2.tar.gz", hash = "sha256:c6c2c1bb685fb0a076cbf81cd2460cd9acfd764f91325a67194f79c49f9546a2", size = 529767 }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/1b/b5/959a03ca011d1031abac03c18af9e767c18d6a9beb443eb106dda609748c/jupyterlite_pyodide_kernel-0.5.2-py3-none-any.whl", hash = "sha256:63ba6ce28d32f2cd19f636c40c153e171369a24189e11e2235457bd7000c5907", size = 546048 },
+]
+
+[[package]]
 name = "k-matrix-day-2025"
 version = "0.0.0"
 source = { virtual = "." }
@@ -1061,6 +1109,9 @@ dev = [
     { name = "jupyterlab-git" },
     { name = "jupyterlab-lsp" },
     { name = "jupyterlab-quickopen" },
+    { name = "jupyterlite-core" },
+    { name = "jupyterlite-pyodide-kernel" },
+    { name = "notebook" },
     { name = "python-lsp-ruff" },
     { name = "python-lsp-server", extra = ["rope"] },
     { name = "quarto-cli" },
@@ -1077,6 +1128,14 @@ jupyter = [
     { name = "jupyterlab-lsp" },
     { name = "jupyterlab-quickopen" },
     { name = "python-lsp-ruff" },
+    { name = "python-lsp-server", extra = ["rope"] },
+]
+lite = [
+    { name = "jupyterlab" },
+    { name = "jupyterlab-lsp" },
+    { name = "jupyterlite-core" },
+    { name = "jupyterlite-pyodide-kernel" },
+    { name = "notebook" },
     { name = "python-lsp-server", extra = ["rope"] },
 ]
 
@@ -1096,6 +1155,9 @@ dev = [
     { name = "jupyterlab-git" },
     { name = "jupyterlab-lsp" },
     { name = "jupyterlab-quickopen" },
+    { name = "jupyterlite-core" },
+    { name = "jupyterlite-pyodide-kernel" },
+    { name = "notebook" },
     { name = "python-lsp-ruff" },
     { name = "python-lsp-server", extras = ["rope"] },
     { name = "quarto-cli" },
@@ -1112,6 +1174,14 @@ jupyter = [
     { name = "jupyterlab-lsp" },
     { name = "jupyterlab-quickopen" },
     { name = "python-lsp-ruff" },
+    { name = "python-lsp-server", extras = ["rope"] },
+]
+lite = [
+    { name = "jupyterlab" },
+    { name = "jupyterlab-lsp" },
+    { name = "jupyterlite-core" },
+    { name = "jupyterlite-pyodide-kernel" },
+    { name = "notebook" },
     { name = "python-lsp-server", extras = ["rope"] },
 ]
 
@@ -1532,6 +1602,15 @@ wheels = [
     { url = "https://files.pythonhosted.org/packages/e5/fb/a7960e838bc5df57a2ce23183bfd2290d97c33028b96bde332a9057834d3/pillow-11.1.0-cp313-cp313t-win32.whl", hash = "sha256:dda60aa465b861324e65a78c9f5cf0f4bc713e4309f83bc387be158b077963d9", size = 2295494 },
     { url = "https://files.pythonhosted.org/packages/d7/6c/6ec83ee2f6f0fda8d4cf89045c6be4b0373ebfc363ba8538f8c999f63fcd/pillow-11.1.0-cp313-cp313t-win_amd64.whl", hash = "sha256:ad5db5781c774ab9a9b2c4302bbf0c1014960a0a7be63278d13ae6fdf88126fe", size = 2631595 },
     { url = "https://files.pythonhosted.org/packages/cf/6c/41c21c6c8af92b9fea313aa47c75de49e2f9a467964ee33eb0135d47eb64/pillow-11.1.0-cp313-cp313t-win_arm64.whl", hash = "sha256:67cd427c68926108778a9005f2a04adbd5e67c442ed21d95389fe1d595458756", size = 2377651 },
+]
+
+[[package]]
+name = "pkginfo"
+version = "1.12.1.2"
+source = { registry = "https://pypi.org/simple" }
+sdist = { url = "https://files.pythonhosted.org/packages/24/03/e26bf3d6453b7fda5bd2b84029a426553bb373d6277ef6b5ac8863421f87/pkginfo-1.12.1.2.tar.gz", hash = "sha256:5cd957824ac36f140260964eba3c6be6442a8359b8c48f4adf90210f33a04b7b", size = 451828 }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/fa/3d/f4f2ba829efb54b6cd2d91349c7463316a9cc55a43fc980447416c88540f/pkginfo-1.12.1.2-py3-none-any.whl", hash = "sha256:c783ac885519cab2c34927ccfa6bf64b5a704d7c69afaea583dd9b7afe969343", size = 32717 },
 ]
 
 [[package]]
