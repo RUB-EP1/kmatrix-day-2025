@@ -1,5 +1,6 @@
 {
   "recommendations": [
+    "bierner.markdown-footnotes",
     "charliermarsh.ruff",
     "eamodio.gitlens",
     "editorconfig.editorconfig",
@@ -10,6 +11,7 @@
     "igorjrd.cslpreview",
     "juliacomputing.pluto-vscode",
     "julialang.language-julia",
+    "mechatroner.rainbow-csv",
     "mhutchie.git-graph",
     "ms-python.python",
     "ms-vscode.live-server",
