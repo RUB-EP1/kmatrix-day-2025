@@ -29,9 +29,7 @@ website:
     foreground: "#e7e7e7"
     logo: images/rub-white.svg
     logo-href: https://rub.de
-    pinned: true
     title: false
-    website:
   page-navigation: true
   repo-actions:
     - edit
@@ -56,7 +54,6 @@ website:
         href: https://rub-ep1.github.io/kmatrix-day-2024
         icon: box-arrow-up-right
     search: true
-    style: docked
     tools:
       - href: https://github.com/RUB-EP1/kmatrix-day-2025
         icon: github
