@@ -57,6 +57,7 @@
     "nocite",
     "pcolormesh",
     "sharey",
+    "vlines",
     "vmax",
     "vmin",
     "xlabel",

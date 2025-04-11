@@ -116,8 +116,9 @@ line-ending = "lf"
 
 [tool.ruff.lint]
 ignore = [
-    "ANN001",
+    "ANN00",
     "ANN20",
+    "COM812",
     "CPY001",
     "D103",
     "D203",
@@ -129,6 +130,9 @@ task-tags = ["cspell"]
 
 [tool.ruff.lint.flake8-builtins]
 builtins-ignorelist = ["display"]
+
+[tool.ruff.lint.flake8-self]
+ignore-names = ["_print"]
 
 [tool.ruff.lint.isort]
 known-third-party = ["sympy"]
