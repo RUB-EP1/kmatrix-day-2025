@@ -92,7 +92,7 @@ On the figure below one can find illustration of the ab->cd scattering process w
 """
 
 # ╔═╡ e6e31ded-4db3-4e47-94bd-76aa2edeaf3a
-RobustLocalResource("", joinpath("images", "1x1_scattering.svg"))
+RobustLocalResource("", joinpath("images", "1x1-scattering.svg"))
 
 # ╔═╡ af8266c4-ecc0-4f6f-a0bb-024d8571a153
 struct TwoBodyChannel
@@ -230,7 +230,7 @@ Where $\alpha_1$ and $\alpha_2$ are production factors which might be complex.
 """
 
 # ╔═╡ 7d5b162e-1bba-41e5-804d-81e01fa6daf4
-RobustLocalResource("", joinpath("images", "1x1_production.svg"), cache=false)
+RobustLocalResource("", joinpath("images", "1x1-production.svg"), cache=false)
 
 # ╔═╡ 22475644-faca-41b2-93c7-af11ab6c5f39
 function productionpole(A::ProductionAmplitude{N,V}, m, iR::Int; ϕ=-π / 2) where {N,V}

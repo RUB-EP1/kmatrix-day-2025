@@ -7,7 +7,7 @@
 
 This is the source code for the **[rub-ep1.github.io/kmatrix-day-2025](https://rub-ep1.github.io/kmatrix-day-2025)** website. <!-- cspell:ignore kmatrix -->
 
-To help developing this repository, all you need it [Git](https://git-scm.com), a [GitHub account](https://github.com/signup), and an installation of **[Pixi](https://pixi.sh)**.
+To help developing this repository, all you need is [Git](https://git-scm.com), a [GitHub account](https://github.com/signup), and an installation of **[Pixi](https://pixi.sh)**.
 
 1. Install Pixi[^pixi-install] and restart your terminal:
    ```bash
