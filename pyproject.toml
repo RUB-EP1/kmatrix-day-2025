@@ -118,6 +118,7 @@ line-ending = "lf"
 ignore = [
     "ANN00",
     "ANN20",
+    "COM812",
     "CPY001",
     "D103",
     "D203",
