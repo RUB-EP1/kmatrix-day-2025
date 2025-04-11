@@ -1,6 +1,6 @@
 {
   "allowCompoundWords": true,
-  "dictionaries": ["latex", "python"],
+  "dictionaries": ["latex", "physics", "python"],
   "enableFiletypes": [
     "git-commit",
     "github-actions-workflow",
@@ -32,20 +32,32 @@
     ".pre-commit-config.yaml",
     ".prettierignore",
     ".vscode/",
+    "*.bib",
+    "*.csl",
     "*.css",
     "*.ico",
     "*.svg",
+    "docs/k-matrix.jl",
     "LICENSE",
+    "Manifest.toml",
+    "Project.toml",
     "pyproject.toml"
   ],
   "ignoreWords": [
     "aslatex",
+    "axhline",
+    "axvline",
+    "cbar",
     "iminuit",
     "ipynb",
     "mathbb",
     "mathrm",
     "nbsp",
+    "ncols",
+    "nocite",
     "pcolormesh",
+    "sharey",
+    "vlines",
     "vmax",
     "vmin",
     "xlabel",
@@ -54,21 +66,35 @@
     "yticks"
   ],
   "language": "en-US",
+  "overrides": [
+    {
+      "dictionaries": ["julia", "latex", "physics"],
+      "filename": "**/*.jl",
+      "languageId": "julia"
+    }
+  ],
   "useGitignore": true,
   "version": "0.2",
   "words": [
+    "analyticity",
+    "Anisovich",
+    "Bargiotti",
+    "Basdevant",
+    "Breit",
     "Hüsken",
     "Ilya",
     "Indico",
     "Kallen",
+    "Kopf",
     "lambdify",
     "Mikhasenko",
     "NumPy",
+    "parametrizations",
     "Pixi",
     "Pöpping",
     "Remco",
     "Segal",
-    "unphysical",
-    "vlines"
+    "unitarization",
+    "unphysical"
   ]
 }
