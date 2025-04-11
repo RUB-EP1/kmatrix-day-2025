@@ -28,26 +28,20 @@ jobs:
     runs-on: ubuntu-24.04
     steps:
       - uses: actions/checkout@v4
-      - uses: astral-sh/setup-uv@v5
+      - uses: prefix-dev/setup-pixi@v0.8.5
+        with:
+          cache: true
+          activate-environment: false
       - name: Fetch Jupyter cache
         uses: actions/cache@v4
         with:
-          key: jupyter-cache-${{hashFiles('uv.lock')}}-${{hashFiles('docs/**/*.ipynb')}}
+          key: jupyter-cache-${{hashFiles('pixi.lock')}}-${{hashFiles('docs/**/*.ipynb')}}
           path: docs/.jupyter_cache
-          restore-keys: jupyter-cache-${{hashFiles('uv.lock')}}
+          restore-keys: jupyter-cache-${{hashFiles('pixi.lock')}}
       - name: Build Jupyter Lite server
-        run: |
-          uv run \
-            --group lite \
-            --no-dev \
-            jupyter lite build --contents finding-poles.ipynb --output-dir lite
-        working-directory: docs
+        run: pixi run -e lite lite
       - name: Build documentation with Quarto
-        run: |
-          uv run \
-            --group doc \
-            --no-dev \
-            quarto render docs --execute
+        run: pixi run -e doc doc
       - uses: actions/upload-pages-artifact@v3
         with:
           path: docs/_build/html
