@@ -38,8 +38,6 @@ jobs:
           key: jupyter-cache-${{hashFiles('pixi.lock')}}-${{hashFiles('docs/**/*.ipynb')}}
           path: docs/.jupyter_cache
           restore-keys: jupyter-cache-${{hashFiles('pixi.lock')}}
-      - name: Build Jupyter Lite server
-        run: pixi run -e lite lite
       - name: Build documentation with Quarto
         run: pixi run -e doc doc
       - uses: actions/upload-pages-artifact@v3

@@ -50,7 +50,7 @@ python = {version = "3.12.*", channel = "conda-forge"}
 
 [tool.pixi.environments]
 default = {features = ["dev", "lite"], solve-group = "main"}
-doc = {features = ["doc"], solve-group = "main"}
+doc = {features = ["doc", "lite"], solve-group = "main"}
 lite = {features = ["lite"], solve-group = "main"}
 main = {features = [], solve-group = "main"}
 
@@ -59,9 +59,11 @@ cmd = "rm -rf docs/_build/html/lite"
 
 [tool.pixi.tasks.doc]
 cmd = "quarto render docs --execute"
+depends-on = [{task = "lite", environment = "lite"}]
 
 [tool.pixi.tasks.doclive]
 cmd = "quarto preview docs"
+depends-on = [{task = "lite", environment = "lite"}]
 
 [tool.pixi.tasks.lab]
 cmd = "jupyter lab docs"
