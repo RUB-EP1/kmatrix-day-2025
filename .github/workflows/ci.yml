@@ -7,6 +7,8 @@ concurrency:
 
 env:
   FORCE_COLOR: "1"
+  JULIA_CI: "true"
+  JULIA_COLOR: "yes"
   UV_PYTHON_PREFERENCE: only-managed
 
 on:
@@ -32,6 +34,16 @@ jobs:
         with:
           cache: true
           activate-environment: false
+      - name: Fetch Julia cache
+        uses: actions/cache@v4
+        with:
+          key: julia-${{hashFiles('docs/Manifest.toml')}}-${{hashFiles('**/*.jl')}}
+          restore-keys: |
+            julia-${{hashFiles('docs/Manifest.toml')}}
+            julia
+          path: |
+            ./julia-*/
+            ~/.julia/
       - name: Fetch Jupyter cache
         uses: actions/cache@v4
         with:

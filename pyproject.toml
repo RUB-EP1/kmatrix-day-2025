@@ -59,11 +59,17 @@ cmd = "rm -rf docs/_build/html/lite"
 
 [tool.pixi.tasks.doc]
 cmd = "quarto render docs --execute"
-depends-on = [{task = "lite", environment = "lite"}]
+depends-on = [
+    "pluto-server",
+    {task = "lite", environment = "lite"},
+]
 
 [tool.pixi.tasks.doclive]
 cmd = "quarto preview docs"
 depends-on = [{task = "lite", environment = "lite"}]
+
+[tool.pixi.tasks.instantiate-julia]
+cmd = "julia --eval='using Pkg; Pkg.instantiate()' --project=docs"
 
 [tool.pixi.tasks.lab]
 cmd = "jupyter lab docs"
@@ -74,8 +80,14 @@ cwd = "docs"
 depends-on = ["clean-lite"]
 
 [tool.pixi.tasks.pluto]
-cmd = "julia --eval='using Pluto; Pluto.run(notebook=\"K-matrix.jl\")' --project=."
+cmd = "julia --eval='using Pluto; Pluto.run(notebook=\"k-matrix.jl\")' --project=."
 cwd = "docs"
+depends-on = ["instantiate-julia"]
+
+[tool.pixi.tasks.pluto-server]
+cmd = "julia --eval='using PlutoSliderServer; PlutoSliderServer.export_notebook(\"k-matrix.jl\")' --project=."
+cwd = "docs"
+depends-on = ["instantiate-julia"]
 
 [tool.pixi.workspace]
 authors = [

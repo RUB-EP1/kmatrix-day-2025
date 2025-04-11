@@ -15,6 +15,7 @@ project:
   render:
     - index.qmd
     - finding-poles.ipynb
+    - k-matrix.html
     - resources.qmd
   resources:
     - lite/
@@ -45,7 +46,11 @@ website:
       - text: Notebooks
         icon: journal-code
         contents:
+          - href: k-matrix.html
+            icon: 1-circle
+            text: Construction of $K$ matrices
           - file: finding-poles.ipynb
+            icon: 2-circle
       - text: Resources
         icon: book
         file: resources.qmd
