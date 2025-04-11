@@ -12,7 +12,12 @@ format:
 number-depth: 3
 project:
   output-dir: _build/html
+  render:
+    - index.qmd
+    - finding-poles.ipynb
+    - resources.qmd
   resources:
+    - lite/
     - references.bib
   type: website
 website:
@@ -32,6 +37,7 @@ website:
     - edit
     - issue
     - source
+  repo-subdir: docs
   repo-url: https://github.com/RUB-EP1/kmatrix-day-2025
   sidebar:
     contents:
@@ -42,9 +48,9 @@ website:
         icon: journal-code
         contents:
           - file: finding-poles.ipynb
-      - text: Useful links
+      - text: Resources
         icon: book
-        file: references.qmd
+        file: resources.qmd
       - text: ---
       - text: K-Matrix Day 2024
         href: https://rub-ep1.github.io/kmatrix-day-2024
@@ -54,5 +60,13 @@ website:
     tools:
       - href: https://github.com/RUB-EP1/kmatrix-day-2025
         icon: github
-      - href: https://amplitude-analysis.slack.com/archives/C08KUF36Y6S
+        text: GitHub Repository
+      - href: https://amplitude-analysis.slack.com/archives/C08MJ655W6R
         icon: slack
+        text: Slack Channel
+      - href: https://indico.global/event/14144
+        icon: calendar-event
+        text: Indico Event
+      - href: lite/lab/index.html
+        icon: code-square
+        text: Live coding with Jupyter Lite
