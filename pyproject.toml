@@ -141,6 +141,7 @@ split-on-trailing-comma = false
     "D",
     "E303",
 ]
+"finding-poles-live.ipynb" = ["F401"]
 
 [tool.tomlsort]
 all = false
