@@ -16,7 +16,7 @@ macro bind(def, element)
     #! format: on
 end
 
-# ╔═╡ ea5ed0c6-2296-4832-bd77-d089fcd3f3b1
+# ╔═╡ 1b49edce-f1e4-43db-a341-66d1c3254b31
 begin
 	using StaticArrays
 	using Plots
@@ -36,43 +36,43 @@ end
 # ╔═╡ 6a5a83b8-3b11-4cd8-a691-b5fe4686bb83
 TableOfContents()
 
-# ╔═╡ c8f2c353-54cf-4c61-948a-4c2eca117db4
+# ╔═╡ 985ba662-b17e-40a9-8dd4-6e187a9fe08a
 md"""
 # Construction of K-matrices for different examples
 
 ## Infrastructure
 """
 
-# ╔═╡ aee1d99e-4737-4356-a82f-3aa010c06d45
-theme(:boxed;
-	  colorbar=false,
-	  clim=(-1, 1),
-	  lab="",
+# ╔═╡ 97c554de-03ca-4ab0-bd10-1cb2db88a225
+theme(:boxed; 
+	  colorbar=false, 
+	  clim=(-1, 1), 
+	  lab="", 
 	  xlab="Mass of system [GeV]",
 	  ylab="Entries",
 	  fontfamily="Computer Modern",
       xlim=(:auto, :auto),
 	  ylim=(:auto, :auto),
-	  grid=false,
+	  grid=false, 
 	  minorticks=true,
 	  guidefonthalign=:right,
       foreground_color_legend=nothing,
 	  background_color_legend=nothing)
 
-# ╔═╡ ca1b3216-042e-479b-9ef1-66c4169071bf
+# ╔═╡ d835017c-9c54-49e7-b473-19dac850529d
 const iϵ = 1e-7im
 
-# ╔═╡ 022271a7-2a17-4cd8-8a1d-e1a4520e5468
+# ╔═╡ 7d82eecd-bcf5-49d9-9f4d-ce0f18ca20a9
 md"""
 ## Problem
 
-We consider example of the data that can be obtained in any experiment. We have measured mass. Let's try to construct a fitting model for such case using K-matrix approach.
+We consider example of the data that can be obtained in any random experiment. We have measured mass. Let's try to construct a fitting model for such case using K-matrix approach.
 """
 
-# ╔═╡ ece483f3-6c4d-4bc8-b419-b6de930e9639
+# ╔═╡ a429b50e-2f1c-405d-abdd-290e64e4d68d
 data = CSV.read((@__DIR__) * "/../data/experimental_data.csv", DataFrame);
 
-# ╔═╡ 6d8a5417-0e3b-4b3e-b4fa-f6a7cac38ca1
+# ╔═╡ 13601a02-c04c-4742-bd16-0fbb09bba9fb
 begin
 	m_min, m_max = 3, 8
 	h = Hist1D(data.mv; data.weights, binedges=range(m_min, m_max, 40))
@@ -81,7 +81,7 @@ begin
 	scatter(input_data.m_bins, input_data.content, yerr=sqrt.(input_data.content))
 end
 
-# ╔═╡ 62539af0-154e-11f0-0b88-6b6f67ad55ef
+# ╔═╡ b9ec7b56-5df0-436e-aaad-a0505d0326f5
 md"""
 
 ## Introduction
@@ -91,16 +91,16 @@ md"""
 On the figure below one can find illustration of the ab->cd scattering process with resonance which has mass $m_{0}$ and width $Г_{0}$.
 """
 
-# ╔═╡ 31151f7d-a3ed-4efc-bf1b-3b526a74ce9d
+# ╔═╡ e6e31ded-4db3-4e47-94bd-76aa2edeaf3a
 RobustLocalResource("",	joinpath("..","figures","1x1_scattering.svg"))
 
-# ╔═╡ 8fac43e3-c14e-4368-aa59-8a5fea92c55f
+# ╔═╡ af8266c4-ecc0-4f6f-a0bb-024d8571a153
 struct TwoBodyChannel
 	m1::ComplexF64
 	m2::ComplexF64
 end
 
-# ╔═╡ 803a1718-ad90-4617-87b4-16099f61f8ec
+# ╔═╡ 2d96bafa-5a99-4e98-8223-c5343b73c457
 md"""
 
 ### K-matrix
@@ -112,30 +112,24 @@ $K_{ij} = \frac{g_i g_j}{m_0^2-s}$
 where $g_{i} g_j$ indicates different possible channels of the scattering process and $s=m^{2}$. K-matrix has to be real and symmetric by construction.
 """
 
-# ╔═╡ 41106b3e-749d-4a13-bd7f-020e94ecc3a9
+# ╔═╡ cf63462b-7480-4fd6-a72c-c7c912e21e09
 begin
 	struct Kmatrix{N,V}
 	    poles::SVector{V,NamedTuple{(:M, :gs),Tuple{Float64,SVector{N,Float64}}}}
-	    nonpoles::SMatrix{N,N,Float64}
 	end
 	function Kmatrix(_poles)
 		V, N = length(_poles), length(first(_poles).gs)
 		poles = map(_poles) do p
 			(; M=p.M, gs=SVector{N}(p.gs))
 		end |> SVector{V}
-		nonpoles = SMatrix{N,N}(fill(0.0, (N,N)))
-		return Kmatrix(poles, nonpoles)
+		return Kmatrix(poles)
 	end
 	#
 	amplitude(K::Kmatrix, m) =
-	    sum((gs * gs') ./ (M^2 - m^2) for (M, gs) in K.poles) + K.nonpoles
-	#
-#	npoles(X::Kmatrix{N,V}) where {N,V} = V
-	nchannels(X::Kmatrix{N,V}) where {N,V} = N
-	#
+	    sum((gs * gs') ./ (M^2 - m^2) for (M, gs) in K.poles)
 end
 
-# ╔═╡ eb3a70ba-f2c7-436b-ac3a-19e54851078f
+# ╔═╡ 17d5d2e3-d4e6-47e2-910f-8a27d4c15633
 md"""
 
 ### T-matrix
@@ -150,7 +144,7 @@ One can show that T-matrix elements are expressed with the [Flatte formula](http
 $T_{ij} = \frac{g_i g_j}{m_0^2-s-\sum\limits_{N_{ch}}ig_i^2 \rho_i}$
 """
 
-# ╔═╡ 86732244-e039-4061-b6f8-989727ae6903
+# ╔═╡ f6ceb7e7-a1e9-41af-bc45-6df3834f739a
 md"""
 
 ### Breit-Wigner
@@ -161,13 +155,13 @@ $\text{BW} = \frac{m_0\Gamma_0}{m_0^2-s-im_0 \Gamma_0}$
 
 """
 
-# ╔═╡ 7d6a02d7-e38b-4c06-94ea-3614ca9bdefc
+# ╔═╡ c6bf06ba-78fd-4a2c-97cf-1ec468157d67
 md"""
 ### Calculation of the width and g-values estimation
 
 Let's compare Flatte to the BW parametrization
 
-$\text{BW} = \frac{m_0\Gamma_0}{m_0^2-s-im_0 \Gamma_0}$
+$\text{BW} = \frac{m_0\Gamma_0}{m_0^2-s-im_0 \Gamma_0}$ 
 
 We can approximate width to coupling using the Breit-Wigner expression, $1/(m_0^2-s-im_0\Gamma_0)$, where $\Gamma_0$ gives the width of the peak.
 Hence
@@ -183,12 +177,12 @@ Let's assume that we know cross-section distribution and can measure FWHM of it.
 $g_{i}\approx\sqrt\frac{Г_{0}m_{0}}{\rho_{i}(m_0)}$
 """
 
-# ╔═╡ 957858ee-141f-4370-846d-44073b301031
+# ╔═╡ d0a1baff-6cd4-4dab-b0d9-e1e0e98364c1
 md"""
 
 ### Cross-section
 
-Cross section of a certain channel calculated as
+Cross section of a certain channel calculated as 
 
 $\frac{\mathrm{d}\sigma}{\mathrm{d}m} = \frac{1}{J} |T|^2 \frac{\mathrm{d}\Phi}{\mathrm{d}m}$
 
@@ -198,7 +192,7 @@ with
 - the $\rho$ is zero below the threshold of a certain channel.
 """
 
-# ╔═╡ c00b287f-0952-44dd-890c-8c7e4b7e4b55
+# ╔═╡ 584ddbda-9b7f-419a-9afc-91b91c1e4af8
 md"""
 
 ## Model construction
@@ -216,7 +210,7 @@ If K is zero for $s=s_\text{z}$, T is zero.
 
 """
 
-# ╔═╡ eaa9f951-fb49-4c3c-8cb3-de3bf996981c
+# ╔═╡ 35fd1324-a12d-4a21-97de-15889d8f7b96
 md"""
 ### Production amplitude
 
@@ -235,28 +229,24 @@ $P=
 Where $\alpha_1$ and $\alpha_2$ are production factors which might be complex.
 """
 
-# ╔═╡ 4b12ae65-ac34-4215-80b9-013566c1cdbd
+# ╔═╡ 7d5b162e-1bba-41e5-804d-81e01fa6daf4
 RobustLocalResource("", joinpath("..","figures", "1x1_production.svg"), cache=false)
 
-# ╔═╡ 43b2e2e8-06bf-4643-b30f-ef6dc648a9fa
+# ╔═╡ c754c08e-4b6b-4450-993f-a6c6abf7a84b
 begin
 	struct ProductionAmplitude{N,V}
 	    T::Tmatrix{N,V}
 	    αpoles::SVector{V,<:Number}
-	    αnonpoles::SVector{N,<:Number}
 	end
 	#
-	npoles(X::ProductionAmplitude{N,V}) where {N,V} = V
-	nchannels(X::ProductionAmplitude{N,V}) where {N,V} = N
-	detD(X::ProductionAmplitude, m; ϕ=-π / 2) = detD(X.T, m; ϕ)
-	channels(X::ProductionAmplitude) = channels(X.T)
-	#
+	detD(PA::ProductionAmplitude, m; ϕ=-π / 2) = detD(PA.T, m; ϕ)
+	# 
 	ProductionAmplitude(T::Tmatrix{N,V}) where {N,V} =
-	    ProductionAmplitude(T, SVector{V}(ones(V)), SVector{N}(ones(N)))
-	#
-	function amplitude(A::ProductionAmplitude, m; ϕ=-π / 2)
-	    @unpack T, αpoles, αnonpoles = A
-	    P = αnonpoles
+	    ProductionAmplitude(T, SVector{V}(ones(V)))
+	# 
+	function amplitude(A::ProductionAmplitude{N,V}, m; ϕ=-π / 2) where {N,V}
+	    @unpack T, αpoles = A
+		P = SVector{N}(zeros(N))
 	    for (α, Mgs) in zip(αpoles, A.T.K.poles)
 	        @unpack M, gs = Mgs
 	        P += α .* gs ./ (M^2 - m^2)
@@ -266,7 +256,7 @@ begin
 	end
 end
 
-# ╔═╡ 6b2b8d3f-e2d4-4ea4-94a9-07e02aebb344
+# ╔═╡ 9507f1b1-8d0c-45c0-b5ae-5fb1d3e4c75f
 begin
 	struct Tmatrix{N,V}
 	    K::Kmatrix{N,V}
@@ -279,7 +269,7 @@ begin
 	    sqrt((m^2 - (ch.m1 - ch.m2)^2)) /
 	    m^2
 	end
-	#
+	#	
 	function Dmatrix(T::Tmatrix{N,V}, m; ϕ=-π / 2) where {N,V}
 	    𝕀 = Matrix(I, (N, N))
 	    iρv = 1im .* ρ.(T.channels, m; ϕ) .* 𝕀
@@ -288,39 +278,34 @@ begin
 	end
 	detD(T::Tmatrix, m; ϕ=-π / 2) = det(Dmatrix(T, m; ϕ))
 	amplitude(T::Tmatrix, m; ϕ=-π / 2) = inv(Dmatrix(T, m; ϕ)) * amplitude(T.K, m)
-	#
-	npoles(X::Tmatrix{N,V}) where {N,V} = V
-	nchannels(X::Tmatrix{N,V}) where {N,V} = N
-	channels(X::Tmatrix) = X.channels
 end
 
-# ╔═╡ df62bad6-afe8-497f-a746-9a490fcc3a81
+# ╔═╡ 22475644-faca-41b2-93c7-af11ab6c5f39
 function productionpole(A::ProductionAmplitude{N,V}, m, iR::Int; ϕ=-π / 2) where {N,V}
-    αnonpoles = SVector{N}(zeros(N))
     αpoles = zeros(Complex{Float64}, V)
     αpoles[iR] = A.αpoles[iR]
-    A = ProductionAmplitude(A.T, SVector{V}(αpoles), αnonpoles)
+    A = ProductionAmplitude(A.T, SVector{V}(αpoles))
     return amplitude(A, m; ϕ)
 end
 
-# ╔═╡ 64ab4581-5388-48f8-a86f-2d1f704d77bd
+# ╔═╡ c2188c41-914c-4133-9b4e-4aa9e5f1aee2
 function intensity(model, m)
 	A = amplitude(model, m)[1]
 	phsp = real(ρ(model.T.channels[1], m)) * m
 	abs2(A) * phsp
 end
 
-# ╔═╡ 0121728d-211c-400c-b7ff-516e9edb3d2e
+# ╔═╡ fd205c2f-cc39-4bd0-a660-3bb85524ab2a
 md"""
 
 ### Initial parametrs estimation
 
 """
 
-# ╔═╡ 98b2dc80-34b5-4883-9a97-f435b2c2adfd
+# ╔═╡ dff76214-27f8-4b19-a249-5d56c96f3b20
 md"""
 
-One can set free parameters (masses, widths, and production couplings) estimating it from the data points:
+One can set free parameters (masses, widths, and production couplings) estimating them from the data points:
 - m1 = $(@bind m1 Slider(range(3.0,8.0,51), default=3.1, show_value=true))
 - Γ1 = $(@bind Γ1 Slider(range(0.1,2.1,21), default=0.1, show_value=true))
 - m2 = $(@bind m2 Slider(range(3.0,8.0,51), default=3.1, show_value=true))
@@ -332,7 +317,7 @@ One can set free parameters (masses, widths, and production couplings) estimatin
 Once initial parapeters are set, you can enable fit below
 """
 
-# ╔═╡ 890720b8-3634-4595-b320-9a67f2e32be4
+# ╔═╡ d52b8ff2-0ec9-400a-83aa-f006577ce0e9
 T = let
 	# one channels
 	channels = SVector(
@@ -341,15 +326,15 @@ T = let
 	MG = [
 		(M=m1, gs=[sqrt(Γ1*m1/real(ρ(channels[1], m1)))]),
 		(M=m2, gs=[sqrt(Γ2*m2/real(ρ(channels[1], m2)))])]
-	#
+	# 
 	K = Kmatrix(MG)
 	T = Tmatrix(K, channels)
 end;
 
-# ╔═╡ 6fc426f9-1c17-44ef-9b4e-5595f66db0e8
-PA = ProductionAmplitude(T, SVector{2}(α1, α2*cis(ϕ2)), SVector{1}(0));
+# ╔═╡ ea9e026c-a90c-429c-bd09-5300f2b0c640
+PA = ProductionAmplitude(T, SVector{2}(α1, α2*cis(ϕ2)))
 
-# ╔═╡ 93d3c4cd-f934-42ff-9ac5-7c7bbea1271b
+# ╔═╡ 1c1ff902-706c-44f2-b133-af445977c393
 let
 	plot()
 	scatter!(input_data.m_bins, input_data.content, yerr=sqrt.(input_data.content), lab="Data")
@@ -367,7 +352,7 @@ let
 	plot!()
 end
 
-# ╔═╡ 7b4e2e18-6c6c-4429-a935-ec1b36c794fa
+# ╔═╡ 14517f85-3c86-4d05-809a-cc4a2b1f4843
 md"""
 
 ## Fit and parameters extraction
@@ -376,7 +361,7 @@ Let's fit our data points with the model we have built.
 
 """
 
-# ╔═╡ b14ace95-f030-45ed-95ce-3c7782f441ea
+# ╔═╡ 94c31923-e347-4d6b-a24c-3a78cf10e265
 function build_model(pars)
 	channels = SVector(
 			TwoBodyChannel(1.0, 1.0))
@@ -385,10 +370,10 @@ function build_model(pars)
 		(M=pars.m2, gs=[sqrt(abs(real(pars.Γ2*pars.m2/ρ(channels[1], pars.m2))))])]
 	K = Kmatrix(MG)
 	T = Tmatrix(K, channels)
-	PA = ProductionAmplitude(T, SVector{2}(pars.α1, pars.α2*cis(pars.ϕ2)), SVector{1}(0));
+	PA = ProductionAmplitude(T, SVector{2}(pars.α1, pars.α2*cis(pars.ϕ2)));
 end
 
-# ╔═╡ 64cef242-5e75-46cb-b277-89c7785ae6f4
+# ╔═╡ d9957aa2-510b-4b91-a988-4165fc0babd9
 begin
 	function extract_names(nt::NamedTuple)
 	    return collect(keys(nt))
@@ -398,7 +383,9 @@ begin
 	end
 end
 
-# ╔═╡ 33da12a3-c538-4d51-b3cd-5dd9e5a6c552
+# ╔═╡ 6c72aa7d-389d-4966-9f34-1729d3e62909
+# ╠═╡ disabled = true
+#=╠═╡
 fit_result, best_pars = let
 	init_pars = (m1 = m1, Γ1 = Γ1, m2 = m2, Γ2 = Γ2, α1 = α1, α2 = α2, ϕ2 = ϕ2)
     names = extract_names(init_pars)
@@ -407,13 +394,15 @@ fit_result, best_pars = let
 	δy_data = sqrt.(input_data.content)
 	model(pars) = build_model(v2p(names, pars))
 	y_fit(pars) = intensity.(Ref(model(pars)), x_data)
-	objective(pars) = sum(abs2, (y_data - y_fit(pars)) ./ δy_data)
+	objective(pars) = sum(abs2, (y_data - y_fit(pars)) ./ δy_data)	
 	fit_result = optimize(objective, collect(init_pars), BFGS(), Optim.Options(; iterations=1000))
 	best_pars = v2p(names, fit_result.minimizer)
 	fit_result, best_pars
 end
+  ╠═╡ =#
 
-# ╔═╡ 4b623acd-08da-4eca-b256-20aef86bc758
+# ╔═╡ 4839eedd-7f9d-4632-a859-ca67b2a10e8b
+#=╠═╡
 let
 	model = build_model(best_pars)
 	plot()
@@ -431,6 +420,7 @@ let
 	vline!([model.T.K.poles[1].M, model.T.K.poles[2].M])
 	plot!()
 end
+  ╠═╡ =#
 
 # ╔═╡ 00000000-0000-0000-0000-000000000001
 PLUTO_PROJECT_TOML_CONTENTS = """
@@ -468,9 +458,9 @@ StaticArrays = "~1.9.13"
 PLUTO_MANIFEST_TOML_CONTENTS = """
 # This file is machine-generated - editing it directly is not advised
 
-julia_version = "1.11.4"
+julia_version = "1.10.4"
 manifest_format = "2.0"
-project_hash = "040ea61d4bef9a0fd684a46fa431aae2fe3ba2fa"
+project_hash = "93ae9c8c253e9d9e20c8452a58053f25c6d83546"
 
 [[deps.ADTypes]]
 git-tree-sha1 = "e2478490447631aedba0823d4d7a80b2cc8cdb32"
@@ -536,7 +526,7 @@ version = "1.1.3"
 
 [[deps.ArgTools]]
 uuid = "0dad84c5-d112-42e6-8d28-ef12dabb789f"
-version = "1.1.2"
+version = "1.1.1"
 
 [[deps.ArrayInterface]]
 deps = ["Adapt", "LinearAlgebra"]
@@ -572,11 +562,9 @@ version = "7.18.0"
 
 [[deps.Artifacts]]
 uuid = "56f22d72-fd6d-98f1-02f0-08ddc0907c33"
-version = "1.11.0"
 
 [[deps.Base64]]
 uuid = "2a0f44e3-6c83-55bd-87e4-b1978d98bd5f"
-version = "1.11.0"
 
 [[deps.BayesHistogram]]
 git-tree-sha1 = "5d5dda960067751bc1534aba765f771325044501"
@@ -620,9 +608,9 @@ version = "0.1.4"
 
 [[deps.CodeTracking]]
 deps = ["InteractiveUtils", "UUIDs"]
-git-tree-sha1 = "7eee164f122511d3e4e1ebadb7956939ea7e1c77"
+git-tree-sha1 = "062c5e1a5bf6ada13db96a4ae4749a4c2234f521"
 uuid = "da1fd8a2-8d9e-5ec2-8556-3022fb5608a2"
-version = "1.3.6"
+version = "1.3.9"
 
 [[deps.CodecZlib]]
 deps = ["TranscodingStreams", "Zlib_jll"]
@@ -750,13 +738,12 @@ version = "1.0.0"
 [[deps.Dates]]
 deps = ["Printf"]
 uuid = "ade2ca70-3891-5945-98fb-dc099432e06a"
-version = "1.11.0"
 
 [[deps.Dbus_jll]]
 deps = ["Artifacts", "Expat_jll", "JLLWrappers", "Libdl"]
-git-tree-sha1 = "fc173b380865f70627d7dd1190dc2fce6cc105af"
+git-tree-sha1 = "473e9afc9cf30814eb67ffa5f2db7df82c3ad9fd"
 uuid = "ee1fde0b-3d02-5ea6-8484-8dfef6360eab"
-version = "1.14.10+0"
+version = "1.16.2+0"
 
 [[deps.DelimitedFiles]]
 deps = ["Mmap"]
@@ -766,9 +753,9 @@ version = "1.9.1"
 
 [[deps.Dictionaries]]
 deps = ["Indexing", "Random", "Serialization"]
-git-tree-sha1 = "1cdab237b6e0d0960d5dcbd2c0ebfa15fa6573d9"
+git-tree-sha1 = "a86af9c4c4f33e16a2b2ff43c2113b2f390081fa"
 uuid = "85a47980-9c8c-11e8-2b9f-f7ca1fa99fb4"
-version = "0.4.4"
+version = "0.4.5"
 
 [[deps.DiffResults]]
 deps = ["StaticArraysCore"]
@@ -784,9 +771,9 @@ version = "1.15.1"
 
 [[deps.DifferentiationInterface]]
 deps = ["ADTypes", "LinearAlgebra"]
-git-tree-sha1 = "70e500f6d5d50091d87859251de7b8cd060c1cce"
+git-tree-sha1 = "e41b6696c84291c4ad15f5f6eaf071b4dfbfda06"
 uuid = "a0c0ee7d-e4b9-4e03-894e-1c5f64a51d63"
-version = "0.6.50"
+version = "0.6.51"
 
     [deps.DifferentiationInterface.extensions]
     DifferentiationInterfaceChainRulesCoreExt = "ChainRulesCore"
@@ -833,7 +820,6 @@ version = "0.6.50"
 [[deps.Distributed]]
 deps = ["Random", "Serialization", "Sockets"]
 uuid = "8ba89e20-285c-5b6f-9357-94700520ee1b"
-version = "1.11.0"
 
 [[deps.DocStringExtensions]]
 git-tree-sha1 = "e7b7e6f178525d17c720ab9c081e4ef04429f860"
@@ -921,7 +907,6 @@ weakdeps = ["Mmap", "Test"]
 
 [[deps.FileWatching]]
 uuid = "7b1f6079-737a-58dc-b8bc-7a2ca5c1b5ee"
-version = "1.11.0"
 
 [[deps.FillArrays]]
 deps = ["LinearAlgebra"]
@@ -965,9 +950,9 @@ version = "0.8.5"
 
 [[deps.Fontconfig_jll]]
 deps = ["Artifacts", "Bzip2_jll", "Expat_jll", "FreeType2_jll", "JLLWrappers", "Libdl", "Libuuid_jll", "Zlib_jll"]
-git-tree-sha1 = "21fac3c77d7b5a9fc03b0ec503aa1a6392c34d2b"
+git-tree-sha1 = "301b5d5d731a0654825f1f2e906990f7141a106b"
 uuid = "a3f928ae-7b40-5064-980b-68af3947d34b"
-version = "2.15.0+0"
+version = "2.16.0+0"
 
 [[deps.Format]]
 git-tree-sha1 = "9c68794ef81b08086aeb32eeaf33531668d5f5fc"
@@ -992,14 +977,13 @@ version = "2.13.4+0"
 
 [[deps.FriBidi_jll]]
 deps = ["Artifacts", "JLLWrappers", "Libdl"]
-git-tree-sha1 = "846f7026a9decf3679419122b49f8a1fdb48d2d5"
+git-tree-sha1 = "7a214fdac5ed5f59a22c2d9a885a16da1c74bbc7"
 uuid = "559328eb-81f9-559d-9380-de523a88c83c"
-version = "1.0.16+0"
+version = "1.0.17+0"
 
 [[deps.Future]]
 deps = ["Random"]
 uuid = "9fa8497b-333b-5362-9e8d-4d0656e87820"
-version = "1.11.0"
 
 [[deps.GLFW_jll]]
 deps = ["Artifacts", "JLLWrappers", "Libdl", "Libglvnd_jll", "Xorg_libXcursor_jll", "Xorg_libXi_jll", "Xorg_libXinerama_jll", "Xorg_libXrandr_jll", "libdecor_jll", "xkbcommon_jll"]
@@ -1049,10 +1033,10 @@ uuid = "7746bdde-850d-59dc-9ae8-88ece973131d"
 version = "2.82.4+0"
 
 [[deps.Graphite2_jll]]
-deps = ["Artifacts", "JLLWrappers", "Libdl", "Pkg"]
-git-tree-sha1 = "01979f9b37367603e2848ea225918a3b3861b606"
+deps = ["Artifacts", "JLLWrappers", "Libdl"]
+git-tree-sha1 = "8a6dbda1fd736d60cc477d99f2e7a042acfa46e8"
 uuid = "3b182d85-2403-5c21-9c21-1e1f0cc25472"
-version = "1.3.14+1"
+version = "1.3.15+0"
 
 [[deps.Grisu]]
 git-tree-sha1 = "53bb909d1151e57e2484c3d1b53e19552b887fb2"
@@ -1067,9 +1051,9 @@ version = "1.7.0"
 
 [[deps.HTTP]]
 deps = ["Base64", "CodecZlib", "ConcurrentUtilities", "Dates", "ExceptionUnwrapping", "Logging", "LoggingExtras", "MbedTLS", "NetworkOptions", "OpenSSL", "PrecompileTools", "Random", "SimpleBufferStream", "Sockets", "URIs", "UUIDs"]
-git-tree-sha1 = "c67b33b085f6e2faf8bf79a61962e7339a81129c"
+git-tree-sha1 = "f93655dc73d7a0b4a368e3c0bce296ae035ad76e"
 uuid = "cd3eb016-35fb-5094-929b-558a96fad6f3"
-version = "1.10.15"
+version = "1.10.16"
 
 [[deps.HarfBuzz_jll]]
 deps = ["Artifacts", "Cairo_jll", "Fontconfig_jll", "FreeType2_jll", "Glib_jll", "Graphite2_jll", "JLLWrappers", "Libdl", "Libffi_jll"]
@@ -1116,7 +1100,6 @@ version = "1.4.3"
 [[deps.InteractiveUtils]]
 deps = ["Markdown"]
 uuid = "b77e0a4c-d291-57a0-90e8-8db25a27a240"
-version = "1.11.0"
 
 [[deps.IntervalSets]]
 git-tree-sha1 = "dba9ddf07f77f60450fe5d2e2beb9854d9a49bd0"
@@ -1185,9 +1168,9 @@ version = "3.1.1+0"
 
 [[deps.JuliaInterpreter]]
 deps = ["CodeTracking", "InteractiveUtils", "Random", "UUIDs"]
-git-tree-sha1 = "a434e811d10e7cbf4f0674285542e697dca605d0"
+git-tree-sha1 = "872cd273cb995ed873c58f196659e32f11f31543"
 uuid = "aa1ae85d-cabe-5617-a682-6adf51b2e16a"
-version = "0.9.42"
+version = "0.9.44"
 
 [[deps.LAME_jll]]
 deps = ["Artifacts", "JLLWrappers", "Libdl"]
@@ -1220,9 +1203,9 @@ version = "1.4.0"
 
 [[deps.Latexify]]
 deps = ["Format", "InteractiveUtils", "LaTeXStrings", "MacroTools", "Markdown", "OrderedCollections", "Requires"]
-git-tree-sha1 = "cd714447457c660382fe634710fb56eb255ee42e"
+git-tree-sha1 = "cd10d2cc78d34c0e2a3a36420ab607b611debfbb"
 uuid = "23fbe1c1-3f47-55db-b15f-69d7ec21a316"
-version = "0.16.6"
+version = "0.16.7"
 
     [deps.Latexify.extensions]
     DataFramesExt = "DataFrames"
@@ -1242,17 +1225,16 @@ version = "0.6.4"
 [[deps.LibCURL_jll]]
 deps = ["Artifacts", "LibSSH2_jll", "Libdl", "MbedTLS_jll", "Zlib_jll", "nghttp2_jll"]
 uuid = "deac9b47-8bc7-5906-a0fe-35ac56dc84c0"
-version = "8.6.0+0"
+version = "8.4.0+0"
 
 [[deps.LibGit2]]
 deps = ["Base64", "LibGit2_jll", "NetworkOptions", "Printf", "SHA"]
 uuid = "76f85450-5226-5b5a-8eaa-529ad045b433"
-version = "1.11.0"
 
 [[deps.LibGit2_jll]]
 deps = ["Artifacts", "LibSSH2_jll", "Libdl", "MbedTLS_jll"]
 uuid = "e37daf67-58a4-590a-8e99-b0245dd2ffc5"
-version = "1.7.2+0"
+version = "1.6.4+0"
 
 [[deps.LibSSH2_jll]]
 deps = ["Artifacts", "Libdl", "MbedTLS_jll"]
@@ -1261,7 +1243,6 @@ version = "1.11.0+1"
 
 [[deps.Libdl]]
 uuid = "8f399da3-3557-5675-b5ff-fb832c97cbdb"
-version = "1.11.0"
 
 [[deps.Libffi_jll]]
 deps = ["Artifacts", "JLLWrappers", "Libdl", "Pkg"]
@@ -1271,9 +1252,9 @@ version = "3.2.2+2"
 
 [[deps.Libgcrypt_jll]]
 deps = ["Artifacts", "JLLWrappers", "Libdl", "Libgpg_error_jll"]
-git-tree-sha1 = "8be878062e0ffa2c3f67bb58a595375eda5de80b"
+git-tree-sha1 = "d77592fa54ad343c5043b6f38a03f1a3c3959ffe"
 uuid = "d4300ac3-e22c-5743-9152-c294e39db1e4"
-version = "1.11.0+0"
+version = "1.11.1+0"
 
 [[deps.Libglvnd_jll]]
 deps = ["Artifacts", "JLLWrappers", "Libdl", "Xorg_libX11_jll", "Xorg_libXext_jll"]
@@ -1320,7 +1301,6 @@ version = "7.3.0"
 [[deps.LinearAlgebra]]
 deps = ["Libdl", "OpenBLAS_jll", "libblastrampoline_jll"]
 uuid = "37e2e46d-f89d-539d-b4ee-838fcccc9c8e"
-version = "1.11.0"
 
 [[deps.LogExpFunctions]]
 deps = ["DocStringExtensions", "IrrationalConstants", "LinearAlgebra"]
@@ -1340,7 +1320,6 @@ version = "0.3.29"
 
 [[deps.Logging]]
 uuid = "56ddb016-857b-54e1-b83d-db4d58db5568"
-version = "1.11.0"
 
 [[deps.LoggingExtras]]
 deps = ["Dates", "Logging"]
@@ -1366,14 +1345,13 @@ version = "0.5.15"
 
 [[deps.MakieCore]]
 deps = ["ColorTypes", "GeometryBasics", "IntervalSets", "Observables"]
-git-tree-sha1 = "605d6e8f2b7eba7f5bc6a16d297475075d5ea775"
+git-tree-sha1 = "903ef1d9d326ebc4a9e6cf24f22194d8da022b50"
 uuid = "20f20a25-4f0e-4fdf-b5d1-57303727442b"
-version = "0.9.1"
+version = "0.9.2"
 
 [[deps.Markdown]]
 deps = ["Base64"]
 uuid = "d6f4376e-aef5-505a-96c1-9c027394607a"
-version = "1.11.0"
 
 [[deps.MbedTLS]]
 deps = ["Dates", "MbedTLS_jll", "MozillaCACerts_jll", "NetworkOptions", "Random", "Sockets"]
@@ -1384,7 +1362,7 @@ version = "1.1.9"
 [[deps.MbedTLS_jll]]
 deps = ["Artifacts", "Libdl"]
 uuid = "c8ffd9c3-330d-5841-b78e-0817d7145fa1"
-version = "2.28.6+0"
+version = "2.28.2+1"
 
 [[deps.Measurements]]
 deps = ["Calculus", "LinearAlgebra", "Printf"]
@@ -1421,11 +1399,10 @@ version = "1.2.0"
 
 [[deps.Mmap]]
 uuid = "a63ad114-7e13-5084-954f-fe012c677804"
-version = "1.11.0"
 
 [[deps.MozillaCACerts_jll]]
 uuid = "14a3606d-f60d-562e-9121-12d972cd8159"
-version = "2023.12.12"
+version = "2023.1.10"
 
 [[deps.NLSolversBase]]
 deps = ["ADTypes", "DifferentiationInterface", "Distributed", "FiniteDiff", "ForwardDiff"]
@@ -1435,9 +1412,9 @@ version = "7.9.1"
 
 [[deps.NaNMath]]
 deps = ["OpenLibm_jll"]
-git-tree-sha1 = "cc0a5deefdb12ab3a096f00a6d42133af4560d71"
+git-tree-sha1 = "9b8215b1ee9e78a293f99797cd31375471b2bcae"
 uuid = "77ba4419-2d1f-58cd-9bb1-8ffee604a2e3"
-version = "1.1.2"
+version = "1.1.3"
 
 [[deps.NetworkOptions]]
 uuid = "ca575930-c2e3-43a9-ace4-1e988b2c1908"
@@ -1457,12 +1434,12 @@ version = "1.3.5+1"
 [[deps.OpenBLAS_jll]]
 deps = ["Artifacts", "CompilerSupportLibraries_jll", "Libdl"]
 uuid = "4536629a-c528-5b80-bd46-f80d51c5b363"
-version = "0.3.27+1"
+version = "0.3.23+4"
 
 [[deps.OpenLibm_jll]]
 deps = ["Artifacts", "Libdl"]
 uuid = "05823500-19ac-5b8b-9628-191a04bc5112"
-version = "0.8.1+4"
+version = "0.8.1+2"
 
 [[deps.OpenSSL]]
 deps = ["BitFlags", "Dates", "MozillaCACerts_jll", "OpenSSL_jll", "Sockets"]
@@ -1535,13 +1512,9 @@ uuid = "30392449-352a-5448-841d-b1acce4e97dc"
 version = "0.44.2+0"
 
 [[deps.Pkg]]
-deps = ["Artifacts", "Dates", "Downloads", "FileWatching", "LibGit2", "Libdl", "Logging", "Markdown", "Printf", "Random", "SHA", "TOML", "Tar", "UUIDs", "p7zip_jll"]
+deps = ["Artifacts", "Dates", "Downloads", "FileWatching", "LibGit2", "Libdl", "Logging", "Markdown", "Printf", "REPL", "Random", "SHA", "Serialization", "TOML", "Tar", "UUIDs", "p7zip_jll"]
 uuid = "44cfe95a-1eb2-52ea-b672-e2afdf69b78f"
-version = "1.11.0"
-weakdeps = ["REPL"]
-
-    [deps.Pkg.extensions]
-    REPLExt = "REPL"
+version = "1.10.0"
 
 [[deps.PlotThemes]]
 deps = ["PlotUtils", "Statistics"]
@@ -1632,7 +1605,6 @@ version = "2.4.0"
 [[deps.Printf]]
 deps = ["Unicode"]
 uuid = "de0858da-6303-5e67-8744-51eddeeeb8d7"
-version = "1.11.0"
 
 [[deps.PtrArrays]]
 git-tree-sha1 = "1d36ef11a9aaf1e8b74dacc6a731dd1de8fd493d"
@@ -1676,14 +1648,12 @@ version = "2.11.2"
     Enzyme = "7da242da-08ed-463a-9acd-ee780be4f1d9"
 
 [[deps.REPL]]
-deps = ["InteractiveUtils", "Markdown", "Sockets", "StyledStrings", "Unicode"]
+deps = ["InteractiveUtils", "Markdown", "Sockets", "Unicode"]
 uuid = "3fa0cd96-eef1-5676-8a61-b3b8758bbffb"
-version = "1.11.0"
 
 [[deps.Random]]
 deps = ["SHA"]
 uuid = "9a3f8284-a2c9-5f02-9a11-845980a1fd5c"
-version = "1.11.0"
 
 [[deps.RecipesBase]]
 deps = ["PrecompileTools"]
@@ -1726,9 +1696,9 @@ weakdeps = ["Distributed"]
 
 [[deps.Roots]]
 deps = ["Accessors", "CommonSolve", "Printf"]
-git-tree-sha1 = "442b4353ee8c26756672afb2db81894fc28811f3"
+git-tree-sha1 = "3ac13765751ffc81e3531223782d9512f6023f71"
 uuid = "f2b01f46-fcfa-551c-844a-d8ac1e96c665"
-version = "2.2.6"
+version = "2.2.7"
 
     [deps.Roots.extensions]
     RootsChainRulesCoreExt = "ChainRulesCore"
@@ -1762,7 +1732,6 @@ version = "1.4.8"
 
 [[deps.Serialization]]
 uuid = "9e88b42a-f829-5b0c-bbe9-9e923198166b"
-version = "1.11.0"
 
 [[deps.Setfield]]
 deps = ["ConstructionBase", "Future", "MacroTools", "StaticArraysCore"]
@@ -1783,7 +1752,6 @@ version = "1.2.0"
 
 [[deps.Sockets]]
 uuid = "6462fe0b-24de-5631-8697-dd941f90decc"
-version = "1.11.0"
 
 [[deps.SortingAlgorithms]]
 deps = ["DataStructures"]
@@ -1794,7 +1762,7 @@ version = "1.2.1"
 [[deps.SparseArrays]]
 deps = ["Libdl", "LinearAlgebra", "Random", "Serialization", "SuiteSparse_jll"]
 uuid = "2f01184e-e22b-5df5-ae63-d93ebab69eaf"
-version = "1.11.0"
+version = "1.10.0"
 
 [[deps.SpecialFunctions]]
 deps = ["IrrationalConstants", "LogExpFunctions", "OpenLibm_jll", "OpenSpecFun_jll"]
@@ -1840,14 +1808,9 @@ uuid = "1e83bf80-4336-4d27-bf5d-d5a4f845583c"
 version = "1.4.3"
 
 [[deps.Statistics]]
-deps = ["LinearAlgebra"]
-git-tree-sha1 = "ae3bb1eb3bba077cd276bc5cfc337cc65c3075c0"
+deps = ["LinearAlgebra", "SparseArrays"]
 uuid = "10745b16-79ce-11e8-11f9-7d13ad32a3b2"
-version = "1.11.1"
-weakdeps = ["SparseArrays"]
-
-    [deps.Statistics.extensions]
-    SparseArraysExt = ["SparseArrays"]
+version = "1.10.0"
 
 [[deps.StatsAPI]]
 deps = ["LinearAlgebra"]
@@ -1867,14 +1830,10 @@ git-tree-sha1 = "725421ae8e530ec29bcbdddbe91ff8053421d023"
 uuid = "892a3eda-7b42-436c-8928-eab12a02cf0e"
 version = "0.4.1"
 
-[[deps.StyledStrings]]
-uuid = "f489334b-da3d-4c2e-b8f0-e476e12c162b"
-version = "1.11.0"
-
 [[deps.SuiteSparse_jll]]
 deps = ["Artifacts", "Libdl", "libblastrampoline_jll"]
 uuid = "bea87d4a-7f5b-5778-9afe-8cc45184846c"
-version = "7.7.0+0"
+version = "7.2.1+1"
 
 [[deps.TOML]]
 deps = ["Dates"]
@@ -1907,7 +1866,6 @@ version = "0.1.1"
 [[deps.Test]]
 deps = ["InteractiveUtils", "Logging", "Random", "Serialization"]
 uuid = "8dfed614-e22c-5e08-85e1-65c5234f0b40"
-version = "1.11.0"
 
 [[deps.TranscodingStreams]]
 git-tree-sha1 = "0c45878dcfdcfa8480052b6ab162cdd138781742"
@@ -1927,7 +1885,6 @@ version = "1.5.2"
 [[deps.UUIDs]]
 deps = ["Random", "SHA"]
 uuid = "cf7118a7-6976-5b1a-9a39-7adc72f591a4"
-version = "1.11.0"
 
 [[deps.UnPack]]
 git-tree-sha1 = "387c1f73762231e86e0c9c5443ce3b4a0a9a0c2b"
@@ -1936,7 +1893,6 @@ version = "1.0.2"
 
 [[deps.Unicode]]
 uuid = "4ec0a83e-493e-50e2-b9ac-8f72acf5a8f5"
-version = "1.11.0"
 
 [[deps.UnicodeFun]]
 deps = ["REPL"]
@@ -2003,21 +1959,21 @@ version = "2.13.6+1"
 
 [[deps.XSLT_jll]]
 deps = ["Artifacts", "JLLWrappers", "Libdl", "Libgcrypt_jll", "Libgpg_error_jll", "Libiconv_jll", "XML2_jll", "Zlib_jll"]
-git-tree-sha1 = "7d1671acbe47ac88e981868a078bd6b4e27c5191"
+git-tree-sha1 = "82df486bfc568c29de4a207f7566d6716db6377c"
 uuid = "aed1982a-8fda-507f-9586-7b0439959a61"
-version = "1.1.42+0"
+version = "1.1.43+0"
 
 [[deps.XZ_jll]]
 deps = ["Artifacts", "JLLWrappers", "Libdl"]
-git-tree-sha1 = "56c6604ec8b2d82cc4cfe01aa03b00426aac7e1f"
+git-tree-sha1 = "fee71455b0aaa3440dfdd54a9a36ccef829be7d4"
 uuid = "ffd25f8a-64ca-5728-b0f7-c24cf3aae800"
-version = "5.6.4+1"
+version = "5.8.1+0"
 
 [[deps.Xorg_libICE_jll]]
 deps = ["Artifacts", "JLLWrappers", "Libdl"]
-git-tree-sha1 = "326b4fea307b0b39892b3e85fa451692eda8d46c"
+git-tree-sha1 = "a3ea76ee3f4facd7a64684f9af25310825ee3668"
 uuid = "f67eecfb-183a-506d-b269-f58e52b52d7c"
-version = "1.1.1+0"
+version = "1.1.2+0"
 
 [[deps.Xorg_libSM_jll]]
 deps = ["Artifacts", "JLLWrappers", "Libdl", "Xorg_libICE_jll"]
@@ -2033,9 +1989,9 @@ version = "1.8.6+3"
 
 [[deps.Xorg_libXau_jll]]
 deps = ["Artifacts", "JLLWrappers", "Libdl"]
-git-tree-sha1 = "e9216fdcd8514b7072b43653874fd688e4c6c003"
+git-tree-sha1 = "aa1261ebbac3ccc8d16558ae6799524c450ed16b"
 uuid = "0c0b7dd1-d40b-584c-a123-a41640f87eec"
-version = "1.0.12+0"
+version = "1.0.13+0"
 
 [[deps.Xorg_libXcursor_jll]]
 deps = ["Artifacts", "JLLWrappers", "Libdl", "Xorg_libXfixes_jll", "Xorg_libXrender_jll"]
@@ -2153,9 +2109,9 @@ version = "2.39.0+0"
 
 [[deps.Xorg_xtrans_jll]]
 deps = ["Artifacts", "JLLWrappers", "Libdl"]
-git-tree-sha1 = "6dba04dbfb72ae3ebe5418ba33d087ba8aa8cb00"
+git-tree-sha1 = "a63799ff68005991f9d9491b6e95bd3478d783cb"
 uuid = "c5fb5394-a638-5e4d-96e5-b29de1b5cf10"
-version = "1.5.1+0"
+version = "1.6.0+0"
 
 [[deps.Zlib_jll]]
 deps = ["Libdl"]
@@ -2201,7 +2157,7 @@ version = "0.15.2+0"
 [[deps.libblastrampoline_jll]]
 deps = ["Artifacts", "Libdl"]
 uuid = "8e850b90-86db-534c-a0d3-1478176c7d93"
-version = "5.11.0+0"
+version = "5.8.0+1"
 
 [[deps.libdecor_jll]]
 deps = ["Artifacts", "Dbus_jll", "JLLWrappers", "Libdl", "Libglvnd_jll", "Pango_jll", "Wayland_jll", "xkbcommon_jll"]
@@ -2248,7 +2204,7 @@ version = "1.1.6+0"
 [[deps.nghttp2_jll]]
 deps = ["Artifacts", "Libdl"]
 uuid = "8e850ede-7688-5339-a07c-302acd2aaf8d"
-version = "1.59.0+0"
+version = "1.52.0+1"
 
 [[deps.p7zip_jll]]
 deps = ["Artifacts", "Libdl"]
@@ -2276,38 +2232,38 @@ version = "1.4.1+2"
 
 # ╔═╡ Cell order:
 # ╟─6a5a83b8-3b11-4cd8-a691-b5fe4686bb83
-# ╟─c8f2c353-54cf-4c61-948a-4c2eca117db4
-# ╠═ea5ed0c6-2296-4832-bd77-d089fcd3f3b1
-# ╠═aee1d99e-4737-4356-a82f-3aa010c06d45
-# ╠═ca1b3216-042e-479b-9ef1-66c4169071bf
-# ╟─022271a7-2a17-4cd8-8a1d-e1a4520e5468
-# ╠═ece483f3-6c4d-4bc8-b419-b6de930e9639
-# ╠═6d8a5417-0e3b-4b3e-b4fa-f6a7cac38ca1
-# ╟─62539af0-154e-11f0-0b88-6b6f67ad55ef
-# ╟─31151f7d-a3ed-4efc-bf1b-3b526a74ce9d
-# ╠═8fac43e3-c14e-4368-aa59-8a5fea92c55f
-# ╟─803a1718-ad90-4617-87b4-16099f61f8ec
-# ╠═41106b3e-749d-4a13-bd7f-020e94ecc3a9
-# ╟─eb3a70ba-f2c7-436b-ac3a-19e54851078f
-# ╠═6b2b8d3f-e2d4-4ea4-94a9-07e02aebb344
-# ╟─86732244-e039-4061-b6f8-989727ae6903
-# ╟─7d6a02d7-e38b-4c06-94ea-3614ca9bdefc
-# ╟─957858ee-141f-4370-846d-44073b301031
-# ╟─c00b287f-0952-44dd-890c-8c7e4b7e4b55
-# ╟─eaa9f951-fb49-4c3c-8cb3-de3bf996981c
-# ╟─4b12ae65-ac34-4215-80b9-013566c1cdbd
-# ╠═43b2e2e8-06bf-4643-b30f-ef6dc648a9fa
-# ╠═df62bad6-afe8-497f-a746-9a490fcc3a81
-# ╠═64ab4581-5388-48f8-a86f-2d1f704d77bd
-# ╟─0121728d-211c-400c-b7ff-516e9edb3d2e
-# ╟─98b2dc80-34b5-4883-9a97-f435b2c2adfd
-# ╠═890720b8-3634-4595-b320-9a67f2e32be4
-# ╠═6fc426f9-1c17-44ef-9b4e-5595f66db0e8
-# ╠═93d3c4cd-f934-42ff-9ac5-7c7bbea1271b
-# ╟─7b4e2e18-6c6c-4429-a935-ec1b36c794fa
-# ╠═b14ace95-f030-45ed-95ce-3c7782f441ea
-# ╠═64cef242-5e75-46cb-b277-89c7785ae6f4
-# ╠═33da12a3-c538-4d51-b3cd-5dd9e5a6c552
-# ╠═4b623acd-08da-4eca-b256-20aef86bc758
+# ╟─985ba662-b17e-40a9-8dd4-6e187a9fe08a
+# ╠═1b49edce-f1e4-43db-a341-66d1c3254b31
+# ╠═97c554de-03ca-4ab0-bd10-1cb2db88a225
+# ╠═d835017c-9c54-49e7-b473-19dac850529d
+# ╟─7d82eecd-bcf5-49d9-9f4d-ce0f18ca20a9
+# ╠═a429b50e-2f1c-405d-abdd-290e64e4d68d
+# ╠═13601a02-c04c-4742-bd16-0fbb09bba9fb
+# ╟─b9ec7b56-5df0-436e-aaad-a0505d0326f5
+# ╟─e6e31ded-4db3-4e47-94bd-76aa2edeaf3a
+# ╠═af8266c4-ecc0-4f6f-a0bb-024d8571a153
+# ╟─2d96bafa-5a99-4e98-8223-c5343b73c457
+# ╠═cf63462b-7480-4fd6-a72c-c7c912e21e09
+# ╟─17d5d2e3-d4e6-47e2-910f-8a27d4c15633
+# ╠═9507f1b1-8d0c-45c0-b5ae-5fb1d3e4c75f
+# ╟─f6ceb7e7-a1e9-41af-bc45-6df3834f739a
+# ╟─c6bf06ba-78fd-4a2c-97cf-1ec468157d67
+# ╟─d0a1baff-6cd4-4dab-b0d9-e1e0e98364c1
+# ╟─584ddbda-9b7f-419a-9afc-91b91c1e4af8
+# ╟─35fd1324-a12d-4a21-97de-15889d8f7b96
+# ╟─7d5b162e-1bba-41e5-804d-81e01fa6daf4
+# ╠═c754c08e-4b6b-4450-993f-a6c6abf7a84b
+# ╠═22475644-faca-41b2-93c7-af11ab6c5f39
+# ╠═c2188c41-914c-4133-9b4e-4aa9e5f1aee2
+# ╟─fd205c2f-cc39-4bd0-a660-3bb85524ab2a
+# ╠═dff76214-27f8-4b19-a249-5d56c96f3b20
+# ╠═d52b8ff2-0ec9-400a-83aa-f006577ce0e9
+# ╠═ea9e026c-a90c-429c-bd09-5300f2b0c640
+# ╠═1c1ff902-706c-44f2-b133-af445977c393
+# ╟─14517f85-3c86-4d05-809a-cc4a2b1f4843
+# ╠═94c31923-e347-4d6b-a24c-3a78cf10e265
+# ╠═d9957aa2-510b-4b91-a988-4165fc0babd9
+# ╠═6c72aa7d-389d-4966-9f34-1729d3e62909
+# ╠═4839eedd-7f9d-4632-a859-ca67b2a10e8b
 # ╟─00000000-0000-0000-0000-000000000001
 # ╟─00000000-0000-0000-0000-000000000002
