@@ -232,54 +232,6 @@ Where $\alpha_1$ and $\alpha_2$ are production factors which might be complex.
 # ╔═╡ 7d5b162e-1bba-41e5-804d-81e01fa6daf4
 RobustLocalResource("", joinpath("images", "1x1_production.svg"), cache=false)
 
-# ╔═╡ c754c08e-4b6b-4450-993f-a6c6abf7a84b
-begin
-    struct ProductionAmplitude{N,V}
-        T::Tmatrix{N,V}
-        αpoles::SVector{V,<:Number}
-    end
-    #
-    detD(PA::ProductionAmplitude, m; ϕ=-π / 2) = detD(PA.T, m; ϕ)
-    #
-    ProductionAmplitude(T::Tmatrix{N,V}) where {N,V} =
-        ProductionAmplitude(T, SVector{V}(ones(V)))
-    #
-    function amplitude(A::ProductionAmplitude{N,V}, m; ϕ=-π / 2) where {N,V}
-        @unpack T, αpoles = A
-        P = SVector{N}(zeros(N))
-        for (α, Mgs) in zip(αpoles, A.T.K.poles)
-            @unpack M, gs = Mgs
-            P += α .* gs ./ (M^2 - m^2)
-        end
-        D⁻¹ = inv(Dmatrix(T, m; ϕ))
-        return D⁻¹ * P
-    end
-end
-
-# ╔═╡ 9507f1b1-8d0c-45c0-b5ae-5fb1d3e4c75f
-begin
-    struct Tmatrix{N,V}
-        K::Kmatrix{N,V}
-        channels::SVector{N,TwoBodyChannel}
-    end
-    #
-    function ρ(ch::TwoBodyChannel, m; ϕ=-π / 2)
-        sqrt(cis(ϕ) * (m - (ch.m1 + ch.m2))) * cis(-ϕ / 2) *
-        sqrt(m + (ch.m1 + ch.m2)) *
-        sqrt((m^2 - (ch.m1 - ch.m2)^2)) /
-        m^2
-    end
-    #
-    function Dmatrix(T::Tmatrix{N,V}, m; ϕ=-π / 2) where {N,V}
-        𝕀 = Matrix(I, (N, N))
-        iρv = 1im .* ρ.(T.channels, m; ϕ) .* 𝕀
-        K = amplitude(T.K, m)
-        D = 𝕀 - K * iρv
-    end
-    detD(T::Tmatrix, m; ϕ=-π / 2) = det(Dmatrix(T, m; ϕ))
-    amplitude(T::Tmatrix, m; ϕ=-π / 2) = inv(Dmatrix(T, m; ϕ)) * amplitude(T.K, m)
-end
-
 # ╔═╡ 22475644-faca-41b2-93c7-af11ab6c5f39
 function productionpole(A::ProductionAmplitude{N,V}, m, iR::Int; ϕ=-π / 2) where {N,V}
     αpoles = zeros(Complex{Float64}, V)
@@ -316,20 +268,6 @@ One can set free parameters (masses, widths, and production couplings) estimatin
 
 Once initial parapeters are set, you can enable fit below
 """
-
-# ╔═╡ d52b8ff2-0ec9-400a-83aa-f006577ce0e9
-T = let
-    # one channels
-    channels = SVector(
-        TwoBodyChannel(1.0, 1.0))
-    # two bare pole
-    MG = [
-        (M=m1, gs=[sqrt(Γ1 * m1 / real(ρ(channels[1], m1)))]),
-        (M=m2, gs=[sqrt(Γ2 * m2 / real(ρ(channels[1], m2)))])]
-    #
-    K = Kmatrix(MG)
-    T = Tmatrix(K, channels)
-end;
 
 # ╔═╡ ea9e026c-a90c-429c-bd09-5300f2b0c640
 PA = ProductionAmplitude(T, SVector{2}(α1, α2 * cis(ϕ2)))
@@ -421,6 +359,68 @@ let
 	plot!()
 end
   ╠═╡ =#
+
+# ╔═╡ 9507f1b1-8d0c-45c0-b5ae-5fb1d3e4c75f
+begin
+    struct Tmatrix{N,V}
+        K::Kmatrix{N,V}
+        channels::SVector{N,TwoBodyChannel}
+    end
+    #
+    function ρ(ch::TwoBodyChannel, m; ϕ=-π / 2)
+        sqrt(cis(ϕ) * (m - (ch.m1 + ch.m2))) * cis(-ϕ / 2) *
+        sqrt(m + (ch.m1 + ch.m2)) *
+        sqrt((m^2 - (ch.m1 - ch.m2)^2)) /
+        m^2
+    end
+    #
+    function Dmatrix(T::Tmatrix{N,V}, m; ϕ=-π / 2) where {N,V}
+        𝕀 = Matrix(I, (N, N))
+        iρv = 1im .* ρ.(T.channels, m; ϕ) .* 𝕀
+        K = amplitude(T.K, m)
+        D = 𝕀 - K * iρv
+    end
+    detD(T::Tmatrix, m; ϕ=-π / 2) = det(Dmatrix(T, m; ϕ))
+    amplitude(T::Tmatrix, m; ϕ=-π / 2) = inv(Dmatrix(T, m; ϕ)) * amplitude(T.K, m)
+end
+
+# ╔═╡ d52b8ff2-0ec9-400a-83aa-f006577ce0e9
+T = let
+    # one channels
+    channels = SVector(
+        TwoBodyChannel(1.0, 1.0))
+    # two bare pole
+    MG = [
+        (M=m1, gs=[sqrt(Γ1 * m1 / real(ρ(channels[1], m1)))]),
+        (M=m2, gs=[sqrt(Γ2 * m2 / real(ρ(channels[1], m2)))])]
+    #
+    K = Kmatrix(MG)
+    T = Tmatrix(K, channels)
+end;
+
+# ╔═╡ c754c08e-4b6b-4450-993f-a6c6abf7a84b
+begin
+    struct ProductionAmplitude{N,V}
+        T::Tmatrix{N,V}
+        αpoles::SVector{V,<:Number}
+    end
+    #
+    detD(PA::ProductionAmplitude, m; ϕ=-π / 2) = detD(PA.T, m; ϕ)
+    #
+    ProductionAmplitude(T::Tmatrix{N,V}) where {N,V} =
+        ProductionAmplitude(T, SVector{V}(ones(V)))
+    #
+    function amplitude(A::ProductionAmplitude{N,V}, m; ϕ=-π / 2) where {N,V}
+        @unpack T, αpoles = A
+        P = SVector{N}(zeros(N))
+        for (α, Mgs) in zip(αpoles, A.T.K.poles)
+            @unpack M, gs = Mgs
+            P += α .* gs ./ (M^2 - m^2)
+        end
+        D⁻¹ = inv(Dmatrix(T, m; ϕ))
+        return D⁻¹ * P
+    end
+end
 
 # ╔═╡ 00000000-0000-0000-0000-000000000001
 PLUTO_PROJECT_TOML_CONTENTS = """
