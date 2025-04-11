@@ -9,9 +9,7 @@ authors = [
 dependencies = [
     "ampform",
     "iminuit",
-    "jupyter-cache",
     "matplotlib",
-    "quarto-cli",
     "sympy",
 ]
 name = "k-matrix-day-2025"
@@ -21,7 +19,13 @@ version = "0.0.0"
 [dependency-groups]
 dev = [
     "ruff",
+    {include-group = "doc"},
     {include-group = "jupyter"},
+    {include-group = "lite"},
+]
+doc = [
+    "jupyter-cache",
+    "quarto-cli",
 ]
 jupyter = [
     "jupyterlab",
@@ -30,6 +34,14 @@ jupyter = [
     "jupyterlab-lsp",
     "jupyterlab-quickopen",
     "python-lsp-ruff",
+    "python-lsp-server[rope]",
+]
+lite = [
+    "jupyterlab",
+    "jupyterlab-lsp",
+    "jupyterlite-core",
+    "jupyterlite-pyodide-kernel",
+    "notebook",
     "python-lsp-server[rope]",
 ]
 
