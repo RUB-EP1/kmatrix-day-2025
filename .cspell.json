@@ -1,6 +1,6 @@
 {
   "allowCompoundWords": true,
-  "dictionaries": ["latex", "python"],
+  "dictionaries": ["latex", "physics", "python"],
   "enableFiletypes": [
     "git-commit",
     "github-actions-workflow",
@@ -37,6 +37,7 @@
     "*.css",
     "*.ico",
     "*.svg",
+    "docs/k-matrix.jl",
     "LICENSE",
     "Manifest.toml",
     "Project.toml",
@@ -63,6 +64,13 @@
     "yticks"
   ],
   "language": "en-US",
+  "overrides": [
+    {
+      "dictionaries": ["julia", "latex", "physics"],
+      "filename": "**/*.jl",
+      "languageId": "julia"
+    }
+  ],
   "useGitignore": true,
   "version": "0.2",
   "words": [
