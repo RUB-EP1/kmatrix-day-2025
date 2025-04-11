@@ -58,15 +58,19 @@ main = {features = [], solve-group = "main"}
 cmd = "rm -rf docs/_build/html/lite"
 
 [tool.pixi.tasks.doc]
+cmd = "quarto render docs"
+depends-on = [{task = "lite", environment = "lite"}]
+
+[tool.pixi.tasks.doclive]
+cmd = "quarto preview docs"
+depends-on = [{task = "lite", environment = "lite"}]
+
+[tool.pixi.tasks.docnb]
 cmd = "quarto render docs --execute"
 depends-on = [
     "pluto-server",
     {task = "lite", environment = "lite"},
 ]
-
-[tool.pixi.tasks.doclive]
-cmd = "quarto preview docs"
-depends-on = [{task = "lite", environment = "lite"}]
 
 [tool.pixi.tasks.instantiate-julia]
 cmd = "julia --eval='using Pkg; Pkg.instantiate()' --project=docs"

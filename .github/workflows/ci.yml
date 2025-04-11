@@ -51,7 +51,7 @@ jobs:
           path: docs/.jupyter_cache
           restore-keys: jupyter-cache-${{hashFiles('pixi.lock')}}
       - name: Build documentation with Quarto
-        run: pixi run -e doc doc
+        run: pixi run -e doc docnb
       - uses: actions/upload-pages-artifact@v3
         with:
           path: docs/_build/html
