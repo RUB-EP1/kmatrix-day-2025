@@ -70,7 +70,7 @@ We consider example of the data that can be obtained in any random experiment. W
 """
 
 # ╔═╡ a429b50e-2f1c-405d-abdd-290e64e4d68d
-data = CSV.read((@__DIR__) * "/../data/experimental_data.csv", DataFrame);
+data = CSV.read((@__DIR__) * "/experimental_data.csv", DataFrame);
 
 # ╔═╡ 13601a02-c04c-4742-bd16-0fbb09bba9fb
 begin

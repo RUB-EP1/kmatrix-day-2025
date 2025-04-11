@@ -13,6 +13,7 @@ number-depth: 3
 project:
   output-dir: _build/html
   render:
+    - experimental-data.csv
     - index.qmd
     - finding-poles.ipynb
     - k-matrix.html
