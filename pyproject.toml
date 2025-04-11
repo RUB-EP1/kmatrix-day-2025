@@ -73,6 +73,10 @@ cmd = "jupyter lite build --contents finding-poles.ipynb --output-dir lite"
 cwd = "docs"
 depends-on = ["clean-lite"]
 
+[tool.pixi.tasks.pluto]
+cmd = "julia --eval='using Pluto; Pluto.run(notebook=\"K-matrix.jl\")' --project=."
+cwd = "docs"
+
 [tool.pixi.workspace]
 authors = [
     "Ilya Segal",

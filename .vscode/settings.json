@@ -38,7 +38,8 @@
   },
   "git.rebaseWhenSync": true,
   "gitlens.telemetry.enabled": false,
-  "julia.executablePath": ".pixi/envs/default/bin/julia",
+  "julia.environmentPath": "${workspaceFolder}/docs",
+  "julia.executablePath": "${workspaceFolder}/.pixi/envs/default/bin/julia",
   "julia.NumThreads": "auto",
   "livePreview.defaultPreviewPath": "docs/_build/html",
   "notebook.codeActionsOnSave": {

@@ -23,8 +23,6 @@
     "transisions"
   ],
   "ignorePaths": [
-    "*.bib",
-    "*.csl",
     ".cspell.json",
     ".editorconfig",
     ".envrc",
@@ -34,10 +32,14 @@
     ".pre-commit-config.yaml",
     ".prettierignore",
     ".vscode/",
+    "*.bib",
+    "*.csl",
     "*.css",
     "*.ico",
     "*.svg",
     "LICENSE",
+    "Manifest.toml",
+    "Project.toml",
     "pyproject.toml"
   ],
   "ignoreWords": [
