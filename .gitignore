@@ -1,4 +1,7 @@
-
-# pixi environments
-.pixi
+.ipynb_checkpoints/
+.jupyterlite.doit.db
+.pixi/
+.virtual_documents/
 *.egg-info
+*.html
+node_modules/

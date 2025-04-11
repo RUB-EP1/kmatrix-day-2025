@@ -1,0 +1,29 @@
+---
+title: Resources
+aliases:
+  - references.html
+  - useful-links.html
+nocite: "@*"
+---
+
+[Section 50](https://pdg.lbl.gov/2024/reviews/rpp2024-rev-resonances.pdf) in the PDG [@ParticleDataGroup:2024cfk] provides an overview of scattering theory and resonance parametrizations. @Aitchison:1972ay first introduced the $K$-matrix formalism and @chungPrimerKmatrixFormalism1995, @Chung:1995dx, @Bargiotti:2002ric, and @Peters:2004qw provide a comprehensive review of the formalism.
+
+The Chew–Mandelstam function for $S$&nbsp;waves is described in @Basdevant:1977ya, [Equation (3.8)](https://journals.aps.org/prd/pdf/10.1103/PhysRevD.16.657#page=6). It also discusses background unitarization, see [Equation (3.5)](https://journals.aps.org/prd/pdf/10.1103/PhysRevD.16.657#page=5). A great introduction to unitarity, analyticity and crossing symmetry can be found by @Aitchison:2015jxa.
+
+Some great examples of coupled analyses with the $K$-matrix formalism are @Anisovich:2002ij and @CrystalBarrel:2019zqh.
+
+## Online resources
+
+- [K-matrix tutorial by Curtis Meyer](https://indico.ph.tum.de/event/664/contributions/2769/attachments/2577/2813/meyer_kmatrix.pdf)
+- [AmpForm notebook about the $K$ matrix](https://ampform.readthedocs.io/0.15.x/usage/dynamics/k-matrix.html)
+- [Visualization of analytic continuation in 1x1 $K$&nbsp;matrix](https://compwa.github.io/report/027/#riemann-sheets-3d)
+- [Visualization of Riemann sheets in a 2x2 $K$&nbsp;matrix](https://compwa.github.io/report/027/#riemann-sheets-3d)
+
+## Bibliography
+
+::: {#refs}
+:::
+
+::: {.callout-tip}
+Download this bibliography as a BibTeX file: [`references.bib`](./references.bib)
+:::

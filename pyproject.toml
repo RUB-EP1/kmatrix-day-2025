@@ -1,0 +1,93 @@
+[project]
+authors = [
+    {name = "Ilya Segal"},
+    {name = "Lena Pöpping"},
+    {name = "Mikhail Mikhasenko"},
+    {name = "Nils Hüsken"},
+    {name = "Remco de Boer"},
+]
+dependencies = [
+    "ampform",
+    "iminuit",
+    "matplotlib",
+    "sympy",
+]
+name = "k-matrix-day-2025"
+requires-python = ">=3.12"
+version = "0.0.0"
+
+[dependency-groups]
+dev = [
+    "ruff",
+    {include-group = "doc"},
+    {include-group = "jupyter"},
+    {include-group = "lite"},
+]
+doc = [
+    "jupyter-cache",
+    "quarto-cli",
+]
+jupyter = [
+    "jupyterlab",
+    "jupyterlab-code-formatter",
+    "jupyterlab-git",
+    "jupyterlab-lsp",
+    "jupyterlab-quickopen",
+    "python-lsp-ruff",
+    "python-lsp-server[rope]",
+]
+lite = [
+    "jupyterlab",
+    "jupyterlab-lsp",
+    "jupyterlite-core",
+    "jupyterlite-pyodide-kernel",
+    "notebook",
+    "python-lsp-server[rope]",
+]
+
+[tool.ruff]
+preview = true
+show-fixes = true
+
+[tool.ruff.format]
+docstring-code-format = true
+line-ending = "lf"
+
+[tool.ruff.lint]
+ignore = [
+    "ANN001",
+    "ANN20",
+    "CPY001",
+    "D103",
+    "D203",
+    "D213",
+    "E741",
+]
+select = ["ALL"]
+task-tags = ["cspell"]
+
+[tool.ruff.lint.flake8-builtins]
+builtins-ignorelist = ["display"]
+
+[tool.ruff.lint.isort]
+known-third-party = ["sympy"]
+split-on-trailing-comma = false
+
+[tool.ruff.lint.per-file-ignores]
+"*.ipynb" = [
+    "B018",
+    "C408",
+    "D",
+    "E303",
+]
+
+[tool.tomlsort]
+all = false
+ignore_case = true
+in_place = true
+sort_first = [
+    "project",
+    "tool.tox.env_run_base",
+]
+spaces_indent_inline_array = 4
+trailing_comma_inline_array = true

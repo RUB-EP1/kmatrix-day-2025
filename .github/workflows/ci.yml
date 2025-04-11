@@ -1,0 +1,104 @@
+name: CI
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: |-
+    ${{ github.ref != format('refs/heads/{0}', github.event.repository.default_branch) }}
+
+env:
+  FORCE_COLOR: "1"
+  UV_PYTHON_PREFERENCE: only-managed
+
+on:
+  push:
+    branches:
+      - main
+      - epic/*
+      - "[0-9]+.[0-9]+.x"
+  pull_request:
+    branches:
+      - main
+      - epic/*
+      - "[0-9]+.[0-9]+.x"
+  workflow_dispatch:
+
+jobs:
+  build:
+    name: Build webpage
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+      - uses: astral-sh/setup-uv@v5
+      - name: Fetch Jupyter cache
+        uses: actions/cache@v4
+        with:
+          key: jupyter-cache-${{hashFiles('uv.lock')}}-${{hashFiles('docs/**/*.ipynb')}}
+          path: docs/.jupyter_cache
+          restore-keys: jupyter-cache-${{hashFiles('uv.lock')}}
+      - name: Build Jupyter Lite server
+        run: |
+          uv run \
+            --group lite \
+            --no-dev \
+            jupyter lite build --contents finding-poles.ipynb --output-dir lite
+        working-directory: docs
+      - name: Build documentation with Quarto
+        run: |
+          uv run \
+            --group doc \
+            --no-dev \
+            quarto render docs --execute
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: docs/_build/html
+
+  pr-preview:
+    name: Push PR preview
+    if: >-
+      github.event_name == 'pull_request' &&
+      github.event.pull_request.head.repo.full_name == github.repository
+    needs:
+      - build
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/download-artifact@v4
+        with:
+          name: github-pages
+      - name: Extract artifact
+        run: |
+          tar xf artifact.tar
+          rm artifact.tar
+      - name: Configure Git credentials
+        run: |
+          git config --global user.name "GitHub Action"
+          git config --global user.email "41898282+github-actions[bot]@users.noreply.github.com"
+      - name: Initialize repository and commit results
+        run: |
+          git init
+          git checkout --orphan gh-pages
+          git add -A
+          git commit -m "Push preview for https://github.com/RUB-EP1/kmatrix-day-2025/pull/${{ github.event.number }}"
+      - name: Push results to GitHub Pages
+        run: |
+          git remote add origin https://x-access-token:${{ secrets.PAT }}@github.com/RUB-EP1/kmatrix-day-2025-pr-preview
+          git push origin gh-pages --force
+      - name: Show notice with link to PR preview
+        run: echo "Documentation preview available on [rub-ep1.github.io/kmatrix-day-2025-pr-preview](https://rub-ep1.github.io/kmatrix-day-2025-pr-preview)" >> $GITHUB_STEP_SUMMARY
+
+  gh-pages:
+    name: Upload to GitHub Pages
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    if: >-
+      github.event_name == 'push' &&
+      github.ref == format('refs/heads/{0}', github.event.repository.default_branch)
+    needs:
+      - build
+    permissions:
+      pages: write
+      id-token: write
+    runs-on: ubuntu-24.04
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v4

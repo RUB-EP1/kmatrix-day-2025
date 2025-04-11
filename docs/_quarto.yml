@@ -1,45 +1,69 @@
-
+bibliography: references.bib
+csl: apa.csl
+execute:
+  cache: true
 format:
   html:
-    anchor-sections: false
-    theme:
-      dark: darkly
-      light: flatly
     css: styles.css
+    theme:
+      light: flatly
+      dark: darkly
+    toc: true
 number-depth: 3
 project:
   output-dir: _build/html
+  render:
+    - index.qmd
+    - finding-poles.ipynb
+    - resources.qmd
+  resources:
+    - lite/
+    - references.bib
   type: website
 website:
-  description: Website for the international K-matrix day
+  description: Website for the International K-Matrix Day 2025
+  draft-mode: visible
   favicon: favicon.ico
   navbar:
     background: "#17365c"
     foreground: "#e7e7e7"
-    logo: _images/rub-white.svg
+    logo: images/rub-white.svg
     logo-href: https://rub.de
-    pinned: true
     title: false
-    website:
+  page-navigation: true
+  repo-actions:
+    - edit
+    - issue
+    - source
+  repo-subdir: docs
+  repo-url: https://github.com/RUB-EP1/kmatrix-day-2025
   sidebar:
-    style: docked  # Sidebar is always visible
-    search: true   # Enable search in sidebar
     contents:
-      - href: 
-        text: "Home"
-      - href: 
-        text: "Notebooks"
-        children: 
-          - href: 
-            text: "Material A"
-          - href: 
-            text: "Material B"
-      - href: 
-        text: "Section 2"
-      - href: 
-        text: "Useful links"
+      - file: index.qmd
+        icon: house
+        text: Home
+      - text: Notebooks
+        icon: journal-code
+        contents:
+          - file: finding-poles.ipynb
+      - text: Resources
+        icon: book
+        file: resources.qmd
+      - text: ---
+      - text: K-Matrix Day 2024
+        href: https://rub-ep1.github.io/kmatrix-day-2024
+        icon: box-arrow-up-right
+    search: true
     tools:
-      - href: https://github.com/RUB-EP1/international-k-matrix-day
+      - href: https://github.com/RUB-EP1/kmatrix-day-2025
         icon: github
-      - href: https://your-slack-workspace-link.com
+        text: GitHub Repository
+      - href: https://amplitude-analysis.slack.com/archives/C08MJ655W6R
         icon: slack
+        text: Slack Channel
+      - href: https://indico.global/event/14144
+        icon: calendar-event
+        text: Indico Event
+      - href: lite/lab/index.html
+        icon: code-square
+        text: Live coding with Jupyter Lite
