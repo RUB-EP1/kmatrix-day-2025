@@ -18,19 +18,19 @@ end
 
 # ╔═╡ 1b49edce-f1e4-43db-a341-66d1c3254b31
 begin
-	using StaticArrays
-	using Plots
-	using LaTeXStrings
-	using PlutoUI
-	using Parameters
-	using LinearAlgebra
-	using PlutoTeachingTools
-	using CalculusWithJulia
-	using DataFrames
-	using Optim
-	using CSV
-	using FHist
-	using QuadGK
+    using StaticArrays
+    using Plots
+    using LaTeXStrings
+    using PlutoUI
+    using Parameters
+    using LinearAlgebra
+    using PlutoTeachingTools
+    using CalculusWithJulia
+    using DataFrames
+    using Optim
+    using CSV
+    using FHist
+    using QuadGK
 end
 
 # ╔═╡ 6a5a83b8-3b11-4cd8-a691-b5fe4686bb83
@@ -45,19 +45,19 @@ md"""
 
 # ╔═╡ 97c554de-03ca-4ab0-bd10-1cb2db88a225
 theme(:boxed;
-	  colorbar=false,
-	  clim=(-1, 1),
-	  lab="",
-	  xlab="Mass of system [GeV]",
-	  ylab="Entries",
-	  fontfamily="Computer Modern",
-      xlim=(:auto, :auto),
-	  ylim=(:auto, :auto),
-	  grid=false,
-	  minorticks=true,
-	  guidefonthalign=:right,
-      foreground_color_legend=nothing,
-	  background_color_legend=nothing)
+    colorbar=false,
+    clim=(-1, 1),
+    lab="",
+    xlab="Mass of system [GeV]",
+    ylab="Entries",
+    fontfamily="Computer Modern",
+    xlim=(:auto, :auto),
+    ylim=(:auto, :auto),
+    grid=false,
+    minorticks=true,
+    guidefonthalign=:right,
+    foreground_color_legend=nothing,
+    background_color_legend=nothing)
 
 # ╔═╡ d835017c-9c54-49e7-b473-19dac850529d
 const iϵ = 1e-7im
@@ -74,11 +74,11 @@ data = CSV.read((@__DIR__) * "/../data/experimental_data.csv", DataFrame);
 
 # ╔═╡ 13601a02-c04c-4742-bd16-0fbb09bba9fb
 begin
-	m_min, m_max = 3, 8
-	h = Hist1D(data.mv; data.weights, binedges=range(m_min, m_max, 40))
-	input_data = (m_bins=bincenters(h), content=bincounts(h))
-	bin_width = input_data.m_bins[2] - input_data.m_bins[1]
-	scatter(input_data.m_bins, input_data.content, yerr=sqrt.(input_data.content))
+    m_min, m_max = 3, 8
+    h = Hist1D(data.mv; data.weights, binedges=range(m_min, m_max, 40))
+    input_data = (m_bins=bincenters(h), content=bincounts(h))
+    bin_width = input_data.m_bins[2] - input_data.m_bins[1]
+    scatter(input_data.m_bins, input_data.content, yerr=sqrt.(input_data.content))
 end
 
 # ╔═╡ b9ec7b56-5df0-436e-aaad-a0505d0326f5
@@ -92,12 +92,12 @@ On the figure below one can find illustration of the ab->cd scattering process w
 """
 
 # ╔═╡ e6e31ded-4db3-4e47-94bd-76aa2edeaf3a
-RobustLocalResource("",	joinpath("..","figures","1x1_scattering.svg"))
+RobustLocalResource("", joinpath("images", "1x1_scattering.svg"))
 
 # ╔═╡ af8266c4-ecc0-4f6f-a0bb-024d8571a153
 struct TwoBodyChannel
-	m1::ComplexF64
-	m2::ComplexF64
+    m1::ComplexF64
+    m2::ComplexF64
 end
 
 # ╔═╡ 2d96bafa-5a99-4e98-8223-c5343b73c457
@@ -114,19 +114,19 @@ where $g_{i} g_j$ indicates different possible channels of the scattering proces
 
 # ╔═╡ cf63462b-7480-4fd6-a72c-c7c912e21e09
 begin
-	struct Kmatrix{N,V}
-	    poles::SVector{V,NamedTuple{(:M, :gs),Tuple{Float64,SVector{N,Float64}}}}
-	end
-	function Kmatrix(_poles)
-		V, N = length(_poles), length(first(_poles).gs)
-		poles = map(_poles) do p
-			(; M=p.M, gs=SVector{N}(p.gs))
-		end |> SVector{V}
-		return Kmatrix(poles)
-	end
-	#
-	amplitude(K::Kmatrix, m) =
-	    sum((gs * gs') ./ (M^2 - m^2) for (M, gs) in K.poles)
+    struct Kmatrix{N,V}
+        poles::SVector{V,NamedTuple{(:M, :gs),Tuple{Float64,SVector{N,Float64}}}}
+    end
+    function Kmatrix(_poles)
+        V, N = length(_poles), length(first(_poles).gs)
+        poles = map(_poles) do p
+            (; M=p.M, gs=SVector{N}(p.gs))
+        end |> SVector{V}
+        return Kmatrix(poles)
+    end
+    #
+    amplitude(K::Kmatrix, m) =
+        sum((gs * gs') ./ (M^2 - m^2) for (M, gs) in K.poles)
 end
 
 # ╔═╡ 17d5d2e3-d4e6-47e2-910f-8a27d4c15633
@@ -230,54 +230,54 @@ Where $\alpha_1$ and $\alpha_2$ are production factors which might be complex.
 """
 
 # ╔═╡ 7d5b162e-1bba-41e5-804d-81e01fa6daf4
-RobustLocalResource("", joinpath("..","figures", "1x1_production.svg"), cache=false)
+RobustLocalResource("", joinpath("images", "1x1_production.svg"), cache=false)
 
 # ╔═╡ c754c08e-4b6b-4450-993f-a6c6abf7a84b
 begin
-	struct ProductionAmplitude{N,V}
-	    T::Tmatrix{N,V}
-	    αpoles::SVector{V,<:Number}
-	end
-	#
-	detD(PA::ProductionAmplitude, m; ϕ=-π / 2) = detD(PA.T, m; ϕ)
-	#
-	ProductionAmplitude(T::Tmatrix{N,V}) where {N,V} =
-	    ProductionAmplitude(T, SVector{V}(ones(V)))
-	#
-	function amplitude(A::ProductionAmplitude{N,V}, m; ϕ=-π / 2) where {N,V}
-	    @unpack T, αpoles = A
-		P = SVector{N}(zeros(N))
-	    for (α, Mgs) in zip(αpoles, A.T.K.poles)
-	        @unpack M, gs = Mgs
-	        P += α .* gs ./ (M^2 - m^2)
-	    end
-	    D⁻¹ = inv(Dmatrix(T, m; ϕ))
-	    return D⁻¹ * P
-	end
+    struct ProductionAmplitude{N,V}
+        T::Tmatrix{N,V}
+        αpoles::SVector{V,<:Number}
+    end
+    #
+    detD(PA::ProductionAmplitude, m; ϕ=-π / 2) = detD(PA.T, m; ϕ)
+    #
+    ProductionAmplitude(T::Tmatrix{N,V}) where {N,V} =
+        ProductionAmplitude(T, SVector{V}(ones(V)))
+    #
+    function amplitude(A::ProductionAmplitude{N,V}, m; ϕ=-π / 2) where {N,V}
+        @unpack T, αpoles = A
+        P = SVector{N}(zeros(N))
+        for (α, Mgs) in zip(αpoles, A.T.K.poles)
+            @unpack M, gs = Mgs
+            P += α .* gs ./ (M^2 - m^2)
+        end
+        D⁻¹ = inv(Dmatrix(T, m; ϕ))
+        return D⁻¹ * P
+    end
 end
 
 # ╔═╡ 9507f1b1-8d0c-45c0-b5ae-5fb1d3e4c75f
 begin
-	struct Tmatrix{N,V}
-	    K::Kmatrix{N,V}
-	    channels::SVector{N,TwoBodyChannel}
-	end
-	#
-	function ρ(ch::TwoBodyChannel, m; ϕ=-π / 2)
-	    sqrt(cis(ϕ) * (m - (ch.m1 + ch.m2))) * cis(-ϕ / 2) *
-	    sqrt(m + (ch.m1 + ch.m2)) *
-	    sqrt((m^2 - (ch.m1 - ch.m2)^2)) /
-	    m^2
-	end
-	#
-	function Dmatrix(T::Tmatrix{N,V}, m; ϕ=-π / 2) where {N,V}
-	    𝕀 = Matrix(I, (N, N))
-	    iρv = 1im .* ρ.(T.channels, m; ϕ) .* 𝕀
-	    K = amplitude(T.K, m)
-	    D = 𝕀 - K * iρv
-	end
-	detD(T::Tmatrix, m; ϕ=-π / 2) = det(Dmatrix(T, m; ϕ))
-	amplitude(T::Tmatrix, m; ϕ=-π / 2) = inv(Dmatrix(T, m; ϕ)) * amplitude(T.K, m)
+    struct Tmatrix{N,V}
+        K::Kmatrix{N,V}
+        channels::SVector{N,TwoBodyChannel}
+    end
+    #
+    function ρ(ch::TwoBodyChannel, m; ϕ=-π / 2)
+        sqrt(cis(ϕ) * (m - (ch.m1 + ch.m2))) * cis(-ϕ / 2) *
+        sqrt(m + (ch.m1 + ch.m2)) *
+        sqrt((m^2 - (ch.m1 - ch.m2)^2)) /
+        m^2
+    end
+    #
+    function Dmatrix(T::Tmatrix{N,V}, m; ϕ=-π / 2) where {N,V}
+        𝕀 = Matrix(I, (N, N))
+        iρv = 1im .* ρ.(T.channels, m; ϕ) .* 𝕀
+        K = amplitude(T.K, m)
+        D = 𝕀 - K * iρv
+    end
+    detD(T::Tmatrix, m; ϕ=-π / 2) = det(Dmatrix(T, m; ϕ))
+    amplitude(T::Tmatrix, m; ϕ=-π / 2) = inv(Dmatrix(T, m; ϕ)) * amplitude(T.K, m)
 end
 
 # ╔═╡ 22475644-faca-41b2-93c7-af11ab6c5f39
@@ -290,9 +290,9 @@ end
 
 # ╔═╡ c2188c41-914c-4133-9b4e-4aa9e5f1aee2
 function intensity(model, m)
-	A = amplitude(model, m)[1]
-	phsp = real(ρ(model.T.channels[1], m)) * m
-	abs2(A) * phsp
+    A = amplitude(model, m)[1]
+    phsp = real(ρ(model.T.channels[1], m)) * m
+    abs2(A) * phsp
 end
 
 # ╔═╡ fd205c2f-cc39-4bd0-a660-3bb85524ab2a
@@ -319,37 +319,37 @@ Once initial parapeters are set, you can enable fit below
 
 # ╔═╡ d52b8ff2-0ec9-400a-83aa-f006577ce0e9
 T = let
-	# one channels
-	channels = SVector(
-			TwoBodyChannel(1.0, 1.0))
-	# two bare pole
-	MG = [
-		(M=m1, gs=[sqrt(Γ1*m1/real(ρ(channels[1], m1)))]),
-		(M=m2, gs=[sqrt(Γ2*m2/real(ρ(channels[1], m2)))])]
-	#
-	K = Kmatrix(MG)
-	T = Tmatrix(K, channels)
+    # one channels
+    channels = SVector(
+        TwoBodyChannel(1.0, 1.0))
+    # two bare pole
+    MG = [
+        (M=m1, gs=[sqrt(Γ1 * m1 / real(ρ(channels[1], m1)))]),
+        (M=m2, gs=[sqrt(Γ2 * m2 / real(ρ(channels[1], m2)))])]
+    #
+    K = Kmatrix(MG)
+    T = Tmatrix(K, channels)
 end;
 
 # ╔═╡ ea9e026c-a90c-429c-bd09-5300f2b0c640
-PA = ProductionAmplitude(T, SVector{2}(α1, α2*cis(ϕ2)))
+PA = ProductionAmplitude(T, SVector{2}(α1, α2 * cis(ϕ2)))
 
 # ╔═╡ 1c1ff902-706c-44f2-b133-af445977c393
 let
-	plot()
-	scatter!(input_data.m_bins, input_data.content, yerr=sqrt.(input_data.content), lab="Data")
-	plot!(title="Production intensity", m_min, m_max, sp=1, lab="Total model") do m
-    	intensity.(Ref(PA), m)
-	end
-	map([1,2]) do ind
-		plot!(m_min, m_max, sp=1, fill=0, alpha=0.2, lab="from R$(ind)") do m
-			A = productionpole(PA, m, ind)[1]
-			phsp = real(ρ(T.channels[1], m)) * m
-			abs2(A) * phsp
-		end
-	end
-	vline!([T.K.poles[1].M, T.K.poles[2].M])
-	plot!()
+    plot()
+    scatter!(input_data.m_bins, input_data.content, yerr=sqrt.(input_data.content), lab="Data")
+    plot!(title="Production intensity", m_min, m_max, sp=1, lab="Total model") do m
+        intensity.(Ref(PA), m)
+    end
+    map([1, 2]) do ind
+        plot!(m_min, m_max, sp=1, fill=0, alpha=0.2, lab="from R$(ind)") do m
+            A = productionpole(PA, m, ind)[1]
+            phsp = real(ρ(T.channels[1], m)) * m
+            abs2(A) * phsp
+        end
+    end
+    vline!([T.K.poles[1].M, T.K.poles[2].M])
+    plot!()
 end
 
 # ╔═╡ 14517f85-3c86-4d05-809a-cc4a2b1f4843
@@ -363,24 +363,24 @@ Let's fit our data points with the model we have built.
 
 # ╔═╡ 94c31923-e347-4d6b-a24c-3a78cf10e265
 function build_model(pars)
-	channels = SVector(
-			TwoBodyChannel(1.0, 1.0))
-	MG = [
-		(M=pars.m1, gs=[sqrt(abs(real(pars.Γ1*pars.m1/ρ(channels[1], pars.m1))))]),
-		(M=pars.m2, gs=[sqrt(abs(real(pars.Γ2*pars.m2/ρ(channels[1], pars.m2))))])]
-	K = Kmatrix(MG)
-	T = Tmatrix(K, channels)
-	PA = ProductionAmplitude(T, SVector{2}(pars.α1, pars.α2*cis(pars.ϕ2)));
+    channels = SVector(
+        TwoBodyChannel(1.0, 1.0))
+    MG = [
+        (M=pars.m1, gs=[sqrt(abs(real(pars.Γ1 * pars.m1 / ρ(channels[1], pars.m1))))]),
+        (M=pars.m2, gs=[sqrt(abs(real(pars.Γ2 * pars.m2 / ρ(channels[1], pars.m2))))])]
+    K = Kmatrix(MG)
+    T = Tmatrix(K, channels)
+    PA = ProductionAmplitude(T, SVector{2}(pars.α1, pars.α2 * cis(pars.ϕ2)))
 end
 
 # ╔═╡ d9957aa2-510b-4b91-a988-4165fc0babd9
 begin
-	function extract_names(nt::NamedTuple)
-	    return collect(keys(nt))
-	end
-	function v2p(fields::Vector{Symbol}, x::Vector)
-	    return NamedTuple{Tuple(fields)}(Tuple(x))
-	end
+    function extract_names(nt::NamedTuple)
+        return collect(keys(nt))
+    end
+    function v2p(fields::Vector{Symbol}, x::Vector)
+        return NamedTuple{Tuple(fields)}(Tuple(x))
+    end
 end
 
 # ╔═╡ 6c72aa7d-389d-4966-9f34-1729d3e62909
