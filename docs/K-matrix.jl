@@ -44,15 +44,16 @@ md"""
 """
 
 # ╔═╡ aee1d99e-4737-4356-a82f-3aa010c06d45
-theme(:boxed;
-	  colorbar=false,
-	  clim=(-1, 1),
-	  lab="",
+theme(:boxed; 
+	  colorbar=false, 
+	  clim=(-1, 1), 
+	  lab="", 
 	  xlab="Mass of system [GeV]",
+	  ylab="Entries",
 	  fontfamily="Computer Modern",
       xlim=(:auto, :auto),
 	  ylim=(:auto, :auto),
-	  grid=false,
+	  grid=false, 
 	  minorticks=true,
 	  guidefonthalign=:right,
       foreground_color_legend=nothing,
@@ -91,7 +92,7 @@ On the figure below one can find illustration of the ab->cd scattering process w
 """
 
 # ╔═╡ 31151f7d-a3ed-4efc-bf1b-3b526a74ce9d
-RobustLocalResource("",	joinpath("..","figures","1x1_scattering.png"))
+RobustLocalResource("",	joinpath("..","figures","1x1_scattering.svg"))
 
 # ╔═╡ 8fac43e3-c14e-4368-aa59-8a5fea92c55f
 struct TwoBodyChannel
@@ -128,7 +129,7 @@ begin
 	#
 	amplitude(K::Kmatrix, m) =
 	    sum((gs * gs') ./ (M^2 - m^2) for (M, gs) in K.poles) + K.nonpoles
-	#
+	# 
 #	npoles(X::Kmatrix{N,V}) where {N,V} = V
 	nchannels(X::Kmatrix{N,V}) where {N,V} = N
 	#
@@ -166,7 +167,7 @@ md"""
 
 Let's compare Flatte to the BW parametrization
 
-$\text{BW} = \frac{m_0\Gamma_0}{m_0^2-s-im_0 \Gamma_0}$
+$\text{BW} = \frac{m_0\Gamma_0}{m_0^2-s-im_0 \Gamma_0}$ 
 
 We can approximate width to coupling using the Breit-Wigner expression, $1/(m_0^2-s-im_0\Gamma_0)$, where $\Gamma_0$ gives the width of the peak.
 Hence
@@ -187,7 +188,7 @@ md"""
 
 ### Cross-section
 
-Cross section of a certain channel calculated as
+Cross section of a certain channel calculated as 
 
 $\frac{\mathrm{d}\sigma}{\mathrm{d}m} = \frac{1}{J} |T|^2 \frac{\mathrm{d}\Phi}{\mathrm{d}m}$
 
@@ -235,7 +236,7 @@ Where $\alpha_1$ and $\alpha_2$ are production factors which might be complex.
 """
 
 # ╔═╡ 4b12ae65-ac34-4215-80b9-013566c1cdbd
-RobustLocalResource("", joinpath("..","figures", "1x1_production.png"), cache=false)
+RobustLocalResource("", joinpath("..","figures", "1x1_production.svg"), cache=false)
 
 # ╔═╡ 43b2e2e8-06bf-4643-b30f-ef6dc648a9fa
 begin
@@ -249,10 +250,10 @@ begin
 	nchannels(X::ProductionAmplitude{N,V}) where {N,V} = N
 	detD(X::ProductionAmplitude, m; ϕ=-π / 2) = detD(X.T, m; ϕ)
 	channels(X::ProductionAmplitude) = channels(X.T)
-	#
+	# 
 	ProductionAmplitude(T::Tmatrix{N,V}) where {N,V} =
 	    ProductionAmplitude(T, SVector{V}(ones(V)), SVector{N}(ones(N)))
-	#
+	# 
 	function amplitude(A::ProductionAmplitude, m; ϕ=-π / 2)
 	    @unpack T, αpoles, αnonpoles = A
 	    P = αnonpoles
@@ -278,7 +279,7 @@ begin
 	    sqrt((m^2 - (ch.m1 - ch.m2)^2)) /
 	    m^2
 	end
-	#
+	#	
 	function Dmatrix(T::Tmatrix{N,V}, m; ϕ=-π / 2) where {N,V}
 	    𝕀 = Matrix(I, (N, N))
 	    iρv = 1im .* ρ.(T.channels, m; ϕ) .* 𝕀
@@ -287,7 +288,7 @@ begin
 	end
 	detD(T::Tmatrix, m; ϕ=-π / 2) = det(Dmatrix(T, m; ϕ))
 	amplitude(T::Tmatrix, m; ϕ=-π / 2) = inv(Dmatrix(T, m; ϕ)) * amplitude(T.K, m)
-	#
+	# 
 	npoles(X::Tmatrix{N,V}) where {N,V} = V
 	nchannels(X::Tmatrix{N,V}) where {N,V} = N
 	channels(X::Tmatrix) = X.channels
@@ -319,14 +320,16 @@ md"""
 # ╔═╡ 98b2dc80-34b5-4883-9a97-f435b2c2adfd
 md"""
 
-Masses, widthes and production couplings
+One can set free parameters (masses, widths, and production couplings) estimating it from the data points:
 - m1 = $(@bind m1 Slider(range(3.0,8.0,51), default=3.1, show_value=true))
 - Γ1 = $(@bind Γ1 Slider(range(0.1,2.1,21), default=0.1, show_value=true))
 - m2 = $(@bind m2 Slider(range(3.0,8.0,51), default=3.1, show_value=true))
 - Γ2 = $(@bind Γ2 Slider(range(0.1,2.1,21), default=0.1, show_value=true))
-- |α₁| = $(@bind α1 Slider(range(0.01,2,61), default=1.0, show_value=true))
-- |α₂| = $(@bind α2 Slider(range(-1,2,61), default=0.65, show_value=true))
-- Arg(α₂) = $(@bind ϕ2 Slider(range(0,2π,100), default=2.4, show_value=true))
+- |α₁| = $(@bind α1 Slider(range(1.0,100.0,100), default=1.0, show_value=true))
+- |α₂| = $(@bind α2 Slider(range(1.0,100.0,100), default=1.0, show_value=true))
+- Arg(α₂) = $(@bind ϕ2 Slider(range(0,2π,100), default=0.0, show_value=true))
+
+Once initial parapeters are set, you can enable fit below
 """
 
 # ╔═╡ 890720b8-3634-4595-b320-9a67f2e32be4
@@ -338,7 +341,7 @@ T = let
 	MG = [
 		(M=m1, gs=[sqrt(Γ1*m1/real(ρ(channels[1], m1)))]),
 		(M=m2, gs=[sqrt(Γ2*m2/real(ρ(channels[1], m2)))])]
-	#
+	# 
 	K = Kmatrix(MG)
 	T = Tmatrix(K, channels)
 end;
@@ -348,35 +351,21 @@ PA = ProductionAmplitude(T, SVector{2}(α1, α2*cis(ϕ2)), SVector{1}(0));
 
 # ╔═╡ 93d3c4cd-f934-42ff-9ac5-7c7bbea1271b
 let
-	f(m) = intensity.(Ref(PA), m)
-	integral, _ = quadgk(f, m_min, m_max)
 	plot()
-	scatter!(input_data.m_bins, input_data.content ./ sum(input_data.content) ./ bin_width, yerr=sqrt.(input_data.content) ./ sum(input_data.content) ./ bin_width, lab="Data")
+	scatter!(input_data.m_bins, input_data.content, yerr=sqrt.(input_data.content), lab="Data")
 	plot!(title="Production intensity", m_min, m_max, sp=1, lab="Total model") do m
-    	intensity.(Ref(PA), m) / integral
+    	intensity.(Ref(PA), m)
 	end
 	map([1,2]) do ind
 		plot!(m_min, m_max, sp=1, fill=0, alpha=0.2, lab="from R$(ind)") do m
 			A = productionpole(PA, m, ind)[1]
 			phsp = real(ρ(T.channels[1], m)) * m
-			abs2(A) * phsp / integral
+			abs2(A) * phsp
 		end
 	end
 	vline!([T.K.poles[1].M, T.K.poles[2].M])
 	plot!()
 end
-
-# ╔═╡ 9926aed3-9070-469e-b988-f1527e5b9e79
-begin
-	f(m) = intensity.(Ref(PA), m)
-	integral, _ = quadgk(f, m_min, m_max)
-end
-
-# ╔═╡ c1d0520c-b949-4c05-92ce-9dbf41774048
-input_data.content ./ sum(input_data.content) ./ bin_width - intensity.(Ref(PA), input_data.m_bins) / integral
-
-# ╔═╡ 94991c46-9cbe-4a6c-ae23-68ff09b35e37
-sum(abs2, (input_data.content ./ sum(input_data.content) ./ bin_width - intensity.(Ref(PA), input_data.m_bins) / integral) ./ sqrt.(input_data.content) ./ sum(input_data.content) ./ bin_width)
 
 # ╔═╡ 7b4e2e18-6c6c-4429-a935-ec1b36c794fa
 md"""
@@ -414,61 +403,32 @@ fit_result, best_pars = let
 	init_pars = (m1 = m1, Γ1 = Γ1, m2 = m2, Γ2 = Γ2, α1 = α1, α2 = α2, ϕ2 = ϕ2)
     names = extract_names(init_pars)
 	x_data = input_data.m_bins
-	y_data = input_data.content ./ sum(input_data.content) ./ bin_width
-	δy_data = sqrt.(input_data.content) ./ sum(input_data.content) ./ bin_width
+	y_data = input_data.content
+	δy_data = sqrt.(input_data.content)
 	model(pars) = build_model(v2p(names, pars))
-	function y_fit(pars)
-    	M = model(pars)
-    	f(m) = intensity.(Ref(M), m)
-    	integral, _ = quadgk(f, m_min, m_max)
-    	intensity.(Ref(M), x_data) / integral
-	end
-	n = length(init_pars)
-	pars_step_size = fill(1.0, n)
-	initial_invH(x) = Matrix{eltype(x)}(I, length(x), length(x)) ./ pars_step_size .^ 2
-	objective(pars) = sum(abs2, (y_data - y_fit(pars)) ./ δy_data)
-	fit_result = optimize(objective, collect(init_pars), BFGS(; initial_invH), Optim.Options(; iterations=100))
+	y_fit(pars) = intensity.(Ref(model(pars)), x_data)
+	objective(pars) = sum(abs2, (y_data - y_fit(pars)) ./ δy_data)	
+	fit_result = optimize(objective, collect(init_pars), BFGS(), Optim.Options(; iterations=1000))
 	best_pars = v2p(names, fit_result.minimizer)
 	fit_result, best_pars
 end
-
-# ╔═╡ eca6b293-e6c2-4b30-8ed3-1afa7913664d
-begin
-	init_pars = (m1 = m1, Γ1 = Γ1, m2 = m2, Γ2 = Γ2, α1 = α1, α2 = α2, ϕ2 = ϕ2)
-	names = extract_names(init_pars)
-    x_data = input_data.m_bins
-	y_data = input_data.content ./ sum(input_data.content) ./ bin_width
-	δy_data = sqrt.(input_data.content) ./ sum(input_data.content) ./ bin_width
-	model(pars) = build_model(v2p(names, pars))
-	function y_fit(pars)
-	   	M = model(pars)
-	   	f(m) = intensity.(Ref(M), m)
-	   	integral, _ = quadgk(f, m_min, m_max)
-	   	intensity.(Ref(M), x_data) / integral
-	end
-end
-
-# ╔═╡ 1f5b5c8f-cbe4-47e7-a2d2-270ec49fa4de
-init_pars
 
 # ╔═╡ 4b623acd-08da-4eca-b256-20aef86bc758
 let
 	model = build_model(best_pars)
 	plot()
-	f(m) = intensity.(Ref(model), m)
-    integral, _ = quadgk(f, m_min, m_max)
-	scatter!(input_data.m_bins, input_data.content ./ sum(input_data.content) ./ bin_width, yerr=sqrt.(input_data.content) ./ sum(input_data.content) ./ bin_width, lab="Data")
+	scatter!(input_data.m_bins, input_data.content, yerr=sqrt.(input_data.content), lab="Data")
 	plot!(title="Production intensity fit", m_min, m_max, sp=1, lab="Fit model") do m
-    	intensity.(Ref(model), m) / integral
+    	intensity.(Ref(model), m)
 	end
 	map([1,2]) do ind
 		plot!(m_min, m_max, sp=1, fill=0, alpha=0.2, lab="from R$(ind)") do m
 			A = productionpole(model, m, ind)[1]
-			phsp = real(ρ(T.channels[1], m)) * m
-			abs2(A) * phsp / integral
+			phsp = real(ρ(model.T.channels[1], m)) * m
+			abs2(A) * phsp
 		end
 	end
-	vline!([T.K.poles[1].M, T.K.poles[2].M])
+	vline!([model.T.K.poles[1].M, model.T.K.poles[2].M])
 	plot!()
 end
 
@@ -2340,19 +2300,14 @@ version = "1.4.1+2"
 # ╠═df62bad6-afe8-497f-a746-9a490fcc3a81
 # ╠═64ab4581-5388-48f8-a86f-2d1f704d77bd
 # ╟─0121728d-211c-400c-b7ff-516e9edb3d2e
-# ╠═98b2dc80-34b5-4883-9a97-f435b2c2adfd
+# ╟─98b2dc80-34b5-4883-9a97-f435b2c2adfd
 # ╠═890720b8-3634-4595-b320-9a67f2e32be4
 # ╠═6fc426f9-1c17-44ef-9b4e-5595f66db0e8
 # ╠═93d3c4cd-f934-42ff-9ac5-7c7bbea1271b
-# ╠═9926aed3-9070-469e-b988-f1527e5b9e79
-# ╠═c1d0520c-b949-4c05-92ce-9dbf41774048
-# ╠═94991c46-9cbe-4a6c-ae23-68ff09b35e37
 # ╟─7b4e2e18-6c6c-4429-a935-ec1b36c794fa
 # ╠═b14ace95-f030-45ed-95ce-3c7782f441ea
 # ╠═64cef242-5e75-46cb-b277-89c7785ae6f4
 # ╠═33da12a3-c538-4d51-b3cd-5dd9e5a6c552
-# ╠═1f5b5c8f-cbe4-47e7-a2d2-270ec49fa4de
-# ╠═eca6b293-e6c2-4b30-8ed3-1afa7913664d
 # ╠═4b623acd-08da-4eca-b256-20aef86bc758
 # ╟─00000000-0000-0000-0000-000000000001
 # ╟─00000000-0000-0000-0000-000000000002
