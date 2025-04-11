@@ -44,16 +44,16 @@ md"""
 """
 
 # ╔═╡ 97c554de-03ca-4ab0-bd10-1cb2db88a225
-theme(:boxed; 
-	  colorbar=false, 
-	  clim=(-1, 1), 
-	  lab="", 
+theme(:boxed;
+	  colorbar=false,
+	  clim=(-1, 1),
+	  lab="",
 	  xlab="Mass of system [GeV]",
 	  ylab="Entries",
 	  fontfamily="Computer Modern",
       xlim=(:auto, :auto),
 	  ylim=(:auto, :auto),
-	  grid=false, 
+	  grid=false,
 	  minorticks=true,
 	  guidefonthalign=:right,
       foreground_color_legend=nothing,
@@ -161,7 +161,7 @@ md"""
 
 Let's compare Flatte to the BW parametrization
 
-$\text{BW} = \frac{m_0\Gamma_0}{m_0^2-s-im_0 \Gamma_0}$ 
+$\text{BW} = \frac{m_0\Gamma_0}{m_0^2-s-im_0 \Gamma_0}$
 
 We can approximate width to coupling using the Breit-Wigner expression, $1/(m_0^2-s-im_0\Gamma_0)$, where $\Gamma_0$ gives the width of the peak.
 Hence
@@ -182,7 +182,7 @@ md"""
 
 ### Cross-section
 
-Cross section of a certain channel calculated as 
+Cross section of a certain channel calculated as
 
 $\frac{\mathrm{d}\sigma}{\mathrm{d}m} = \frac{1}{J} |T|^2 \frac{\mathrm{d}\Phi}{\mathrm{d}m}$
 
@@ -240,10 +240,10 @@ begin
 	end
 	#
 	detD(PA::ProductionAmplitude, m; ϕ=-π / 2) = detD(PA.T, m; ϕ)
-	# 
+	#
 	ProductionAmplitude(T::Tmatrix{N,V}) where {N,V} =
 	    ProductionAmplitude(T, SVector{V}(ones(V)))
-	# 
+	#
 	function amplitude(A::ProductionAmplitude{N,V}, m; ϕ=-π / 2) where {N,V}
 	    @unpack T, αpoles = A
 		P = SVector{N}(zeros(N))
@@ -269,7 +269,7 @@ begin
 	    sqrt((m^2 - (ch.m1 - ch.m2)^2)) /
 	    m^2
 	end
-	#	
+	#
 	function Dmatrix(T::Tmatrix{N,V}, m; ϕ=-π / 2) where {N,V}
 	    𝕀 = Matrix(I, (N, N))
 	    iρv = 1im .* ρ.(T.channels, m; ϕ) .* 𝕀
@@ -326,7 +326,7 @@ T = let
 	MG = [
 		(M=m1, gs=[sqrt(Γ1*m1/real(ρ(channels[1], m1)))]),
 		(M=m2, gs=[sqrt(Γ2*m2/real(ρ(channels[1], m2)))])]
-	# 
+	#
 	K = Kmatrix(MG)
 	T = Tmatrix(K, channels)
 end;
@@ -394,7 +394,7 @@ fit_result, best_pars = let
 	δy_data = sqrt.(input_data.content)
 	model(pars) = build_model(v2p(names, pars))
 	y_fit(pars) = intensity.(Ref(model(pars)), x_data)
-	objective(pars) = sum(abs2, (y_data - y_fit(pars)) ./ δy_data)	
+	objective(pars) = sum(abs2, (y_data - y_fit(pars)) ./ δy_data)
 	fit_result = optimize(objective, collect(init_pars), BFGS(), Optim.Options(; iterations=1000))
 	best_pars = v2p(names, fit_result.minimizer)
 	fit_result, best_pars
