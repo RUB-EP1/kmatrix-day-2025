@@ -21,7 +21,6 @@ dev = [
     "ruff",
     {include-group = "doc"},
     {include-group = "jupyter"},
-    {include-group = "lite"},
 ]
 doc = [
     "jupyter-cache",
@@ -44,6 +43,68 @@ lite = [
     "notebook",
     "python-lsp-server[rope]",
 ]
+
+[tool.pixi.dependencies]
+julia = {version = "*", channel = "https://repo.prefix.dev/julia-forge"}
+python = {version = "3.12.*", channel = "conda-forge"}
+
+[tool.pixi.environments]
+default = {features = ["dev", "lite"], solve-group = "main"}
+doc = {features = ["doc", "lite"], solve-group = "main"}
+lite = {features = ["lite"], solve-group = "main"}
+main = {features = [], solve-group = "main"}
+
+[tool.pixi.tasks.clean-lite]
+cmd = "rm -rf docs/_build/html/lite"
+
+[tool.pixi.tasks.doc]
+cmd = "quarto render docs"
+depends-on = [{task = "lite", environment = "lite"}]
+
+[tool.pixi.tasks.doclive]
+cmd = "quarto preview docs"
+depends-on = [{task = "lite", environment = "lite"}]
+
+[tool.pixi.tasks.docnb]
+cmd = "quarto render docs --execute"
+depends-on = [
+    "pluto-server",
+    {task = "lite", environment = "lite"},
+]
+
+[tool.pixi.tasks.instantiate-julia]
+cmd = "julia --eval='using Pkg; Pkg.instantiate()' --project=docs"
+
+[tool.pixi.tasks.lab]
+cmd = "jupyter lab docs"
+
+[tool.pixi.tasks.lite]
+cmd = "jupyter lite build --contents finding-poles.ipynb --output-dir lite"
+cwd = "docs"
+depends-on = ["clean-lite"]
+
+[tool.pixi.tasks.pluto]
+cmd = "julia --eval='using Pluto; Pluto.run(notebook=\"k-matrix.jl\")' --project=."
+cwd = "docs"
+depends-on = ["instantiate-julia"]
+
+[tool.pixi.tasks.pluto-server]
+cmd = "julia --eval='using PlutoSliderServer; PlutoSliderServer.export_notebook(\"k-matrix.jl\")' --project=."
+cwd = "docs"
+depends-on = ["instantiate-julia"]
+
+[tool.pixi.workspace]
+authors = [
+    "Ilya Segal",
+    "Lena Pöpping",
+    "Mikhail Mikhasenko",
+    "Nils Hüsken",
+    "Remco de Boer",
+]
+channels = ["conda-forge", "https://repo.prefix.dev/julia-forge"]
+name = "kmatrix-day-2025"
+platforms = ["linux-64", "osx-64", "osx-arm64", "win-64"]
+version = "0.1.0"
 
 [tool.ruff]
 preview = true

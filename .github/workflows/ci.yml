@@ -7,6 +7,8 @@ concurrency:
 
 env:
   FORCE_COLOR: "1"
+  JULIA_CI: "true"
+  JULIA_COLOR: "yes"
   UV_PYTHON_PREFERENCE: only-managed
 
 on:
@@ -28,26 +30,28 @@ jobs:
     runs-on: ubuntu-24.04
     steps:
       - uses: actions/checkout@v4
-      - uses: astral-sh/setup-uv@v5
+      - uses: prefix-dev/setup-pixi@v0.8.5
+        with:
+          cache: true
+          activate-environment: false
+      - name: Fetch Julia cache
+        uses: actions/cache@v4
+        with:
+          key: julia-${{hashFiles('docs/Manifest.toml')}}-${{hashFiles('**/*.jl')}}
+          restore-keys: |
+            julia-${{hashFiles('docs/Manifest.toml')}}
+            julia
+          path: |
+            ./julia-*/
+            ~/.julia/
       - name: Fetch Jupyter cache
         uses: actions/cache@v4
         with:
-          key: jupyter-cache-${{hashFiles('uv.lock')}}-${{hashFiles('docs/**/*.ipynb')}}
+          key: jupyter-cache-${{hashFiles('pixi.lock')}}-${{hashFiles('docs/**/*.ipynb')}}
           path: docs/.jupyter_cache
-          restore-keys: jupyter-cache-${{hashFiles('uv.lock')}}
-      - name: Build Jupyter Lite server
-        run: |
-          uv run \
-            --group lite \
-            --no-dev \
-            jupyter lite build --contents finding-poles.ipynb --output-dir lite
-        working-directory: docs
+          restore-keys: jupyter-cache-${{hashFiles('pixi.lock')}}
       - name: Build documentation with Quarto
-        run: |
-          uv run \
-            --group doc \
-            --no-dev \
-            quarto render docs --execute
+        run: pixi run -e doc docnb
       - uses: actions/upload-pages-artifact@v3
         with:
           path: docs/_build/html
