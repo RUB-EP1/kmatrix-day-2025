@@ -145,6 +145,7 @@ split-on-trailing-comma = false
     "D",
     "E303",
     "E402",
+    "N816",
 ]
 "finding-poles-live.ipynb" = ["F401"]
 
