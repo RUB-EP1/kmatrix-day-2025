@@ -79,7 +79,7 @@ cmd = "julia --eval='using Pkg; Pkg.instantiate()' --project=docs"
 cmd = "jupyter lab docs"
 
 [tool.pixi.tasks.lite]
-cmd = "jupyter lite build --contents finding-poles.ipynb --output-dir lite"
+cmd = "jupyter lite build --contents finding-poles.ipynb --contents finding-poles-2channels.ipynb --output-dir lite"
 cwd = "docs"
 depends-on = ["clean-lite"]
 
@@ -116,8 +116,9 @@ line-ending = "lf"
 
 [tool.ruff.lint]
 ignore = [
-    "ANN001",
+    "ANN00",
     "ANN20",
+    "COM812",
     "CPY001",
     "D103",
     "D203",
@@ -130,6 +131,9 @@ task-tags = ["cspell"]
 [tool.ruff.lint.flake8-builtins]
 builtins-ignorelist = ["display"]
 
+[tool.ruff.lint.flake8-self]
+ignore-names = ["_print"]
+
 [tool.ruff.lint.isort]
 known-third-party = ["sympy"]
 split-on-trailing-comma = false
@@ -140,6 +144,8 @@ split-on-trailing-comma = false
     "C408",
     "D",
     "E303",
+    "E402",
+    "N816",
 ]
 "finding-poles-live.ipynb" = ["F401"]
 

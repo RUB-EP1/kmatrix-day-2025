@@ -16,6 +16,7 @@ project:
     - experimental-data.csv
     - index.qmd
     - finding-poles.ipynb
+    - finding-poles-2channels.ipynb
     - k-matrix.html
     - resources.qmd
   resources:
@@ -44,14 +45,18 @@ website:
       - file: index.qmd
         icon: house
         text: Home
-      - text: Notebooks
-        icon: journal-code
+      - text: Live coding session
+        icon: play
         contents:
           - href: k-matrix.html
             icon: 1-circle
             text: Construction of $K$ matrices
           - file: finding-poles.ipynb
             icon: 2-circle
+      - text: Bonus material
+        icon: journal-code
+        contents:
+          - file: finding-poles-2channels.ipynb
       - text: Resources
         icon: book
         file: resources.qmd
