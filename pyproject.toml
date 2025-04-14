@@ -79,7 +79,7 @@ cmd = "julia --eval='using Pkg; Pkg.instantiate()' --project=docs"
 cmd = "jupyter lab docs"
 
 [tool.pixi.tasks.lite]
-cmd = "jupyter lite build --contents finding-poles.ipynb --output-dir lite"
+cmd = "jupyter lite build --contents finding-poles.ipynb --contents finding-poles-2channels.ipynb --output-dir lite"
 cwd = "docs"
 depends-on = ["clean-lite"]
 
