@@ -104,7 +104,7 @@ RobustLocalResource("", joinpath("images", "1x1-scattering.svg"))
 # ╔═╡ af8266c4-ecc0-4f6f-a0bb-024d8571a153
 begin
 	abstract type AbstractChannel end
-	# 
+	#
 	# masses are usually real
 	# for unstable particles, the simplest approximation is to use (m-iΓ/2)
 	struct TwoBodyChannel{T<:Number} <: AbstractChannel
@@ -178,12 +178,12 @@ begin
     end
     amplitude(T::Tmatrix, m) = inv(Dmatrix(T, m)) * amplitude(T.K, m)
 	#
-	# 
+	#
     struct ProductionAmplitude{N,V,C}
         T::Tmatrix{N,V,C}
         αpoles::SVector{V,<:Number}
     end
-	# 
+	#
     function amplitude(A::ProductionAmplitude{N,V,C}, m) where {N,V,C}
         @unpack T, αpoles = A
         P = SVector{N}(zeros(N))
@@ -353,7 +353,7 @@ PA = ProductionAmplitude(T, SVector{2}(αg, αh * cis(ϕh)))
 # ╔═╡ 1c1ff902-706c-44f2-b133-af445977c393
 let
 	m_min, m_max = extrema(input_data.m_bins)
-		# 
+		#
     plot(title="Production intensity")
     scatter!(input_data.m_bins, input_data.content,
 			 yerr=sqrt.(input_data.content), lab="Data")
@@ -412,16 +412,16 @@ chi2(f, x, y, δy) = sum(abs2, (f.(x) .- y) ./ δy)
 #=╠═╡
 fit_result, best_pars = let
 	init_pars = ComponentArray(; Mg, g, Mh, h, αg, αh, ϕh)
-    # 
+    #
 	@unpack m_bins, content = input_data
 	δy_data = sqrt.(content)
-	# 
+	#
 	function objective(pars)
 		model = build_model(pars)
 		f(m) = intensity(model, m)
 		chi2(f, m_bins, content, δy_data)
 	end
-	# 
+	#
 	fit_result = optimize(objective, init_pars, BFGS(), Optim.Options(; iterations=1000))
 	best_pars = fit_result.minimizer
 	(; fit_result, best_pars)
@@ -438,7 +438,7 @@ best_pars |> show
 let
 	model = build_model(best_pars)
 	m_min, m_max = extrema(input_data.m_bins)
-	# 
+	#
 	plot(title="Production intensity fit")
 	scatter!(
 		input_data.m_bins, input_data.content, yerr=sqrt.(input_data.content), lab="Data")
