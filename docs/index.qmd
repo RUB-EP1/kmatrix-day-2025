@@ -28,6 +28,10 @@ All events will take place on Zoom: [https://cern.zoom.us/j/64114654083?pwd=eZRH
 | 17:00&nbsp;&#8209;&nbsp;17:45 | Exercise: **[Finding pole positions](./finding-poles.ipynb)**                                                               | Lena&nbsp;Pöpping       |
 | 17:45&nbsp;&#8209;&nbsp;...   | $K$-pop, $K$-Cheese, and $K$-Wine                                                                                           |                         |
 
+:::{.callout-tip}
+The recordings can be found [here](https://www.youtube.com/playlist?list=PLyMw0aVKjssAoDgkgg7XhKI9LVDlzIlnu) on YouTube.
+:::
+
 ### About
 
 This website is maintained for informational purposes. For feedback, suggestions, or questions, please reach out to us [via GitHub](https://github.com/RUB-EP1/kmatrix-day-2025) or via [our Slack channel](https://amplitude-analysis.slack.com/archives/C08MJ655W6R)!
