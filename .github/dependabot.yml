@@ -7,6 +7,10 @@ updates:
       - Zeyna777
     commit-message:
       prefix: MAINT
+    groups:
+      actions:
+        patterns:
+          - "*"
     labels:
       - 🔨 Maintenance
     schedule:
