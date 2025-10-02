@@ -56,14 +56,17 @@ main = {features = [], solve-group = "main"}
 
 [tool.pixi.tasks.clean-lite]
 cmd = "rm -rf docs/_build/html/lite"
+description = "Remove the build files of the Jupyter Lite server"
 
 [tool.pixi.tasks.doc]
 cmd = "quarto render docs"
 depends-on = [{task = "lite", environment = "lite"}]
+description = "Build website (no cell output)"
 
 [tool.pixi.tasks.doclive]
 cmd = "quarto preview docs"
 depends-on = [{task = "lite", environment = "lite"}]
+description = "Preview website (live reload)"
 
 [tool.pixi.tasks.docnb]
 cmd = "quarto render docs --execute"
@@ -71,27 +74,33 @@ depends-on = [
     "pluto-server",
     {task = "lite", environment = "lite"},
 ]
+description = "Execute notebooks and build website"
 
 [tool.pixi.tasks.instantiate-julia]
 cmd = "julia --eval='using Pkg; Pkg.instantiate()' --project=docs"
+description = "Instantiate Julia environment"
 
 [tool.pixi.tasks.lab]
 cmd = "jupyter lab docs"
+description = "Launch Jupyter Lab"
 
 [tool.pixi.tasks.lite]
 cmd = "jupyter lite build --contents finding-poles.ipynb --contents finding-poles-2channels.ipynb --output-dir lite"
 cwd = "docs"
 depends-on = ["clean-lite"]
+description = "Build Jupyter Lite server"
 
 [tool.pixi.tasks.pluto]
 cmd = "julia --eval='using Pluto; Pluto.run(notebook=\"k-matrix.jl\")' --project=."
 cwd = "docs"
 depends-on = ["instantiate-julia"]
+description = "Launch Pluto notebook server"
 
 [tool.pixi.tasks.pluto-server]
 cmd = "julia --eval='using PlutoSliderServer; PlutoSliderServer.export_notebook(\"k-matrix.jl\")' --project=."
 cwd = "docs"
 depends-on = ["instantiate-julia"]
+description = "Preview static Pluto website"
 
 [tool.pixi.workspace]
 authors = [
@@ -154,9 +163,6 @@ split-on-trailing-comma = false
 all = false
 ignore_case = true
 in_place = true
-sort_first = [
-    "project",
-    "tool.tox.env_run_base",
-]
+sort_first = ["project"]
 spaces_indent_inline_array = 4
 trailing_comma_inline_array = true
