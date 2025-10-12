@@ -102,6 +102,9 @@ cwd = "docs"
 depends-on = ["instantiate-julia"]
 description = "Preview static Pluto website"
 
+[tool.pixi.tasks.style]
+cmd = "pre-commit run --all-files"
+
 [tool.pixi.workspace]
 authors = [
     "Ilya Segal",
