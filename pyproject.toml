@@ -13,7 +13,7 @@ dependencies = [
     "sympy",
 ]
 name = "k-matrix-day-2025"
-requires-python = ">=3.12"
+requires-python = ">=3.13"
 version = "0.0.0"
 
 [dependency-groups]
@@ -45,8 +45,8 @@ lite = [
 ]
 
 [tool.pixi.dependencies]
-julia = {version = "*", channel = "https://repo.prefix.dev/julia-forge"}
-python = {version = "3.12.*", channel = "conda-forge"}
+julia = {channel = "https://repo.prefix.dev/julia-forge"}
+python = {channel = "conda-forge"}
 
 [tool.pixi.environments]
 default = {features = ["dev", "lite"], solve-group = "main"}
@@ -101,6 +101,9 @@ cmd = "julia --eval='using PlutoSliderServer; PlutoSliderServer.export_notebook(
 cwd = "docs"
 depends-on = ["instantiate-julia"]
 description = "Preview static Pluto website"
+
+[tool.pixi.tasks.style]
+cmd = "pre-commit run --all-files"
 
 [tool.pixi.workspace]
 authors = [
