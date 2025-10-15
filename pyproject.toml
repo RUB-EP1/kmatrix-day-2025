@@ -46,7 +46,7 @@ lite = [
 
 [tool.pixi.dependencies]
 julia = {channel = "https://repo.prefix.dev/julia-forge"}
-python = {channel = "conda-forge"}
+python = {version = "3.13.*", channel = "conda-forge"}
 
 [tool.pixi.environments]
 default = {features = ["dev", "lite"], solve-group = "main"}
