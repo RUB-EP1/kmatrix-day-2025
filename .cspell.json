@@ -60,6 +60,7 @@
     "nocite",
     "nrows",
     "pcolormesh",
+    "pmatrix",
     "sharey",
     "vlines",
     "vmax",
