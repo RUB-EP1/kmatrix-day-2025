@@ -1,6 +1,7 @@
 _build/
 .jupyter_cache/
 *_files/
+**/*.quarto_ipynb
 /.quarto/
 lite/
 site_libs/
