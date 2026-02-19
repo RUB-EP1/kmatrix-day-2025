@@ -3,7 +3,8 @@
     "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
   "[git-commit]": {
-    "editor.rulers": [72]
+    "editor.rulers": [72],
+    "rewrap.wrappingColumn": 72
   },
   "[json]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode",
@@ -32,26 +33,28 @@
     "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
   "cSpell.enabled": true,
+  "diffEditor.experimental.showMoves": true,
   "editor.formatOnSave": true,
   "files.associations": {
     "**/pixi.lock": "yaml"
   },
-  "git.rebaseWhenSync": true,
   "gitlens.telemetry.enabled": false,
   "julia.environmentPath": "${workspaceFolder}/docs",
   "julia.executablePath": "${workspaceFolder}/.pixi/envs/default/bin/julia",
   "julia.NumThreads": "auto",
   "livePreview.defaultPreviewPath": "docs/_build/html",
+  "multiDiffEditor.experimental.enabled": true,
   "notebook.codeActionsOnSave": {
     "notebook.source.organizeImports": "explicit"
   },
   "notebook.formatOnSave.enabled": true,
+  "notebook.gotoSymbols.showAllSymbols": true,
   "prettier.documentSelectors": ["**/*.qmd"],
-  "python.analysis.autoImportCompletions": false,
   "python.defaultInterpreterPath": ".pixi/envs/default/bin/python",
   "python.terminal.activateEnvironment": false,
   "quarto.path": ".pixi/envs/default/bin/quarto",
   "redhat.telemetry.enabled": false,
+  "rewrap.wrappingColumn": 88,
   "ruff.enable": true,
   "ruff.importStrategy": "fromEnvironment",
   "ruff.organizeImports": true,
