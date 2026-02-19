@@ -27,32 +27,38 @@ doc = [
     "quarto-cli",
 ]
 jupyter = [
+    "jupyter-ruff",
     "jupyterlab",
-    "jupyterlab-code-formatter",
     "jupyterlab-git",
     "jupyterlab-lsp",
+    "jupyterlab-quarto",
     "jupyterlab-quickopen",
     "python-lsp-ruff",
-    "python-lsp-server[rope]",
+    "python-lsp-server",
 ]
 lite = [
+    "jupyter-ruff",
     "jupyterlab",
     "jupyterlab-lsp",
+    "jupyterlab-quarto",
     "jupyterlite-core",
     "jupyterlite-pyodide-kernel",
     "notebook",
-    "python-lsp-server[rope]",
+    "python-lsp-server",
 ]
 
 [tool.pixi.dependencies]
-julia = {channel = "https://repo.prefix.dev/julia-forge"}
-python = {version = "3.13.*", channel = "conda-forge"}
+julia = {version = "*", channel = "https://repo.prefix.dev/julia-forge"}
+python = "3.13.*"
 
 [tool.pixi.environments]
 default = {features = ["dev", "lite"], solve-group = "main"}
 doc = {features = ["doc", "lite"], solve-group = "main"}
 lite = {features = ["lite"], solve-group = "main"}
 main = {features = [], solve-group = "main"}
+
+[tool.pixi.pypi-dependencies]
+k-matrix-day-2025 = {path = ".", editable = true}
 
 [tool.pixi.tasks.clean-lite]
 cmd = "rm -rf docs/_build/html/lite"
@@ -69,7 +75,7 @@ depends-on = [{task = "lite", environment = "lite"}]
 description = "Preview website (live reload)"
 
 [tool.pixi.tasks.docnb]
-cmd = "quarto render docs --execute"
+cmd = "pixi run doc"
 depends-on = [
     "pluto-server",
     {task = "lite", environment = "lite"},
@@ -115,10 +121,16 @@ authors = [
 ]
 channels = ["conda-forge", "https://repo.prefix.dev/julia-forge"]
 name = "kmatrix-day-2025"
-platforms = ["linux-64", "osx-64", "osx-arm64", "win-64"]
+platforms = [
+    "linux-64",
+    "osx-64",
+    "osx-arm64",
+    "win-64",
+]
 version = "0.1.0"
 
 [tool.ruff]
+extend-include = ["*.ipynb"]
 preview = true
 show-fixes = true
 
@@ -130,18 +142,31 @@ line-ending = "lf"
 ignore = [
     "ANN00",
     "ANN20",
+    "ANN401",
     "COM812",
     "CPY001",
-    "D103",
-    "D203",
-    "D213",
+    "D",
+    "E501",
     "E741",
+    "FURB101",
+    "FURB103",
+    "FURB140",
+    "G004",
+    "ISC001",
+    "PLW1514",
+    "PT001",
+    "PTH",
+    "RUF067",
+    "SIM108",
 ]
 select = ["ALL"]
 task-tags = ["cspell"]
 
 [tool.ruff.lint.flake8-builtins]
 builtins-ignorelist = ["display"]
+
+[tool.ruff.lint.flake8-comprehensions]
+allow-dict-calls-with-keyword-arguments = true
 
 [tool.ruff.lint.flake8-self]
 ignore-names = ["_print"]
@@ -152,15 +177,32 @@ split-on-trailing-comma = false
 
 [tool.ruff.lint.per-file-ignores]
 "*.ipynb" = [
+    "ANN",
     "B018",
     "C408",
-    "D",
+    "C90",
     "E303",
     "E402",
+    "E703",
+    "N806",
     "N816",
+    "PLR09",
+    "PLR2004",
+    "PLW0602",
+    "PLW0603",
     "S101",
+    "T20",
+    "TC00",
+]
+"docs/*" = [
+    "INP001",
+    "S101",
+    "S113",
 ]
 "finding-poles-live.ipynb" = ["F401"]
+
+[tool.ruff.lint.pydocstyle]
+convention = "google"
 
 [tool.tomlsort]
 all = false

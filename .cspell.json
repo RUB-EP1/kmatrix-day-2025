@@ -23,6 +23,11 @@
     "transisions"
   ],
   "ignorePaths": [
+    "*.bib",
+    "*.csl",
+    "*.css",
+    "*.ico",
+    "*.svg",
     ".cspell.json",
     ".editorconfig",
     ".envrc",
@@ -32,11 +37,6 @@
     ".pre-commit-config.yaml",
     ".prettierignore",
     ".vscode/",
-    "*.bib",
-    "*.csl",
-    "*.css",
-    "*.ico",
-    "*.svg",
     "docs/k-matrix.jl",
     "LICENSE",
     "Manifest.toml",

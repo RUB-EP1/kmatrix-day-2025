@@ -29,13 +29,13 @@ jobs:
     name: Build webpage
     runs-on: ubuntu-24.04
     steps:
-      - uses: actions/checkout@v5
-      - uses: prefix-dev/setup-pixi@v0.9.1
+      - uses: actions/checkout@v6
+      - uses: prefix-dev/setup-pixi@v0.9.4
         with:
           cache: true
           activate-environment: false
       - name: Fetch Julia cache
-        uses: actions/cache@v4
+        uses: actions/cache@v5
         with:
           key: julia-${{hashFiles('docs/Manifest.toml')}}-${{hashFiles('**/*.jl')}}
           restore-keys: |
@@ -45,7 +45,7 @@ jobs:
             ./julia-*/
             ~/.julia/
       - name: Fetch Jupyter cache
-        uses: actions/cache@v4
+        uses: actions/cache@v5
         with:
           key: jupyter-cache-${{hashFiles('pixi.lock')}}-${{hashFiles('docs/**/*.ipynb')}}
           path: docs/.jupyter_cache
@@ -65,7 +65,7 @@ jobs:
       - build
     runs-on: ubuntu-24.04
     steps:
-      - uses: actions/download-artifact@v5
+      - uses: actions/download-artifact@v7
         with:
           name: github-pages
       - name: Extract artifact
