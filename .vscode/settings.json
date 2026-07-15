@@ -29,6 +29,9 @@
   "[quarto]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
+  "[toml]": {
+    "editor.defaultFormatter": "tombi-toml.tombi"
+  },
   "[yaml]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
@@ -39,9 +42,9 @@
     "**/pixi.lock": "yaml"
   },
   "gitlens.telemetry.enabled": false,
+  "julia.NumThreads": "auto",
   "julia.environmentPath": "${workspaceFolder}/docs",
   "julia.executablePath": "${workspaceFolder}/.pixi/envs/default/bin/julia",
-  "julia.NumThreads": "auto",
   "livePreview.defaultPreviewPath": "docs/_build/html",
   "multiDiffEditor.experimental.enabled": true,
   "notebook.codeActionsOnSave": {
