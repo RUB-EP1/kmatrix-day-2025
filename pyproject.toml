@@ -125,6 +125,23 @@ description = "Preview static Pluto website"
 [tool.pixi.tasks.style]
 cmd = "pre-commit run --all-files"
 
+[tool.pixi.tasks.upgrade]
+depends-on = [
+    "_upgrade-pixi",
+    "_upgrade-precommit",
+    "_upgrade-julia",
+]
+description = "Upgrade all lock files"
+
+[tool.pixi.tasks._upgrade-pixi]
+cmd = "pixi update"
+
+[tool.pixi.tasks._upgrade-precommit]
+cmd = "pre-commit autoupdate -j8"
+
+[tool.pixi.tasks._upgrade-julia]
+cmd = "julia --eval='using Pkg; Pkg.update()' --project=docs"
+
 [tool.pixi.workspace]
 authors = [
     "Ilya Segal",
