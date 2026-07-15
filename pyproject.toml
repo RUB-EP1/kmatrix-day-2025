@@ -1,10 +1,14 @@
 [project]
+name = "k-matrix-day-2025"
+version = "0.0.0"
+requires-python = "~=3.13.0"
+license-files = ["LICENSE"]
 authors = [
-    {name = "Ilya Segal"},
-    {name = "Lena Pöpping"},
-    {name = "Mikhail Mikhasenko"},
-    {name = "Nils Hüsken"},
-    {name = "Remco de Boer"},
+    { name = "Ilya Segal" },
+    { name = "Lena Pöpping" },
+    { name = "Mikhail Mikhasenko" },
+    { name = "Nils Hüsken" },
+    { name = "Remco de Boer" },
 ]
 dependencies = [
     "ampform",
@@ -12,15 +16,12 @@ dependencies = [
     "matplotlib",
     "sympy",
 ]
-name = "k-matrix-day-2025"
-requires-python = "~=3.13.0"
-version = "0.0.0"
 
 [dependency-groups]
 dev = [
     "ruff",
-    {include-group = "doc"},
-    {include-group = "jupyter"},
+    { include-group = "doc" },
+    { include-group = "jupyter" },
 ]
 doc = [
     "jupyter-cache",
@@ -47,18 +48,31 @@ lite = [
     "python-lsp-server",
 ]
 
+[tool.compwa.policy]
+package-manager = "pixi"
+
+[tool.compwa.policy.nb]
+no-binder = true
+
+[tool.compwa.policy.github]
+no-cd = true
+no-github-actions = true
+
+[tool.compwa.policy.format]
+no-cspell-update = true
+
 [tool.pixi.dependencies]
-julia = {version = "*", channel = "https://repo.prefix.dev/julia-forge"}
+julia = { version = "*", channel = "https://repo.prefix.dev/julia-forge" }
 python = "3.13.*"
 
 [tool.pixi.environments]
-default = {features = ["dev", "lite"], solve-group = "main"}
-doc = {features = ["doc", "lite"], solve-group = "main"}
-lite = {features = ["lite"], solve-group = "main"}
-main = {features = [], solve-group = "main"}
+default = { features = ["dev", "lite"], solve-group = "main" }
+doc = { features = ["doc", "lite"], solve-group = "main" }
+lite = { features = ["lite"], solve-group = "main" }
+main = { features = [], solve-group = "main" }
 
 [tool.pixi.pypi-dependencies]
-k-matrix-day-2025 = {path = ".", editable = true}
+k-matrix-day-2025 = { path = ".", editable = true }
 
 [tool.pixi.tasks.clean-lite]
 cmd = "rm -rf docs/_build/html/lite"
@@ -66,19 +80,19 @@ description = "Remove the build files of the Jupyter Lite server"
 
 [tool.pixi.tasks.doc]
 cmd = "quarto render docs"
-depends-on = [{task = "lite", environment = "lite"}]
+depends-on = [{ task = "lite", environment = "lite" }]
 description = "Build website (no cell output)"
 
 [tool.pixi.tasks.doclive]
 cmd = "quarto preview docs"
-depends-on = [{task = "lite", environment = "lite"}]
+depends-on = [{ task = "lite", environment = "lite" }]
 description = "Preview website (live reload)"
 
 [tool.pixi.tasks.docnb]
 cmd = "pixi run doc"
 depends-on = [
     "pluto-server",
-    {task = "lite", environment = "lite"},
+    { task = "lite", environment = "lite" },
 ]
 description = "Execute notebooks and build website"
 
@@ -110,6 +124,23 @@ description = "Preview static Pluto website"
 
 [tool.pixi.tasks.style]
 cmd = "pre-commit run --all-files"
+
+[tool.pixi.tasks.upgrade]
+depends-on = [
+    "_upgrade-pixi",
+    "_upgrade-precommit",
+    "_upgrade-julia",
+]
+description = "Upgrade all lock files"
+
+[tool.pixi.tasks._upgrade-pixi]
+cmd = "pixi update"
+
+[tool.pixi.tasks._upgrade-precommit]
+cmd = "pre-commit autoupdate -j8"
+
+[tool.pixi.tasks._upgrade-julia]
+cmd = "julia --eval='using Pkg; Pkg.update()' --project=docs"
 
 [tool.pixi.workspace]
 authors = [
@@ -163,7 +194,7 @@ select = ["ALL"]
 task-tags = ["cspell"]
 
 [tool.ruff.lint.flake8-builtins]
-builtins-ignorelist = ["display"]
+ignorelist = ["display"]
 
 [tool.ruff.lint.flake8-comprehensions]
 allow-dict-calls-with-keyword-arguments = true
@@ -204,10 +235,20 @@ split-on-trailing-comma = false
 [tool.ruff.lint.pydocstyle]
 convention = "google"
 
-[tool.tomlsort]
-all = false
-ignore_case = true
-in_place = true
-sort_first = ["project"]
-spaces_indent_inline_array = 4
-trailing_comma_inline_array = true
+[tool.tombi.files]
+exclude = [
+    "**/Manifest.toml",
+    "**/Project.toml",
+]
+
+[tool.tombi.format.rules]
+indent-width = 4
+line-width = 88
+
+[tool.tombi.lint.rules]
+key-empty = "off"
+
+[[tool.tombi.schemas]]
+root = "tool.compwa.policy"
+path = "https://raw.githubusercontent.com/ComPWA/policy/0.9.0/compwa-policy.schema.json"
+include = ["pyproject.toml"]
