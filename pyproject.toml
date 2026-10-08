@@ -62,6 +62,13 @@ no-github-actions = true
 no-cspell-update = true
 
 [tool.lychee]
+exclude = [
+    "^https://amplitude-analysis\\.slack\\.com/",  # requires a Slack account
+    "^https://github\\.com/signup",  # blocks automated requests
+    "^https://indico\\.ph\\.tum\\.de/event/664/contributions/2769/attachments/",  # returns 500 to automated requests
+    "^https://join\\.slack\\.com/",  # blocks automated requests
+    "^https://journals\\.aps\\.org/",  # blocks automated requests
+]
 extensions = ["css", "md", "qmd"]
 
 [tool.pixi.dependencies]
