@@ -62,22 +62,7 @@ no-github-actions = true
 no-cspell-update = true
 
 [tool.lychee]
-extensions = [
-    "css",
-    "htm",
-    "html",
-    "markdown",
-    "md",
-    "mdown",
-    "mdwn",
-    "mdx",
-    "mkd",
-    "mkdn",
-    "mkdown",
-    "qmd",
-    "txt",
-    "xml",
-]
+extensions = ["css", "md", "qmd"]
 
 [tool.pixi.dependencies]
 julia = { version = "*", channel = "https://repo.prefix.dev/julia-forge" }
