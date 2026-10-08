@@ -78,7 +78,6 @@ extensions = [
     "txt",
     "xml",
 ]
-root_dir = "."
 
 [tool.pixi.dependencies]
 julia = { version = "*", channel = "https://repo.prefix.dev/julia-forge" }
