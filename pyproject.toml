@@ -61,6 +61,25 @@ no-github-actions = true
 [tool.compwa.policy.format]
 no-cspell-update = true
 
+[tool.lychee]
+extensions = [
+    "css",
+    "htm",
+    "html",
+    "markdown",
+    "md",
+    "mdown",
+    "mdwn",
+    "mdx",
+    "mkd",
+    "mkdn",
+    "mkdown",
+    "qmd",
+    "txt",
+    "xml",
+]
+root_dir = "."
+
 [tool.pixi.dependencies]
 julia = { version = "*", channel = "https://repo.prefix.dev/julia-forge" }
 python = "3.13.*"
@@ -73,7 +92,7 @@ main = { features = [], solve-group = "main" }
 
 [tool.pixi.pypi-dependencies]
 k-matrix-day-2025 = { path = ".", editable = true }
-lychee-bin = "*"
+lychee-bin = ">=0.24.0"
 
 [tool.pixi.tasks.clean-lite]
 cmd = "rm -rf docs/_build/html/lite"
@@ -144,7 +163,7 @@ cmd = "prek autoupdate"
 cmd = "julia --eval='using Pkg; Pkg.update()' --project=docs"
 
 [tool.pixi.tasks.linkcheck]
-cmd = "lychee --root-dir . . && lychee --root-dir . --extensions qmd ."
+cmd = "lychee ."
 
 [tool.pixi.workspace]
 authors = [
