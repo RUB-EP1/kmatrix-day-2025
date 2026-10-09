@@ -1,7 +1,7 @@
 [project]
 name = "k-matrix-day-2025"
 version = "0.0.0"
-requires-python = "~=3.13.0"
+requires-python = "~=3.14.0"
 license-files = ["LICENSE"]
 authors = [
     { name = "Ilya Segal" },
@@ -73,7 +73,7 @@ extensions = ["css", "md", "qmd"]
 
 [tool.pixi.dependencies]
 julia = { version = "*", channel = "https://repo.prefix.dev/julia-forge" }
-python = "3.13.*"
+python = "3.14.*"
 lychee = ">=0.24.0"
 
 [tool.pixi.environments]
