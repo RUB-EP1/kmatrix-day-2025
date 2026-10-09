@@ -74,6 +74,7 @@ extensions = ["css", "md", "qmd"]
 [tool.pixi.dependencies]
 julia = { version = "*", channel = "https://repo.prefix.dev/julia-forge" }
 python = "3.13.*"
+lychee = ">=0.24.0"
 
 [tool.pixi.environments]
 default = { features = ["dev", "lite"], solve-group = "main" }
@@ -83,7 +84,6 @@ main = { features = [], solve-group = "main" }
 
 [tool.pixi.pypi-dependencies]
 k-matrix-day-2025 = { path = ".", editable = true }
-lychee-bin = ">=0.24.0"
 
 [tool.pixi.tasks.clean-lite]
 cmd = "rm -rf docs/_build/html/lite"
@@ -134,7 +134,7 @@ depends-on = ["instantiate-julia"]
 description = "Preview static Pluto website"
 
 [tool.pixi.tasks.style]
-cmd = "pre-commit run --all-files"
+cmd = "prek run --all-files"
 
 [tool.pixi.tasks.upgrade]
 depends-on = [
@@ -273,5 +273,5 @@ key-empty = "off"
 
 [[tool.tombi.schemas]]
 root = "tool.compwa.policy"
-path = "https://raw.githubusercontent.com/ComPWA/policy/0.9.8/compwa-policy.schema.json"
+path = "https://raw.githubusercontent.com/ComPWA/policy/0.10.0/compwa-policy.schema.json"
 include = ["pyproject.toml"]
