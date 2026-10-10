@@ -1,7 +1,7 @@
 [project]
 name = "k-matrix-day-2025"
 version = "0.0.0"
-requires-python = "~=3.13.0"
+requires-python = "~=3.14.0"
 license-files = ["LICENSE"]
 authors = [
     { name = "Ilya Segal" },
@@ -61,9 +61,20 @@ no-github-actions = true
 [tool.compwa.policy.format]
 no-cspell-update = true
 
+[tool.lychee]
+exclude = [
+    "^https://amplitude-analysis\\.slack\\.com/",  # requires a Slack account
+    "^https://github\\.com/signup",  # blocks automated requests
+    "^https://indico\\.ph\\.tum\\.de/event/664/contributions/2769/attachments/",  # returns 500 to automated requests
+    "^https://join\\.slack\\.com/",  # blocks automated requests
+    "^https://journals\\.aps\\.org/",  # blocks automated requests
+]
+extensions = ["css", "md", "qmd"]
+
 [tool.pixi.dependencies]
 julia = { version = "*", channel = "https://repo.prefix.dev/julia-forge" }
-python = "3.13.*"
+python = "3.14.*"
+lychee = ">=0.24.0"
 
 [tool.pixi.environments]
 default = { features = ["dev", "lite"], solve-group = "main" }
@@ -123,7 +134,7 @@ depends-on = ["instantiate-julia"]
 description = "Preview static Pluto website"
 
 [tool.pixi.tasks.style]
-cmd = "pre-commit run --all-files"
+cmd = "prek run --all-files"
 
 [tool.pixi.tasks.upgrade]
 depends-on = [
@@ -137,10 +148,13 @@ description = "Upgrade all lock files"
 cmd = "pixi update"
 
 [tool.pixi.tasks._upgrade-precommit]
-cmd = "pre-commit autoupdate -j8"
+cmd = "prek autoupdate"
 
 [tool.pixi.tasks._upgrade-julia]
 cmd = "julia --eval='using Pkg; Pkg.update()' --project=docs"
+
+[tool.pixi.tasks.linkcheck]
+cmd = "lychee ."
 
 [tool.pixi.workspace]
 authors = [
@@ -173,22 +187,31 @@ line-ending = "lf"
 ignore = [
     "ANN00",
     "ANN20",
-    "ANN401",
-    "COM812",
-    "CPY001",
     "D",
-    "E501",
-    "E741",
-    "FURB101",
-    "FURB103",
-    "FURB140",
-    "G004",
-    "ISC001",
-    "PLW1514",
-    "PT001",
     "PTH",
-    "RUF067",
-    "SIM108",
+    "ambiguous-variable-name",
+    "any-type",
+    "if-else-block-instead-of-if-exp",
+    "incorrect-blank-line-before-class",
+    "line-too-long",
+    "logging-f-string",
+    "missing-copyright-notice",
+    "missing-dashed-underline-after-section",
+    "missing-section-name-colon",
+    "missing-trailing-comma",
+    "multi-line-summary-second-line",
+    "non-empty-init-module",
+    "pytest-fixture-incorrect-parentheses-style",
+    "read-whole-file",
+    "reimplemented-starmap",
+    "single-line-implicit-string-concatenation",
+    "undocumented-magic-method",
+    "undocumented-public-class",
+    "undocumented-public-function",
+    "undocumented-public-init",
+    "undocumented-public-method",
+    "unspecified-encoding",
+    "write-whole-file",
 ]
 select = ["ALL"]
 task-tags = ["cspell"]
@@ -209,28 +232,28 @@ split-on-trailing-comma = false
 [tool.ruff.lint.per-file-ignores]
 "*.ipynb" = [
     "ANN",
-    "B018",
-    "C408",
     "C90",
-    "E303",
-    "E402",
-    "E703",
-    "N806",
-    "N816",
     "PLR09",
-    "PLR2004",
-    "PLW0602",
-    "PLW0603",
-    "S101",
     "T20",
     "TC00",
+    "assert",
+    "global-statement",
+    "global-variable-not-assigned",
+    "magic-value-comparison",
+    "mixed-case-variable-in-global-scope",
+    "module-import-not-at-top-of-file",
+    "non-lowercase-variable-in-function",
+    "too-many-blank-lines",
+    "unnecessary-collection-call",
+    "useless-expression",
+    "useless-semicolon",
 ]
 "docs/*" = [
-    "INP001",
-    "S101",
-    "S113",
+    "assert",
+    "implicit-namespace-package",
+    "request-without-timeout",
 ]
-"finding-poles-live.ipynb" = ["F401"]
+"finding-poles-live.ipynb" = ["unused-import"]
 
 [tool.ruff.lint.pydocstyle]
 convention = "google"
@@ -250,5 +273,5 @@ key-empty = "off"
 
 [[tool.tombi.schemas]]
 root = "tool.compwa.policy"
-path = "https://raw.githubusercontent.com/ComPWA/policy/0.9.0/compwa-policy.schema.json"
+path = "https://raw.githubusercontent.com/ComPWA/policy/0.10.0/compwa-policy.schema.json"
 include = ["pyproject.toml"]
