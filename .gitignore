@@ -1,5 +1,6 @@
 .ipynb_checkpoints/
 .jupyterlite.doit.db
+.lycheecache
 .pixi/
 .virtual_documents/
 *.egg-info

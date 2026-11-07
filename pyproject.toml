@@ -62,14 +62,29 @@ no-github-actions = true
 no-cspell-update = true
 
 [tool.lychee]
+cache = true
 exclude = [
-    "^https://amplitude-analysis\\.slack\\.com/",  # requires a Slack account
-    "^https://github\\.com/signup",  # blocks automated requests
-    "^https://indico\\.ph\\.tum\\.de/event/664/contributions/2769/attachments/",  # returns 500 to automated requests
-    "^https://join\\.slack\\.com/",  # blocks automated requests
-    "^https://journals\\.aps\\.org/",  # blocks automated requests
+    '^https://github\.com/signup$',  # blocks automated requests
+    '^https://journals\.aps\.org/prd/pdf/10\.1103/PhysRevD\.16\.657#page=[56]$',  # requires a subscription
+    '^https://www\.youtube\.com/playlist\?list=PLyMw0aVKjssAoDgkgg7XhKI9LVDlzIlnu$',  # Redirects automated requests to a consent page
 ]
 extensions = ["css", "md", "qmd"]
+include_fragments = "anchor-only"
+include_verbatim = true
+max_cache_age = "2d"
+max_redirects = 0
+max_retries = 3
+remap = [
+    '^https://indico\.global/e/kmatrix-day-2025$ https://indico.global/event/14144/',
+    '^https://indico\.global/event/14144$ https://indico.global/event/14144/',
+    '^https://indico\.global/event/14144/contributions/124586$ https://indico.global/event/14144/contributions/124586/',
+    '^https://indico\.global/event/14144/contributions/124590$ https://indico.global/event/14144/contributions/124590/',
+    '^https://pixi\.sh/$ https://pixi.prefix.dev/',  # required badge link of check-dev-files
+    '^https://pixi\.sh/install\.sh$ https://pixi.prefix.dev/install.sh',
+    '^https://rub-ep1\.github\.io/kmatrix-day-2025$ https://rub-ep1.github.io/kmatrix-day-2025/',
+]
+retry_wait_time = 5
+timeout = 30
 
 [tool.pixi.dependencies]
 julia = { version = "*", channel = "https://repo.prefix.dev/julia-forge" }
