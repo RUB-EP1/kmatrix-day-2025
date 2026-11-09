@@ -90,6 +90,10 @@ main = { features = [], solve-group = "main" }
 [tool.pixi.pypi-dependencies]
 k-matrix-day-2025 = { path = ".", editable = true }
 
+[tool.pixi.tasks.all]
+depends-on = ["style", "linkcheck", "docnb"]
+description = "Run style and link checks and build the website"
+
 [tool.pixi.tasks.clean-lite]
 cmd = "rm -rf docs/_build/html/lite"
 description = "Remove the build files of the Jupyter Lite server"
