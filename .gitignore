@@ -6,3 +6,12 @@
 *.egg-info
 *.html
 node_modules/
+
+# Agent tooling
+.agents/
+.claude/
+.codex/
+.gemini/
+AGENTS.md
+CLAUDE.md
+GEMINI.md
