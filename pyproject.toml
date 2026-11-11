@@ -65,8 +65,8 @@ no-cspell-update = true
 [tool.lychee]
 cache = true
 cache_exclude_status = "400.."
-# [:] keeps Lychee from extracting regex patterns as URLs.
 exclude = [
+    # [:] keeps Lychee from extracting regex patterns as URLs.
     '^https[:]//github\.com/signup$',  # blocks automated requests
     '^https[:]//journals\.aps\.org/prd/pdf/10\.1103/PhysRevD\.16\.657#page=[56]$',  # requires a subscription
     '^https[:]//www\.youtube\.com/playlist\?list=PLyMw0aVKjssAoDgkgg7XhKI9LVDlzIlnu$',  # Redirects automated requests to a consent page
