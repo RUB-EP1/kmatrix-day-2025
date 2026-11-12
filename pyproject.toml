@@ -182,6 +182,7 @@ for file in files
 end
 '
 """
+
 [tool.pixi.workspace]
 authors = [
     "Ilya Segal",
