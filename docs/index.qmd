@@ -12,8 +12,6 @@ The goal of the $K$-Matrix Day is to share information about this powerful tool 
 
 ✏️ Application via **Indico**: [https://indico.global/e/kmatrix-day-2025](https://indico.global/event/14144) <!-- cspell:ignore kmatrix -->
 
-💬 For further discussions, join the [Amplitude analysis Slack workspace](https://join.slack.com/t/amplitude-analysis/shared_invite/zt-20eqvwbg6-~KbrYI_F6FAiFmVaUpQoPA), then look for the [#international-k-matrix-day](https://amplitude-analysis.slack.com/archives/C08MJ655W6R) channel
-
 ### 🕒 Timetable
 
 The annual International $K$-Matrix Day will take on Monday **April 14<sup>th</sup>, 2025**.<br>
@@ -34,7 +32,7 @@ The recordings can be found [here](https://www.youtube.com/playlist?list=PLyMw0a
 
 ### About
 
-This website is maintained for informational purposes. For feedback, suggestions, or questions, please reach out to us [via GitHub](https://github.com/RUB-EP1/kmatrix-day-2025) or via [our Slack channel](https://amplitude-analysis.slack.com/archives/C08MJ655W6R)!
+This website is maintained for informational purposes. For feedback, suggestions, or questions, please reach out to us [via GitHub](https://github.com/RUB-EP1/kmatrix-day-2025)!
 
 <img src="images/k-humans.svg" width="300px" style="margin-bottom:20px; margin-bottom:10px; margin-top:10px;">
 

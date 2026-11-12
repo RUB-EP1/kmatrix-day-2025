@@ -1,5 +1,5 @@
 {
-  "[css]": {
+  "[css][json][jsonc][markdown][quarto][yaml]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
   "[git-commit]": {
@@ -7,17 +7,10 @@
     "rewrap.wrappingColumn": 72
   },
   "[json]": {
-    "editor.defaultFormatter": "esbenp.prettier-vscode",
     "editor.wordWrap": "on"
-  },
-  "[jsonc]": {
-    "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
   "[julia]": {
     "editor.defaultFormatter": "julialang.language-julia"
-  },
-  "[markdown]": {
-    "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
   "[python]": {
     "editor.codeActionsOnSave": {
@@ -26,14 +19,8 @@
     "editor.defaultFormatter": "charliermarsh.ruff",
     "editor.rulers": [88]
   },
-  "[quarto]": {
-    "editor.defaultFormatter": "esbenp.prettier-vscode"
-  },
   "[toml]": {
     "editor.defaultFormatter": "tombi-toml.tombi"
-  },
-  "[yaml]": {
-    "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
   "cSpell.enabled": true,
   "diffEditor.experimental.showMoves": true,
@@ -46,7 +33,6 @@
   "julia.environmentPath": "${workspaceFolder}/docs",
   "julia.executablePath": "${workspaceFolder}/.pixi/envs/default/bin/julia",
   "livePreview.defaultPreviewPath": "docs/_build/html",
-  "multiDiffEditor.experimental.enabled": true,
   "notebook.codeActionsOnSave": {
     "notebook.source.organizeImports": "explicit"
   },
