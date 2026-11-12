@@ -151,6 +151,7 @@ depends-on = [
     "_upgrade-pixi",
     "_upgrade-precommit",
     "_upgrade-julia",
+    "_upgrade-pluto",
 ]
 description = "Upgrade all lock files"
 
@@ -166,6 +167,21 @@ cmd = "julia --eval='using Pkg; Pkg.update()' --project=docs"
 [tool.pixi.tasks.linkcheck]
 cmd = "lychee ."
 
+[tool.pixi.tasks._upgrade-pluto]
+cmd = """
+julia --eval='
+using Pkg
+Pkg.activate(temp=true)
+Pkg.add("Pluto")
+using Pluto
+
+files = readlines(`git ls-files -- "*.jl"`)
+for file in files
+    startswith(readline(file), "### A Pluto.jl notebook ###") || continue
+    Pluto.update_notebook_environment(file; backup=false)
+end
+'
+"""
 [tool.pixi.workspace]
 authors = [
     "Ilya Segal",
@@ -286,5 +302,5 @@ key-empty = "off"
 
 [[tool.tombi.schemas]]
 root = "tool.compwa.policy"
-path = "https://raw.githubusercontent.com/ComPWA/policy/0.10.6/compwa-policy.schema.json"
+path = "https://raw.githubusercontent.com/ComPWA/policy/0.10.7/compwa-policy.schema.json"
 include = ["pyproject.toml"]
