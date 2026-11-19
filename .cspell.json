@@ -61,6 +61,7 @@
     "nrows",
     "pcolormesh",
     "pmatrix",
+    "rtol",
     "sharey",
     "vlines",
     "vmax",
