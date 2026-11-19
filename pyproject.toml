@@ -120,6 +120,7 @@ depends-on = [
     { task = "lite", environment = "lite" },
 ]
 description = "Execute notebooks and build website"
+env = { QUARTO_PROFILE = "execute" }
 
 [tool.pixi.tasks.instantiate-julia]
 cmd = "julia --eval='using Pkg; Pkg.instantiate()' --project=docs"
