@@ -55,6 +55,7 @@ package-manager = "pixi"
 no-binder = true
 
 [tool.compwa.policy.github]
+dependabot-assignees = ["redeboer"]
 no-cd = true
 no-github-actions = true
 
@@ -62,14 +63,19 @@ no-github-actions = true
 no-cspell-update = true
 
 [tool.lychee]
+cache = true
+cache_exclude_status = "400.."
 exclude = [
-    "^https://amplitude-analysis\\.slack\\.com/",  # requires a Slack account
-    "^https://github\\.com/signup",  # blocks automated requests
-    "^https://indico\\.ph\\.tum\\.de/event/664/contributions/2769/attachments/",  # returns 500 to automated requests
-    "^https://join\\.slack\\.com/",  # blocks automated requests
-    "^https://journals\\.aps\\.org/",  # blocks automated requests
+    # [:] keeps Lychee from extracting regex patterns as URLs.
+    '^https[:]//github\.com/signup$',  # blocks automated requests
+    '^https[:]//journals\.aps\.org/prd/pdf/10\.1103/PhysRevD\.16\.657#page=[56]$',  # requires a subscription
+    '^https[:]//www\.youtube\.com/playlist\?list=PLyMw0aVKjssAoDgkgg7XhKI9LVDlzIlnu$',  # Redirects automated requests to a consent page
 ]
 extensions = ["css", "md", "qmd"]
+hidden = true
+include_fragments = "anchor-only"
+include_verbatim = true
+max_cache_age = "7d"
 
 [tool.pixi.dependencies]
 julia = { version = "*", channel = "https://repo.prefix.dev/julia-forge" }
@@ -84,6 +90,14 @@ main = { features = [], solve-group = "main" }
 
 [tool.pixi.pypi-dependencies]
 k-matrix-day-2025 = { path = ".", editable = true }
+
+[tool.pixi.tasks.all]
+depends-on = [
+    "style",
+    "linkcheck",
+    "docnb",
+]
+description = "Run style and link checks and build the website"
 
 [tool.pixi.tasks.clean-lite]
 cmd = "rm -rf docs/_build/html/lite"
@@ -141,6 +155,7 @@ depends-on = [
     "_upgrade-pixi",
     "_upgrade-precommit",
     "_upgrade-julia",
+    "_upgrade-pluto",
 ]
 description = "Upgrade all lock files"
 
@@ -155,6 +170,22 @@ cmd = "julia --eval='using Pkg; Pkg.update()' --project=docs"
 
 [tool.pixi.tasks.linkcheck]
 cmd = "lychee ."
+
+[tool.pixi.tasks._upgrade-pluto]
+cmd = """
+julia --eval='
+using Pkg
+Pkg.activate(temp=true)
+Pkg.add("Pluto")
+using Pluto
+
+files = readlines(`git ls-files -- "*.jl"`)
+for file in files
+    startswith(readline(file), "### A Pluto.jl notebook ###") || continue
+    Pluto.update_notebook_environment(file; backup=false)
+end
+'
+"""
 
 [tool.pixi.workspace]
 authors = [
@@ -225,6 +256,9 @@ allow-dict-calls-with-keyword-arguments = true
 [tool.ruff.lint.flake8-self]
 ignore-names = ["_print"]
 
+[tool.ruff.lint.flake8-tidy-imports.banned-api]
+"__future__.annotations".msg = "Notebooks should not use postponed evaluation of annotations."
+
 [tool.ruff.lint.isort]
 known-third-party = ["sympy"]
 split-on-trailing-comma = false
@@ -273,5 +307,5 @@ key-empty = "off"
 
 [[tool.tombi.schemas]]
 root = "tool.compwa.policy"
-path = "https://raw.githubusercontent.com/ComPWA/policy/0.10.1/compwa-policy.schema.json"
+path = "https://raw.githubusercontent.com/ComPWA/policy/0.10.7/compwa-policy.schema.json"
 include = ["pyproject.toml"]
