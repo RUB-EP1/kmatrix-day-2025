@@ -120,6 +120,7 @@ depends-on = [
     { task = "lite", environment = "lite" },
 ]
 description = "Execute notebooks and build website"
+env = { QUARTO_PROFILE = "execute" }
 
 [tool.pixi.tasks.instantiate-julia]
 cmd = "julia --eval='using Pkg; Pkg.instantiate()' --project=docs"
@@ -307,5 +308,5 @@ key-empty = "off"
 
 [[tool.tombi.schemas]]
 root = "tool.compwa.policy"
-path = "https://raw.githubusercontent.com/ComPWA/policy/0.10.7/compwa-policy.schema.json"
+path = "https://raw.githubusercontent.com/ComPWA/policy/0.10.9/compwa-policy.schema.json"
 include = ["pyproject.toml"]

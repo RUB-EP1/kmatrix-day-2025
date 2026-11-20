@@ -5,6 +5,7 @@ execute:
 format:
   html:
     css: styles.css
+    respect-user-color-scheme: true
     theme:
       light: flatly
       dark: darkly
