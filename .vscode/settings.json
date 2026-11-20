@@ -29,9 +29,10 @@
     "**/pixi.lock": "yaml"
   },
   "gitlens.telemetry.enabled": false,
-  "julia.NumThreads": "auto",
   "julia.environmentPath": "${workspaceFolder}/docs",
   "julia.executablePath": "${workspaceFolder}/.pixi/envs/default/bin/julia",
+  "julia.juliaup.install.hint": false,
+  "julia.NumThreads": "auto",
   "livePreview.defaultPreviewPath": "docs/_build/html",
   "notebook.codeActionsOnSave": {
     "notebook.source.organizeImports": "explicit"
