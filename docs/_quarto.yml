@@ -8,6 +8,7 @@ format:
     theme:
       light: flatly
       dark: darkly
+    respect-user-color-scheme: true
     toc: true
 number-depth: 3
 project:
