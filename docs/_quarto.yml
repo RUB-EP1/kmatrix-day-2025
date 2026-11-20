@@ -5,10 +5,10 @@ execute:
 format:
   html:
     css: styles.css
+    respect-user-color-scheme: true
     theme:
       light: flatly
       dark: darkly
-    respect-user-color-scheme: true
     toc: true
 number-depth: 3
 project:
